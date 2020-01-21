@@ -10,7 +10,6 @@ class User extends Component{
 
     render(){
         const locationIamIn = this.props.match.params.location
-        console.log(locationIamIn)
         return (
                <> 
                <Link to={`/map/${locationIamIn}`}>Back</Link>
