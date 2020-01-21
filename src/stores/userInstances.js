@@ -10,11 +10,13 @@ export class User{
     @observable interestedIn
     @observable gender
     @observable picture
+    @observable id
     // below - variables that we don't need to insert when making a new instance
     @observable isCheckedIn
     @observable coordinates 
-    id
-    constructor(firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture, coordinates){
+    
+    constructor(id, firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture, coordinates){
+        this.id = id
         this.firstName = firstName
         this.lastName = lastName
         this.age = age

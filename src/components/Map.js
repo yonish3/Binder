@@ -2,17 +2,20 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import image from "../dummyImage/dummyMap.PNG"
 import { Link } from "react-router-dom"
-import Locations from "./RenderedByMap/Locations"
+
 
 @inject("user", "usersStore")
 @observer
 
-class Map extends Component {
+class MapDisplay extends Component {
 
 
     render() {
+        // function that gets locations from yoni
         const locationsArray = ["Speakeasy", "Camel-Comedy-Club", "Max-Brenner"]
-
+        // sending location to yoni
+        // getting from yoni users list //keeps updating
+        
 
         return (
             <>
@@ -33,4 +36,4 @@ class Map extends Component {
     }
 }
 
-export default Map
+export default MapDisplay

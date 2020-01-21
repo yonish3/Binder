@@ -12,7 +12,7 @@ class User extends Component{
         const locationIamIn = this.props.match.params.location
         return (
                <> 
-               <Link to={`/map/${locationIamIn}`}>Back</Link>
+               <Link to={`/map/${locationIamIn}`}>Back To Other Hotties</Link>
                <div>
                 Chat with me!
                 </div>

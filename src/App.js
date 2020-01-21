@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { observer, inject } from 'mobx-react'
 import './App.css';
-import Map from "./components/Map"
+import MapDisplay from "./components/Map"
 import Locations from "./components/RenderedByMap/Locations"
 import User from "./components/RenderedByMap/User"
 
@@ -23,7 +23,7 @@ class App extends Component {
             <Link to="/map" className="link">Map</Link>
           </div>
 
-          <Route path="/map" exact component={Map} />
+          <Route path="/map" exact component={MapDisplay} />
           <Route path="/map/:location" exact render={({match}) => <Locations match={match}/>} />
           <Route path="/user/:location/:firstName" exact render={({match}) => <User match={match}/>} />
         </div>

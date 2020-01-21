@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import { Link } from "react-router-dom"
-import User from "./User"
-import { BrowserRouter } from 'react-router-dom';
+
 
 @inject("user", "usersStore")
 @observer
