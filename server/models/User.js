@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   firstName: String,
   lastName: String,
-  phoneNumber: Number,
   age: Number,
   status: String,
   desiredRelationship: String,
@@ -16,4 +15,4 @@ const userSchema = new Schema({
 });
 
 const User = mongoose.model("User", userSchema);
-module.exports = Transaction;
+module.exports = User;
