@@ -4,14 +4,16 @@ import { observer, inject } from 'mobx-react'
 import './App.css';
 import Map from "./components/Map"
 import Locations from "./components/RenderedByMap/Locations"
-
+import User from "./components/RenderedByMap/User"
 
 @inject("user", "usersStore")
 @observer
 
 class App extends Component {
 
-
+  componentDidMount(){
+    this.props.usersStore.getUsers()
+  }
 
   render() {
     return (
@@ -23,7 +25,7 @@ class App extends Component {
 
           <Route path="/map" exact component={Map} />
           <Route path="/map/:location" exact render={({match}) => <Locations match={match}/>} />
-
+          <Route path="/user/:firstName" exact render={({match}) => <User match={match}/>} />
         </div>
       </Router>
     );
