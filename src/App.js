@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { observer, inject } from 'mobx-react'
 import './App.css';
-import MapDisplay from "./components/Map"
+import MapDisplay from "./components/MapDisplay"
 import Locations from "./components/RenderedByMap/Locations"
 import User from "./components/RenderedByMap/User"
 
