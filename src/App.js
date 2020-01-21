@@ -25,7 +25,7 @@ class App extends Component {
 
           <Route path="/map" exact component={Map} />
           <Route path="/map/:location" exact render={({match}) => <Locations match={match}/>} />
-          <Route path="/user/:firstName" exact render={({match}) => <User match={match}/>} />
+          <Route path="/user/:location/:firstName" exact render={({match}) => <User match={match}/>} />
         </div>
       </Router>
     );

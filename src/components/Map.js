@@ -20,7 +20,6 @@ class Map extends Component {
 
                 {locationsArray.map((location, index) =>
                     <div key={index}>
-                        {console.log(location)}
                         <Link to={`/map/${location}`} className="link" key={index}>
                            {location}
                         </Link>

@@ -9,27 +9,23 @@ import { BrowserRouter } from 'react-router-dom';
 
 class Locations extends Component {
 
-    // pushToArray = (array) => {
-    //     let newUsersArray = []
-    //     array.forEach(user => newUsersArray.push(user))
-    //     // console.log(newUsersArray)
-    //     return newUsersArray
-    // }
 
     render() {
         const thisDummyUsers = this.props.usersStore.users
-        // const dummyUsersJS = thisDummyUsers ? this.pushToArray(thisDummyUsers) : null
+        const currentLocation = this.props.match.params.location
         return (
             <>
                 {thisDummyUsers.map((user, index) =>
-                    <div key={index}>
-                        <h2>{user.firstName}</h2>
-                        <h4>{user.age}</h4>
-                        <h5>{user.gender}</h5>
-                        <h5>{user.status}</h5>
-                        <h5>{user.desiredRelationship}</h5>
-                        <img src={user.picture} />
-                    </div>
+                    <Link to={`/user/${currentLocation}/${user.firstName}`} key={index}>
+                        <div key={index}>
+                            <h2>{user.firstName}</h2>
+                            <h4>{user.age}</h4>
+                            <h5>{user.gender}</h5>
+                            <h5>{user.status}</h5>
+                            <h5>{user.desiredRelationship}</h5>
+                            <img src={user.picture} />
+                        </div>
+                    </Link>
                 )}
             </>
         )

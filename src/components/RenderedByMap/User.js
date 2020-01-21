@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
-
+import { Link } from "react-router-dom"
 @inject("user", "usersStore")
 @observer
 
@@ -9,9 +9,14 @@ class User extends Component{
 
 
     render(){
-        console.log(this.props.dummyUser)
+        const locationIamIn = this.props.match.params.location
+        console.log(locationIamIn)
         return (
                <> 
+               <Link to={`/map/${locationIamIn}`}>Back</Link>
+               <div>
+                Chat with me!
+                </div>
                </> 
         )
     }
