@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { observer } from 'mobx-react'
 import './App.css';
 
 @observer
+
 class App extends Component {
+
+
+
   render() {
     return (
+
+
       <div>
-        HELLO
+        <Router>
+
+        </Router>
       </div>
     );
   }
