@@ -11,7 +11,6 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 // import tileData from "./tileData";
-
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Users extends Component {
@@ -33,9 +32,8 @@ class Users extends Component {
       }
     }));
   };
-
   render() {
-    const thisDummyUsers = this.props.usersStore.users;
+    const nearbyUsers = this.props.socketStore.nearbyUsers;
     const currentLocation = this.props.match.params.location;
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
@@ -47,9 +45,6 @@ class Users extends Component {
           </Link>
         ))} */}
         {/* <div className={classes.root}>
-
-
-
         <GridList cellHeight={180} className={classes.gridList}>
           <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
             <ListSubheader component="div">Elevation</ListSubheader>
@@ -71,14 +66,13 @@ class Users extends Component {
           ))}
         </GridList>
         </div> */}
-
         <div className={classes.root}>
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span">December</ListSubheader>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
-            {thisDummyUsers.map((user, index) => (
+            {nearbyUsers.map((user, index) => (
               <GridListTile
                 key={user.firstName}
                 onClick={() =>
@@ -89,7 +83,6 @@ class Users extends Component {
                 <GridListTileBar
                 style={{height: "auto"}}
                   title={`${user.firstName}, ${user.age}`}
-                  
                   actionIcon={
                     <IconButton
                       aria-label={`info about ${user.firstName}`}
@@ -119,5 +112,4 @@ class Users extends Component {
 //         </div>
 //     </Link>
 // )}
-
 export default withRouter(Users);
