@@ -7,12 +7,13 @@ import { Provider } from "mobx-react"
 import { User } from "./stores/userInstances"
 import { UsersStore } from "./stores/usersStore"
 import { LocationsStore } from "./stores/locationsStore"
+import { MyProfile } from './stores/myProfileStore';
 
 const user = new User()
 const usersStore = new UsersStore()
 const locationsStore = new LocationsStore()
-
-const stores = {user, usersStore, locationsStore}
+const myProfile = new MyProfile()
+const stores = {user, usersStore, locationsStore, myProfile}
 
 
 ReactDOM.render(<Provider {...stores}><App /></Provider>, document.getElementById('root'));

@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 // import tileData from "./tileData";
 
-@inject("user", "usersStore")
+@inject("user", "usersStore", "locationsStore", "myProfile")
 @observer
 class Users extends Component {
   useStyles = () => {

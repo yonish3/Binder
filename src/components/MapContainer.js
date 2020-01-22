@@ -7,7 +7,7 @@ import CurrentLocation from "./CurrentLocation";
 
 
 const apiKey = process.env.API_KEY
-@inject("user", "usersStore")
+@inject("user", "usersStore", "locationsStore", "myProfile")
 @observer
 
 class MapContainer extends Component {
@@ -19,11 +19,6 @@ class MapContainer extends Component {
       selectedPlace: {}
     };
   }
-  // state = {
-  //   showingInfoWindow: false,
-  //   activeMarker: {},
-  //   selectedPlace: {}
-  // };
 
   onMarkerClick = (props, marker, e) => {
     this.setState({

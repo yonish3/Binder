@@ -16,7 +16,7 @@ const mapStyles = {
 };
 
 
-@inject("user", "usersStore", "locationsStore")
+@inject("user", "usersStore", "locationsStore", "myProfile")
 @observer
 
 

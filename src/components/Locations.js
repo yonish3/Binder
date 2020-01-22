@@ -8,7 +8,7 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-@inject("user", "usersStore", "locationsStore")
+@inject("user", "usersStore", "locationsStore", "myProfile")
 @observer
 class Locations extends Component {
   useStyles = () => {

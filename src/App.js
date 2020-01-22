@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-// import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+
 import { observer, inject } from 'mobx-react'
 import './App.css';
-// import MapDisplay from "./components/MapDisplay"
+
 import Users from "./components/RenderedByMap/Users"
 import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
 import Locations from './components/Locations'
-// import CurrentLocation from "./components/CurrentLocation"
+
 require('dotenv').config()
 
 
 
 
-@inject("user", "usersStore")
+@inject("user", "usersStore", "myProfile")
 @observer
 
 
