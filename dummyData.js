@@ -30,7 +30,7 @@ exports.users =  [
             interestedIn: ["Men"],
             gender: "Female",
             picture: "thisIsAtest",
-            location: "Sputnik Bar"
+            location: "Sputnik bar"
         },
         {
             firstName: "Barry",

@@ -35,7 +35,7 @@ class Users extends Component {
   };
 
   render() {
-    const thisDummyUsers = this.props.usersStore.users;
+    const nearbyUsers = this.props.socketStore.nearbyUsers;
     const currentLocation = this.props.match.params.location;
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
@@ -78,7 +78,7 @@ class Users extends Component {
               <ListSubheader component="span">December</ListSubheader>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
-            {thisDummyUsers.map((user, index) => (
+            {nearbyUsers.map((user, index) => (
               <GridListTile
                 key={user.firstName}
                 onClick={() =>

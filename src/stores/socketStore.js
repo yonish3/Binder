@@ -8,6 +8,7 @@ export class SocketStore{
     @observable socketId = "";
     @observable coordinates = {}
     @observable nearbyLocations = []
+    @observable nearbyUsers = []
 
     @action openSocket = () => {
         // const ;
@@ -27,9 +28,13 @@ export class SocketStore{
           })
     }
     @action getUsersNearMe = (location) => {
-        console.log('before emit locaiton: '+location)
-        this.socket.emit('selectedLocation', location);
+        console.log('before emit location: '+location)
         
+        this.socket.emit('selectedLocation', location);
+        this.socket.on('usersNearMe',  (usersNearMe) => {
+            console.log('usersNearMe: ' + usersNearMe)
+            this.nearbyUsers = usersNearMe
+          })
     }
 
     @action sendReaction = (reactionObj) => {
