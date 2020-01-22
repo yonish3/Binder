@@ -1,54 +1,84 @@
-import image1 from "../dummyImage/puppy-development1.jpg";
-import image2 from "../dummyImage/puppy-development2.jpg";
-import image3 from "../dummyImage/puppy-development3.jpg";
-import image4 from "../dummyImage/puppy-development4.jpg"
+// import image1 from "../dummyImage/puppy-development1.jpg";
+// import image2 from "../dummyImage/puppy-development2.jpg";
+// import image3 from "../dummyImage/puppy-development3.jpg";
+// import image4 from "../dummyImage/puppy-development4.jpg"
+import DorImage from "../dummyImage/DorBenLulu.jpg";
+import EfratImage from "../dummyImage/Efrat.jpg";
+import VickiImage from "../dummyImage/Vicki.jpeg";
+import HaimImage from "../dummyImage/Haim.jpg"
+import YoniImage from "../dummyImage/Yoni.jpg"
+import EyalImage from "../dummyImage/Eyal.jpg"
 
 const dummyData =  [
     {
-        firstName: "Bruce",
-        lastName: "Wayne",
-        age: 32,
+        firstName: "Haim",
+        lastName: "Ruso",
+        age: 29,
         status: "Single",
         desiredRelationship: "Serious Relationship",
         interestedIn: ["Women"],
         gender: "Male",
-        picture: image1,
+        picture: HaimImage,
         isCheckedIn: true,
         isDeleted: false   
     },
     {
-        firstName: "Clark",
-        lastName: "Kent",
-        age: 35,
+        firstName: "Dor",
+        lastName: "Ben Lulu",
+        age: 25,
         status: "Single",
         desiredRelationship: "Serious Relationship",
         interestedIn: ["Women"],
         gender: "Male",
-        picture: image2,
+        picture: DorImage,
         isCheckedIn: true,
         isDeleted: false   
     },
     {
-        firstName: "Princess",
-        lastName: "Dianna",
+        firstName: "Vicki",
+        lastName: "Menashe",
         age: 28,
         status: "Single",
         desiredRelationship: "Serious Relationship",
         interestedIn: ["Men"],
         gender: "Female",
-        picture: image3,
+        picture: VickiImage,
         isCheckedIn: true,
         isDeleted: false   
     },
     {
-        firstName: "Barry",
-        lastName: "Allen",
-        age: 25,
+        firstName: "Yoni",
+        lastName: "Shalev",
+        age: 36,
         status: "Single",
         desiredRelationship: "Hookups",
-        interestedIn: ["Men"],
+        interestedIn: ["Women"],
         gender: "Male",
-        picture: image4,
+        picture: YoniImage,
+        isCheckedIn: true,
+        isDeleted: false   
+    },
+    {
+        firstName: "Efrat",
+        lastName: "Harel",
+        age: 25,
+        status: "Single",
+        desiredRelationship: "Serious Relationship",
+        interestedIn: ["Men"],
+        gender: "Female",
+        picture: EfratImage,
+        isCheckedIn: true,
+        isDeleted: false   
+    },
+    {
+        firstName: "Eyal",
+        lastName: "Pundak",
+        age: 34,
+        status: "Single",
+        desiredRelationship: "Serious Relationship",
+        interestedIn: ["Women"],
+        gender: "Male",
+        picture: EyalImage,
         isCheckedIn: true,
         isDeleted: false   
     }
