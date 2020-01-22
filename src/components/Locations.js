@@ -22,9 +22,10 @@ class Locations extends Component {
       }
     }));
   };
-  sendLocation = (name) => {
-    console.log(name)
+  sendLocation = (locationName) => {
+    this.props.socketStore.getUsersNearMe(locationName)
   }
+
   render() {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
@@ -50,7 +51,7 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button onClick={() => this.sendLocation(location.name)}>
+          <ListItem key={i} button value={location.name} onClick={() => this.sendLocation(location.name)}>
             <Link  to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
             </Link>
