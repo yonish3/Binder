@@ -87,7 +87,7 @@ class CurrentLocation extends React.Component {
         const response = await axios.get(`/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&radius=100&type=bar&key=${apiKey}`);
         console.log(response)
         let places=[]
-        places=response.data.results.map(item=> item.name)
+        places=response.data.results.map((itemName)=> ({name:itemName.name, id:itemName.place_id}) )
         console.log(places)
       }
 
