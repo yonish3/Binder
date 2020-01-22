@@ -6,7 +6,6 @@ import axios from 'axios';
 // 
 
 const apiKey = process.env.API_KEY
-// console.log(apiKey)
 
 const mapStyles = {
   map: {
@@ -123,7 +122,6 @@ class CurrentLocation extends React.Component {
 
       renderChildren() {
         const { children } = this.props;
-    
         if (!children) return;
     
         return React.Children.map(children, c => {
