@@ -12,6 +12,9 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const axios = require("axios")
 const apiKey = process.env.GOOGLE_MAP_API_KEY //move through config
+const controller = require('./server/middlewares/controllers/controller')
+const queries = require('./server/db/queries')
+const users = require('./dummyData').users
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -20,11 +23,12 @@ app.use("/", api);
 app.use(errorHandler)
 
 //dummyData
-let users = [
-    { userId: '123', socketId: '123', location: 'Elevation' },
-    { userId: 'qwe', socketId: 'qwe', location: 'Spotnic' },
-    { userId: '456', socketId: '456', location: 'Super Pharm' },
-]
+// let users = [
+//     { userId: '123', socketId: '123', location: 'Elevation' },
+//     { userId: 'qwe', socketId: 'qwe', location: 'Spotnic' },
+//     { userId: '456', socketId: '456', location: 'Super Pharm' },
+// ]
+
 
 let locationsArry = ['Elevation', 'Super Pharm', 'Spotnic']
 
@@ -48,18 +52,25 @@ io.on('connection', function (socket) {
                 return
             }
         })
-        socket.emit(`userId`, userId);
-        socket.emit(`allUsers`, users);
-        console.log('user id socket works')
+
+        // socket.emit(`allUsers`, users);
+        // console.log('user id socket works')
     })
+    
+    
+    
+
+    // let len = users.length
+    
+    // socket.emit(`allUsers`, users);
 
     socket.on('GPSlocation', async (GPSlocation) => {
         console.log('GPS location recived: ' + GPSlocation.lat, GPSlocation.lng)
 
-        const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-        let places = []
-        places = response.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
-        console.log(places)
+        const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
+        // let places = []
+        let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
+        // console.log(places)
 
         socket.emit(`locationsArry`, places);
     })
@@ -76,8 +87,9 @@ io.on('connection', function (socket) {
             }
         })
         socket.emit(`users`, usersNearUser)
-        socket.emit(`allUsers`, users);
+        // socket.emit(`allUsers`, users);
     })
+
     socket.on('disconnect', function () {
         console.log('user disconnected');
         for (let i = 0; i < users.length; i++) {
@@ -86,8 +98,8 @@ io.on('connection', function (socket) {
                 users.splice(i, 1);
             }
         }
-        socket.emit(`allUsers`, users);
-        io.emit('exit', users);
+        // socket.emit(`allUsers`, users);
+        // io.emit('exit', users);
     });
 });
 
