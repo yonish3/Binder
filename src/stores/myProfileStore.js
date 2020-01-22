@@ -1,4 +1,4 @@
-import {observable} from "mobx"
+import { observable, action } from "mobx"
 import dummyData from "./dummyData"
 
 export class MyProfile{
