@@ -4,14 +4,29 @@ import socketIOClient  from "socket.io-client"
 
 export class SocketStore{
     endpoint = "localhost:8080"
-    @observable socketId = ""
+    socket = socketIOClient(this.endpoint);
+    @observable socketId = "";
+    @observable coordinates = {}
 
     @action openSocket = () => {
-        const socket = socketIOClient(this.endpoint);
-        socket.emit('userId', 'resctTestUser')
-        socket.on('userId', (userIdin) => {
+        // const ;
+        this.socket.emit('userId', 'resctTestUser')
+        this.socket.on('userId', (userIdin) => {
             console.log('recived: '+ userIdin)
         })
+        
+    }
+
+    @action getLocationsNearby = (coordinates) => {
+        // console.log(coordinates)
+        
+        this.socket.emit('GPSlocation', coordinates);
+        this.socket.on('locationsArry', function(locationsArry){
+            // for (let index = 0; index < locationsArry.length; index++) {
+            //   console.log(locationsArry)
+            // }
+            console.log(locationsArry)
+          })
     }
 }
 

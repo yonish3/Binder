@@ -69,6 +69,9 @@ class CurrentLocation extends React.Component {
                   lat: coords.latitude,
                   lng: coords.longitude
                 }
+              }, function(){
+                // console.log(this.props.socketStore)
+                this.props.socketStore.getLocationsNearby(this.state.currentLocation)
               });
             });
           }
@@ -135,6 +138,7 @@ class CurrentLocation extends React.Component {
       }
 
       render() {
+        console.log(this.state)
         const style = Object.assign({}, mapStyles.map);
         
        return (
