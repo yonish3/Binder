@@ -6,6 +6,10 @@ import Fade from "@material-ui/core/Fade";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Emoji extends Component {
+
+    handleClick = (label) => {
+
+    }
   render() {
     return (
       //   <span
@@ -21,7 +25,7 @@ class Emoji extends Component {
       //   <Emojify style={{ height: 32, width: 32 }}>:heart:</Emojify>
       //     </Tooltip>
       <>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:heart:</Emojify>
+        <Emojify style={{ height: 32, width: 32 }} onClick={() => this.handleClick()}></Emojify>
         <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:fire:</Emojify>
         <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:heart_eyes:</Emojify>
         <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:blush:</Emojify>

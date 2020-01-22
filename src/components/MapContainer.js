@@ -35,7 +35,7 @@ class MapContainer extends Component {
         });
       }
     }
-  }
+  
     render() {
       //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
       const divStyle = {

@@ -28,5 +28,9 @@ export class SocketStore{
     @action getUsersNearMe = (location) => {
         
     }
+
+    @action sendReaction = (reactionObj) => {
+        this.socket.emit('reaction', reactionObj)
+    }
 }
 
