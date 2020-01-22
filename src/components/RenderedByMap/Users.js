@@ -75,6 +75,7 @@ class Users extends Component {
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="div">December</ListSubheader>
+              <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
             {thisDummyUsers.map(user => (
               <GridListTile key={user.firstName}>

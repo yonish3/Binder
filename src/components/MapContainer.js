@@ -30,7 +30,8 @@ class MapContainer extends Component {
       activeMarker: marker,
       showingInfoWindow: true
     });
-
+  }
+  
   onClose = props => {
     if (this.state.showingInfoWindow) {
       this.setState({
