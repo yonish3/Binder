@@ -1,54 +1,42 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
-import CurrentLocation from './Map';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+// import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+import { observer, inject } from 'mobx-react'
+import './App.css';
+// import MapDisplay from "./components/MapDisplay"
+import Locations from "./components/RenderedByMap/Locations"
+import User from "./components/RenderedByMap/User"
+import MapContainer from "./components/MapContainer"
+// import CurrentLocation from "./components/CurrentLocation"
+
+@inject("user", "usersStore")
+@observer
+
+class App extends Component {
 
 
-
-
-export class MapContainer extends Component {
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {}
-  };
-
-  onMarkerClick = (props, marker, e) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    });
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      });
+    componentDidMount() {
+        this.props.usersStore.getUsers()
     }
-  };
 
-  render() {
-    return (
-      <CurrentLocation
-        centerAroundCurrentLocation
-        google={this.props.google}
-      >
-        <Marker onClick={this.onMarkerClick} name={'current location'} />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
-      </CurrentLocation>
-    );
-  }
+    render() {
+        //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
+        return (
+            <Router>
+                <div id="main-container">
+                    {/* <div id="main-links">
+                        <Link to="/map" className="link">Map</Link>
+                    </div> */}
+                    {/* need to change path to /map when finished testing */}
+                    <Route path="/" exact component={MapContainer} />
+                    <Route path="/map/:location" exact render={({ match }) => <Locations match={match} />} />
+                    <Route path="/user/:location/:firstName" exact render={({ match }) => <User match={match} />} />
+                </div>
+            </Router>
+        );
+    }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBfabs7hjM38iufAEGazLloZUS9t9DfUy8'
-})(MapContainer);
+
+
+export default App
