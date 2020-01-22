@@ -23,7 +23,7 @@ class Locations extends Component {
     }));
   };
   sendLocation = (event) => {
-    console.log(event.target.name)
+    console.log(event.target.innerText)
   }
   render() {
     // const realLocationArray = this.props.locationsStore.locations
@@ -50,9 +50,9 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button>
-            <Link  to={`/map/${location.name}`} name={location.name} onClick={this.sendLocation}>
-              <ListItemText primary={location.name} />
+          <ListItem key={i} button primaryText={location.name}>
+            <Link  to={`/map/${location.name}`} >
+              <ListItemText primary={location.name} name={location.name} onClick={this.sendLocation}/>
             </Link>
           </ListItem>
         ))}
