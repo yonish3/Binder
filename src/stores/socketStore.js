@@ -7,6 +7,7 @@ export class SocketStore{
     socket = socketIOClient(this.endpoint);
     @observable socketId = "";
     @observable coordinates = {}
+    @observable nearbyLocations = []
 
     @action openSocket = () => {
         // const ;
@@ -17,12 +18,14 @@ export class SocketStore{
         
     }
 
-    @action getLocationsNearby = (coordinates) => {
+    @action getLocationsNearby = function(coordinates) {
         console.log(coordinates)
         // {lat:coords.latitude,lng :coords.longitude }
         this.socket.emit('GPSlocation', coordinates);
-        this.socket.on('locationsArry', function(locationsArry){
+        this.socket.on('locationsArry',  (locationsArry) =>{
             console.log(locationsArry)
+            this.nearbyLocations = locationsArry
+            console.log(this.nearbyLocations)
           })
     }
 }

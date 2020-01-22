@@ -59,7 +59,7 @@ io.on('connection', function (socket) {
         places = response.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
         console.log(places)
 
-        socket.emit(`locationsArry`, locationsArry);
+        socket.emit(`locationsArry`, places);
     })
     socket.on('selectedLocation', (selectedLocation) => {
         console.log('Selected location recived: ' + selectedLocation)
