@@ -8,7 +8,12 @@ import axios from "axios"
 @observer
 
 class MapDisplay extends Component {
-    
+    constructor(){
+        super()
+
+    }
+
+
 
     render() {
         // const realLocationArray = this.props.locationsStore.locations
@@ -16,22 +21,27 @@ class MapDisplay extends Component {
         const locationsArray = ["Speakeasy", "Camel-Comedy-Club", "Max-Brenner"]
         // sending location to yoni - post to yoni with axios 
         // getting from yoni users list //keeps updating
-        
+
 
         return (
             <>
                 <img src={image} alt="map" />
+                <div>
+                    {/* <input type="text" list="nearby-locations" name="myCurrentLocation" onChange={this.handleInput}/>
+                    <datalist id="nearby-locations"> */}
+                        {locationsArray.map((location, index) =>
+                            // <option key={index} value={location}>{location}</option>
+                            <div key={index}>
+                                <Link to={`/map/${location}`} className="link" key={index}>
+                                    {location}
+                                </Link>
+                            </div>
 
-                {locationsArray.map((location, index) =>
-                    <div key={index}>
-                        <Link to={`/map/${location}`} className="link" key={index}>
-                           {location}
-                        </Link>
-                    </div>
-
-                )}
-            {/* choose one place - button */}
-            {/* send location to yoni */}
+                        )}
+                    {/* </datalist> */}
+                </div>
+                {/* choose one place - button */}
+                {/* send location to yoni */}
             </>
         )
     }

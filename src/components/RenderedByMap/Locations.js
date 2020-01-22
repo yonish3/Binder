@@ -12,6 +12,7 @@ class Locations extends Component {
     render() {
         const thisDummyUsers = this.props.usersStore.users
         const currentLocation = this.props.match.params.location
+        // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
         return (
             <>
                 {thisDummyUsers.map((user, index) =>
