@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import { observer, inject } from 'mobx-react'
 import './App.css';
 // import MapDisplay from "./components/MapDisplay"
-import Locations from "./components/RenderedByMap/Locations"
+import Users from "./components/RenderedByMap/Users"
 import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
+import Locations from './components/Locations'
 // import CurrentLocation from "./components/CurrentLocation"
 
 @inject("user", "usersStore")
@@ -28,8 +29,8 @@ class App extends Component {
                         <Link to="/map" className="link">Map</Link>
                     </div> */}
                     {/* need to change path to /map when finished testing */}
-                    <Route path="/" exact component={MapContainer} />
-                    <Route path="/map/:location" exact render={({ match }) => <Locations match={match} />} />
+                    <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />
+                    <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
                     <Route path="/user/:location/:firstName" exact render={({ match }) => <User match={match} />} />
                 </div>
             </Router>
