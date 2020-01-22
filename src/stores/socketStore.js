@@ -20,7 +20,8 @@ export class SocketStore{
     @action getLocationsNearby = function(coordinates) {
 
         this.socket.emit('GPSlocation', coordinates);
-        this.socket.on('locationsArry',  (locationsArry) =>{
+        this.socket.on('locationsArry',  (locationsArry) => {
+            console.log('locationsArry',locationsArry)
             this.nearbyLocations = locationsArry
           })
     }

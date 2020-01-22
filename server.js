@@ -7,17 +7,19 @@ const api = require("./server/routes/api.js");
 const errorHandler = require('./server/middlewares/errorHandler/errorHandler')
 const config = require('./config/config')
 const port = 8080
-const dbSetup = require('./server/db/dbSetup')
+// const dbSetup = require('./server/db/dbSetup')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const axios = require("axios")
-const apiKey = process.env.GOOGLE_MAP_API_KEY
+const apiKey = process.env.GOOGLE_MAP_API_KEY //move through config
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/", api);
+app.use(errorHandler)
 
+//dummyData
 let users = [
     { userId: '123', socketId: '123', location: 'Elevation' },
     { userId: 'qwe', socketId: 'qwe', location: 'Spotnic' },
@@ -33,10 +35,13 @@ io.on('connection', function (socket) {
         userId: null,
         location: null
     })
+    console.log('users',users)
+
     let len = users.length
+    
     socket.emit(`allUsers`, users);
     socket.on('userId', (userId) => {
-        users.forEach(u => {
+        users.forEach(u => { //from db
             if (u.socketId === socket.id) {
                 u.userId = userId
                 return
@@ -46,21 +51,18 @@ io.on('connection', function (socket) {
         socket.emit(`allUsers`, users);
         console.log('user id socket works')
     })
+
     socket.on('GPSlocation', async (GPSlocation) => {
-        console.log('GPS location recived: ' + GPSlocation)
-        console.log(GPSlocation)
+        console.log('GPS location recived: ' + GPSlocation.lat, GPSlocation.lng)
 
         const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-        console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`)
-        // console.log(response)
-        // console.log(response.data)
-        // console.log(apiKey)
         let places = []
         places = response.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
         console.log(places)
 
         socket.emit(`locationsArry`, places);
     })
+    
     socket.on('selectedLocation', (selectedLocation) => {
         console.log('Selected location recived: ' + selectedLocation)
         let usersNearUser = []
