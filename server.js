@@ -15,20 +15,14 @@ const apiKey = process.env.GOOGLE_MAP_API_KEY //move through config
 const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
 const users = require('./dummyData').users
+const cors = require('cors')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(cors())
 app.use("/", api);
 app.use(errorHandler)
-
-//dummyData
-// let users = [
-//     { userId: '123', socketId: '123', location: 'Elevation' },
-//     { userId: 'qwe', socketId: 'qwe', location: 'Spotnic' },
-//     { userId: '456', socketId: '456', location: 'Super Pharm' },
-// ]
-
 
 let locationsArry = ['Elevation', 'Super Pharm', 'Spotnic']
 
@@ -43,7 +37,7 @@ io.on('connection', function (socket) {
     console.log('socket is ',socket.id)
     let len = users.length
     
-    socket.emit(`allUsers`, users);
+    socket.emit(`allUsers`, users); //should be here?
     socket.on('userId', (userId) => { 
         
         users.forEach(u => { //from db
@@ -105,6 +99,6 @@ io.on('connection', function (socket) {
 
 http.listen(8080, function () {
     console.log('listening on *:8080');
-});
+})
 
 // app.listen(port, () => console.log(`Server is running on port ${port}`));
