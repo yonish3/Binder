@@ -22,13 +22,8 @@ class Locations extends Component {
       }
     }));
   };
-<<<<<<< HEAD
-  sendLocation = (event) => {
-    console.log(event.target.innerText)
-=======
   sendLocation = (locationName) => {
     this.props.socketStore.getUsersNearMe(locationName)
->>>>>>> development
   }
 
   render() {
