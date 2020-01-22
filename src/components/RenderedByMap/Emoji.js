@@ -3,7 +3,7 @@ import { observer, inject } from "mobx-react";
 import Emojify from "react-emojione";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
-@inject("user", "usersStore")
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Emoji extends Component {
   render() {

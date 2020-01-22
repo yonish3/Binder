@@ -16,7 +16,7 @@ import GridListTileBar from "@material-ui/core/GridListTileBar";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 
-@inject("user", "usersStore")
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class User extends Component {
   useStyles = () => {
@@ -28,13 +28,7 @@ class User extends Component {
   };
 
   render() {
-    // const locationIamIn = this.props.match.params.location;
 
-    // const useStyles = makeStyles({
-    //   card: {
-    //     maxWidth: 345,
-    //   },
-    // });
 
     const classes = this.useStyles();
     const user = this.props.user;

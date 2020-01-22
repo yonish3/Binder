@@ -1,0 +1,29 @@
+import { observable, action } from "mobx"
+import dummyData from "./dummyData"
+import socketIOClient  from "socket.io-client"
+
+export class SocketStore{
+    endpoint = "localhost:8080"
+    socket = socketIOClient(this.endpoint);
+    @observable socketId = "";
+    @observable coordinates = {}
+    @observable nearbyLocations = []
+
+    @action openSocket = () => {
+        // const ;
+        this.socket.emit('userId', 'resctTestUser')
+        this.socket.on('userId', (userIdin) => {
+            console.log('recived: '+ userIdin)
+        })
+        
+    }
+
+    @action getLocationsNearby = function(coordinates) {
+
+        this.socket.emit('GPSlocation', coordinates);
+        this.socket.on('locationsArry',  (locationsArry) =>{
+            this.nearbyLocations = locationsArry
+          })
+    }
+}
+

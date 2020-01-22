@@ -1,7 +1,4 @@
-// import image1 from "../dummyImage/puppy-development1.jpg";
-// import image2 from "../dummyImage/puppy-development2.jpg";
-// import image3 from "../dummyImage/puppy-development3.jpg";
-// import image4 from "../dummyImage/puppy-development4.jpg"
+
 import DorImage from "../dummyImage/DorBenLulu.jpg";
 import EfratImage from "../dummyImage/Efrat.jpg";
 import VickiImage from "../dummyImage/Vicki.jpeg";
@@ -11,6 +8,7 @@ import EyalImage from "../dummyImage/Eyal.jpg"
 
 const dummyData =  [
     {
+        id: "1234",
         firstName: "Haim",
         lastName: "Ruso",
         age: 29,
@@ -23,6 +21,7 @@ const dummyData =  [
         isDeleted: false   
     },
     {
+        id: "5678",
         firstName: "Dor",
         lastName: "Ben Lulu",
         age: 25,
@@ -35,6 +34,7 @@ const dummyData =  [
         isDeleted: false   
     },
     {
+        id: "9101",
         firstName: "Vicki",
         lastName: "Menashe",
         age: 28,
@@ -47,6 +47,7 @@ const dummyData =  [
         isDeleted: false   
     },
     {
+        id: "1121",
         firstName: "Yoni",
         lastName: "Shalev",
         age: 36,
@@ -59,6 +60,7 @@ const dummyData =  [
         isDeleted: false   
     },
     {
+        id: "3141",
         firstName: "Efrat",
         lastName: "Harel",
         age: 25,
@@ -71,6 +73,7 @@ const dummyData =  [
         isDeleted: false   
     },
     {
+        id: "5161",
         firstName: "Eyal",
         lastName: "Pundak",
         age: 34,
