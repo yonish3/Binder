@@ -16,7 +16,7 @@ const apiKey = process.env.GOOGLE_MAP_API_KEY
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use("/", api);
+app.use("/", api);
 
 let users = [
     { userId: '123', socketId: '123', location: 'Elevation' },
