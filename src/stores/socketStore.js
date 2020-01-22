@@ -10,7 +10,6 @@ export class SocketStore{
     @observable nearbyLocations = []
 
     @action openSocket = () => {
-        // const ;
         this.socket.emit('userId', 'resctTestUser')
         this.socket.on('userId', (userIdin) => {
             console.log('recived: '+ userIdin)
@@ -19,14 +18,17 @@ export class SocketStore{
     }
 
     @action getLocationsNearby = function(coordinates) {
-        console.log(coordinates)
-        // {lat:coords.latitude,lng :coords.longitude }
+
         this.socket.emit('GPSlocation', coordinates);
-        this.socket.on('locationsArry',  (locationsArry) =>{
-            console.log(locationsArry)
+        this.socket.on('locationsArry',  (locationsArry) => {
+            console.log('locationsArry',locationsArry)
             this.nearbyLocations = locationsArry
-            console.log(this.nearbyLocations)
           })
+    }
+    @action getUsersNearMe = (location) => {
+        console.log('before emit locaiton: '+location)
+        this.socket.emit('selectedLocation', location);
+        
     }
 }
 

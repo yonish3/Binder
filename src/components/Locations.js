@@ -22,6 +22,9 @@ class Locations extends Component {
       }
     }));
   };
+  sendLocation = (locationName) => {
+    this.props.socketStore.getUsersNearMe(locationName)
+  }
 
   render() {
     // const realLocationArray = this.props.locationsStore.locations
@@ -48,7 +51,7 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button>
+          <ListItem key={i} button value={location.name} onClick={() => this.sendLocation(location.name)}>
             <Link  to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
             </Link>
