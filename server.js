@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
         console.log(GPSlocation)
 
         const response = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-
+        console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`)
         // console.log(response)
         // console.log(response.data)
         // console.log(apiKey)

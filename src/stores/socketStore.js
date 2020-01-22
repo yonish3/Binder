@@ -10,7 +10,6 @@ export class SocketStore{
     @observable nearbyLocations = []
 
     @action openSocket = () => {
-        // const ;
         this.socket.emit('userId', 'resctTestUser')
         this.socket.on('userId', (userIdin) => {
             console.log('recived: '+ userIdin)
@@ -24,6 +23,9 @@ export class SocketStore{
         this.socket.on('locationsArry',  (locationsArry) =>{
             this.nearbyLocations = locationsArry
           })
+    }
+    @action getUsersNearMe = (location) => {
+        
     }
 }
 
