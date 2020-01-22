@@ -78,7 +78,8 @@ io.on('connection', function (socket) {
                 u.location = selectedLocation
             }
         })
-        socket.emit(`users`, usersNearUser)
+        console.log('usersNearUser', usersNearUser)
+        socket.emit(`usersNearMe`, usersNearUser)
         // socket.emit(`allUsers`, users);
     })
 
