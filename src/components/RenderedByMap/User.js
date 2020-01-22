@@ -25,13 +25,7 @@ class User extends Component {
 
 
   render() {
-    // const locationIamIn = this.props.match.params.location;
 
-    // const useStyles = makeStyles({
-    //   card: {
-    //     maxWidth: 345,
-    //   },
-    // });
 
     const classes = this.useStyles();
     const user = this.props.user
