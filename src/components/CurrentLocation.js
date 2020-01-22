@@ -59,7 +59,7 @@ class CurrentLocation extends React.Component {
       componentDidMount() {
         if (this.props.centerAroundCurrentLocation) {
           if (navigator && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(pos => {
+            navigator.geolocation.getCurrentPosition( pos => {
               const coords = pos.coords;
               console.log(pos)
               const coordinates={lat:coords.latitude,lng :coords.longitude }

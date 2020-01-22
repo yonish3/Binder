@@ -34,23 +34,15 @@ let locationsArry = ['Elevation', 'Super Pharm', 'Spotnic']
 
 io.on('connection', function (socket) {
     console.log('user has connected')
-    users.push({
-        socketId: socket.id,
-        userId: null,
-        location: null
-    })
-    console.log('users',users)
-    console.log('socket is ',socket.id)
-    let len = users.length
     
-    socket.emit(`allUsers`, users);
-    socket.on('userId', (userId) => { 
-        
-        users.forEach(u => { //from db
-            if (u.socketId === socket.id) {
-                u.userId = userId
-                return
-            }
+    socket.on('userId', (userId) => {
+        console.log('userId',userId)
+        const userInfo = queries.findUser(userId)
+        userInfo.then( resolvedUserInfo => {
+          resolvedUserInfo.socketId = socket.id
+          users.push(resolvedUserInfo)
+          // console.log(users)
+          socket.emit('userInfo', userInfo)
         })
 
         // socket.emit(`allUsers`, users);
