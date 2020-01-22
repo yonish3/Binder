@@ -61,16 +61,16 @@ class CurrentLocation extends React.Component {
           if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(pos => {
               const coords = pos.coords;
+              console.log(pos)
               const coordinates={lat:coords.latitude,lng :coords.longitude }
               this.getCheckIn(coordinates)
-              this.getLocations(coordinates)
+              // this.getLocations(coordinates)
               this.setState({
                 currentLocation: {
                   lat: coords.latitude,
                   lng: coords.longitude
                 }
               }, function(){
-                // console.log(this.props.socketStore)
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
               });
             });
@@ -88,13 +88,14 @@ class CurrentLocation extends React.Component {
           console.log(error);
         });
       }
-      getLocations=async (coordinates)=>{
-        const response = await axios.get(`/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&radius=100&type=bar&key=${apiKey}`);
-        console.log(response)
-        let places=[]
-        places=response.data.results.map(item=> item.name)
-        console.log(places)
-      }
+      // getLocations=async (coordinates)=>{
+      //   const response = await axios.get(`/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&radius=100&type=bar&key=${apiKey}`);
+        
+      //   console.log(response)
+      //   let places=[]
+      //   places=response.data.results.map(item=> item.name)
+      //   console.log(places)
+      // }
 
       loadMap() {
         if (this.props && this.props.google) {
