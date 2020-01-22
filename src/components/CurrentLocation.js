@@ -3,7 +3,10 @@ import ReactDOM from 'react-dom';
 import { observer, inject } from "mobx-react";
 // import { Link } from "react-router-dom";
 import axios from 'axios';
+// 
 
+const apiKey = process.env.API_KEY
+// console.log(apiKey)
 
 const mapStyles = {
   map: {
@@ -12,7 +15,7 @@ const mapStyles = {
     height: '100%'
   }
 };
-const apiKey='AIzaSyDmMp4vZyuGAkAHBsUj_cmiblYNk1POFXA'
+
 
 @inject("user", "usersStore", "locationsStore")
 @observer
