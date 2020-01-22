@@ -27,4 +27,3 @@ exports.deleteUser = async function(userId){
         throw new Error('Couldn\'t find user')
     }
 }
-
