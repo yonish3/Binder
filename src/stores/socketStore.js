@@ -26,6 +26,8 @@ export class SocketStore{
           })
     }
     @action getUsersNearMe = (location) => {
+        console.log('before emit locaiton: '+location)
+        this.socket.emit('selectedLocation', location);
         
     }
 }
