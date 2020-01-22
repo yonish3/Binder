@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+// import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { observer, inject } from 'mobx-react'
 import './App.css';
-import MapDisplay from "./components/MapDisplay"
+// import MapDisplay from "./components/MapDisplay"
 import Locations from "./components/RenderedByMap/Locations"
 import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
-import CurrentLocation from "./components/CurrentLocation"
+// import CurrentLocation from "./components/CurrentLocation"
 
 @inject("user", "usersStore")
 @observer
@@ -27,8 +27,8 @@ class App extends Component {
                     {/* <div id="main-links">
                         <Link to="/map" className="link">Map</Link>
                     </div> */}
-
-                    <Route path="/map" exact component={MapContainer} />
+                    {/* need to change path to /map when finished testing */}
+                    <Route path="/" exact component={MapContainer} />
                     <Route path="/map/:location" exact render={({ match }) => <Locations match={match} />} />
                     <Route path="/user/:location/:firstName" exact render={({ match }) => <User match={match} />} />
                 </div>

@@ -1,6 +1,6 @@
 import { observable, computed, action } from "mobx"
-import { User } from "./userInstances"
-import axios from "axios"
+// import { User } from "./userInstances"
+// import axios from "axios"
 const dummyData = require("./dummyData")
 
 
