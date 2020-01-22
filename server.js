@@ -78,6 +78,15 @@ io.on('connection', function (socket) {
         socket.emit(`users`, usersNearUser)
         socket.emit(`allUsers`, users);
     })
+
+    socket.on('reaction', (reactionObj) => {
+        console.log(`User id is : ${reactionObj.userId} destinationSocket is ${reactionObj.destinationSocketId}`)
+        io.to(`${reactionObj.destinationSocketId}`).emit('reaction recieved', reactionObj.label);
+
+        // socket.emit(`users`, usersNearUser)
+        // socket.emit(`allUsers`, users);
+    })
+
     socket.on('disconnect', function () {
         console.log('user disconnected');
         for (let i = 0; i < users.length; i++) {
@@ -86,6 +95,7 @@ io.on('connection', function (socket) {
                 users.splice(i, 1);
             }
         }
+        
         socket.emit(`allUsers`, users);
         io.emit('exit', users);
     });

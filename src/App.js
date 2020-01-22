@@ -37,7 +37,7 @@ class App extends Component {
                     {/* need to change path to /map when finished testing */}
                     <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />
                     <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                    <Route path="/user/:firstName" exact render={({ match }) => <Profile match={match} />} />
+                    <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
                 </div>
             </Router>
         );

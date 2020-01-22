@@ -1,24 +1,36 @@
 import React, { Component } from "react";
+import { observer, inject } from "mobx-react";
 import Typography from "@material-ui/core/Typography";
 import Emoji from "./Emoji";
 import DorImage from "../../dummyImage/DorBenLulu.jpg";
 // import Emojify from "react-emojione";
 // const Emoji = Emojify
 
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@observer
 class Profile extends Component {
   render() {
-    const user = {
-      firstName: "Dor",
-      lastName: "Ben Lulu",
-      age: 25,
-      status: "Single",
-      desiredRelationship: "Serious Relationship",
-      interestedIn: ["Women"],
-      gender: "Male",
-      picture: DorImage,
-      isCheckedIn: true,
-      isDeleted: false
-    };
+    console.log(this.props.match)
+    console.log(this.props.usersStore.users)
+    // const user = {
+    //   firstName: "Dor",
+    //   lastName: "Ben Lulu",
+    //   age: 25,
+    //   status: "Single",
+    //   desiredRelationship: "Serious Relationship",
+    //   interestedIn: ["Women"],
+    //   gender: "Male",
+    //   picture: DorImage,
+    //   isCheckedIn: true,
+    //   isDeleted: false
+    // };
+
+    const userId = this.props.match.params.id;
+    console.log(`user id `, userId);
+    const user = this.props.usersStore.getUserById(userId)
+
+    console.log(`user to display is `, user);
+console.log(this.props.usersStore.users);
 
     const containerStyle = {
       position: "relative",
@@ -41,6 +53,7 @@ class Profile extends Component {
       width: "100%"
     };
 
+    
     return (
       <div>
         <div style={containerStyle}></div>
@@ -53,7 +66,7 @@ class Profile extends Component {
         <Typography variant="subtitle2" gutterBottom>
           Looking for: {user.desiredRelationship}
         </Typography>
-        <Emoji />
+        <Emoji match={this.props.match}/>
       </div>
     );
   }
