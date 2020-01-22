@@ -5,6 +5,7 @@ import './App.css';
 import Map from "./components/Map"
 import Locations from "./components/RenderedByMap/Locations"
 import User from "./components/RenderedByMap/User"
+import Socket from './components/Socket'
 
 @inject("user", "usersStore")
 @observer
@@ -22,6 +23,8 @@ class App extends Component {
           <div id="main-links">
             <Link to="/map" className="link">Map</Link>
           </div>
+          
+          <Socket />
 
           <Route path="/map" exact component={Map} />
           <Route path="/map/:location" exact render={({match}) => <Locations match={match}/>} />
