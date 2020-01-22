@@ -85,6 +85,7 @@ class CurrentLocation extends React.Component {
           console.log(response);
         })
         .catch(function (error) {
+          console.log('coordinates',coordinates)
           console.log(error);
         });
       }

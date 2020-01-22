@@ -11,7 +11,7 @@ export class SocketStore{
 
     @action openSocket = () => {
         // const ;
-        this.socket.emit('userId', 'resctTestUser')
+        this.socket.emit('userId', '5e270a0e2647322352129dae')
         this.socket.on('userId', (userIdin) => {
             console.log('recived: '+ userIdin)
         })
