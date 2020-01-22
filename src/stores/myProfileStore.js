@@ -5,7 +5,7 @@ export class MyProfile{
     @observable profile = {}
 
     @action getProfile = () => {
-        this.profile = dummyData[0]
-        console.log(this.profile)
+        this.profile = dummyData[3]
+        
     }
 }

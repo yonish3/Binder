@@ -8,8 +8,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-@inject("user", "usersStore", "locationsStore", "myProfile")
+
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
+
 class Locations extends Component {
   useStyles = () => {
     return makeStyles(theme => ({
@@ -27,7 +29,7 @@ class Locations extends Component {
     const locationsArray = ["Speakeasy", "Camel-Comedy-Club", "Max-Brenner"];
     // sending location to yoni - post to yoni with axios
     // getting from yoni users list //keeps updating
-
+    console.log(this.props.myProfile.profile)
     console.log("in Locations!");
 
     const divStyle = {

@@ -7,7 +7,7 @@ import CurrentLocation from "./CurrentLocation";
 
 
 const apiKey = process.env.API_KEY
-@inject("user", "usersStore", "locationsStore", "myProfile")
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class MapContainer extends Component {

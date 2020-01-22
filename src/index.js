@@ -8,12 +8,15 @@ import { User } from "./stores/userInstances"
 import { UsersStore } from "./stores/usersStore"
 import { LocationsStore } from "./stores/locationsStore"
 import { MyProfile } from './stores/myProfileStore';
+import { SocketStore } from "./stores/socketStore"
 
 const user = new User()
 const usersStore = new UsersStore()
 const locationsStore = new LocationsStore()
 const myProfile = new MyProfile()
-const stores = {user, usersStore, locationsStore, myProfile}
+const socketStore = new SocketStore()
+
+const stores = {user, usersStore, locationsStore, myProfile, socketStore}
 
 
 ReactDOM.render(<Provider {...stores}><App /></Provider>, document.getElementById('root'));

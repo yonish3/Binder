@@ -14,7 +14,7 @@ require('dotenv').config()
 
 
 
-@inject("user", "usersStore", "myProfile")
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 
@@ -23,6 +23,8 @@ class App extends Component {
 
     componentDidMount() {
         this.props.usersStore.getUsers()
+        this.props.myProfile.getProfile()
+        this.props.socketStore.openSocket()
     }
 
     render() {
