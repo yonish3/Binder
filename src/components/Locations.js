@@ -8,8 +8,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
-@inject("user", "usersStore", "locationsStore")
+
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
+
 class Locations extends Component {
   useStyles = () => {
     return makeStyles(theme => ({
@@ -20,14 +22,17 @@ class Locations extends Component {
       }
     }));
   };
-
+  sendLocation = (event) => {
+    console.log(event.target.name)
+  }
   render() {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
-    const locationsArray = ["Speakeasy", "Camel-Comedy-Club", "Max-Brenner"];
+    const locationsArray = this.props.socketStore.nearbyLocations;
+    console.log(this.props.socketStore.nearbyLocations)
     // sending location to yoni - post to yoni with axios
     // getting from yoni users list //keeps updating
-
+    console.log(this.props.myProfile.profile)
     console.log("in Locations!");
 
     const divStyle = {
@@ -46,8 +51,8 @@ class Locations extends Component {
       >
         {locationsArray.map((location, i) => (
           <ListItem key={i} button>
-            <Link  to={`/map/${location}`} >
-              <ListItemText primary={location} />
+            <Link  to={`/map/${location.name}`} name={location.name} onClick={this.sendLocation}>
+              <ListItemText primary={location.name} />
             </Link>
           </ListItem>
         ))}

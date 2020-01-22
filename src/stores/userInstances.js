@@ -1,7 +1,7 @@
 import {observable} from "mobx"
 
 export class User{
-    
+    @observable id
     @observable firstName
     @observable lastName
     @observable age
@@ -10,10 +10,10 @@ export class User{
     @observable interestedIn
     @observable gender
     @observable picture
-    @observable id
-    // below - variables that we don't need to insert when making a new instance
+    
+    
     @observable isCheckedIn
-    @observable coordinates 
+    @observable isDeleted 
     
     constructor(id, firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture, coordinates){
         this.id = id

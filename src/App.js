@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-// import { GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
+
 import { observer, inject } from 'mobx-react'
 import './App.css';
-// import MapDisplay from "./components/MapDisplay"
+
 import Users from "./components/RenderedByMap/Users"
 import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
@@ -15,7 +15,7 @@ require('dotenv').config()
 
 
 
-@inject("user", "usersStore")
+@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 
@@ -24,6 +24,8 @@ class App extends Component {
 
     componentDidMount() {
         this.props.usersStore.getUsers()
+        this.props.myProfile.getProfile()
+        this.props.socketStore.openSocket()
     }
 
     render() {
