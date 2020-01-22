@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
+import { withRouter } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import User from "./User";
 import { makeStyles } from "@material-ui/core/styles";
@@ -77,12 +78,18 @@ class Users extends Component {
               <ListSubheader component="span">December</ListSubheader>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
-            {thisDummyUsers.map(user => (
-              <GridListTile key={user.firstName}>
+            {thisDummyUsers.map((user, index) => (
+              <GridListTile
+                key={user.firstName}
+                onClick={() =>
+                  this.props.history.push(`/user/${user.firstName}`)
+                }
+              >
                 <img src={user.picture} alt={user.firstName} />
                 <GridListTileBar
-                  title={user.firstName}
-                  subtitle={<span>by: {user.firstName}</span>}
+                style={{height: "auto"}}
+                  title={`${user.firstName}, ${user.age}`}
+                  
                   actionIcon={
                     <IconButton
                       aria-label={`info about ${user.firstName}`}
@@ -112,4 +119,5 @@ class Users extends Component {
 //         </div>
 //     </Link>
 // )}
-export default Users;
+
+export default withRouter(Users);

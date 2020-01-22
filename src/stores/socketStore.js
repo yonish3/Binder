@@ -30,5 +30,9 @@ export class SocketStore{
         this.socket.emit('selectedLocation', location);
         
     }
+
+    @action sendReaction = (reactionObj) => {
+        this.socket.emit('reaction', reactionObj)
+    }
 }
 

@@ -36,11 +36,12 @@ io.on('connection', function (socket) {
         location: null
     })
     console.log('users',users)
-
+    console.log('socket is ',socket.id)
     let len = users.length
     
     socket.emit(`allUsers`, users);
-    socket.on('userId', (userId) => {
+    socket.on('userId', (userId) => { 
+        
         users.forEach(u => { //from db
             if (u.socketId === socket.id) {
                 u.userId = userId

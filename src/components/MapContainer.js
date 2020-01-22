@@ -9,7 +9,6 @@ import CurrentLocation from "./CurrentLocation";
 const apiKey = process.env.API_KEY
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
-
 class MapContainer extends Component {
   constructor() {
     super();
@@ -20,7 +19,7 @@ class MapContainer extends Component {
     };
   }
 
-  onMarkerClick = (props, marker, e) => {
+  onMarkerClick = (props, marker, e) =>{
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -36,7 +35,7 @@ class MapContainer extends Component {
         });
       }
     }
-
+  
     render() {
       //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
       const divStyle = {
@@ -62,8 +61,7 @@ class MapContainer extends Component {
       );
     }
   }
-
-
+  
 export default GoogleApiWrapper({
-  apiKey: apiKey
+  apiKey: "AIzaSyDVj2e5Q-6pNzWHmypcns1iOlIua1Tise0"
 })(MapContainer);
