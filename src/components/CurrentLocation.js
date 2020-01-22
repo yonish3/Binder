@@ -11,7 +11,7 @@ const mapStyles = {
   map: {
     position: 'absolute',
     width: '100%',
-    height: '100%'
+    height: '40%'
   }
 };
 
@@ -31,7 +31,7 @@ class CurrentLocation extends React.Component {
             lat: lat,
             lng: lng
           }
-        };
+        }; 
       }
 
       componentDidUpdate(prevProps, prevState) {
