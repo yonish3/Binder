@@ -8,7 +8,9 @@ const config = {
     
     db: {
         db_URI: process.env.MONGO_DB_URI
-    }
+    },
+    googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY
+
 }
 
 console.log(config)

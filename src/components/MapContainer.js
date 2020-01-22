@@ -5,6 +5,8 @@ import { observer, inject } from "mobx-react";
 // import './App.css';
 import CurrentLocation from "./CurrentLocation";
 
+
+const apiKey = process.env.API_KEY
 @inject("user", "usersStore")
 @observer
 class MapContainer extends Component {
@@ -65,5 +67,5 @@ class MapContainer extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: "AIzaSyDmMp4vZyuGAkAHBsUj_cmiblYNk1POFXA"
+  apiKey: apiKey
 })(MapContainer);

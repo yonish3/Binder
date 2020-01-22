@@ -9,12 +9,17 @@ import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
 import Locations from './components/Locations'
 // import CurrentLocation from "./components/CurrentLocation"
+require('dotenv').config()
+
+
+
 
 @inject("user", "usersStore")
 @observer
 
-class App extends Component {
 
+class App extends Component {
+    
 
     componentDidMount() {
         this.props.usersStore.getUsers()
