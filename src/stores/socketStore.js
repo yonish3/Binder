@@ -8,6 +8,15 @@ export class SocketStore{
     @observable coordinates = {}
     @observable nearbyLocations = []
     @observable nearbyUsers = []
+@observable checked = false
+    @action getUserById = (id) => {
+        return this.nearbyUsers.find(user => user.id == id)
+    }
+    @action findSocketDestinationById = (id) => {
+        const socketId = this.nearbyUsers.find(user => user.socketId == id)
+        return socketId;
+    }
+
     @action openSocket = () => {
         // const ;
         this.socket.emit('userId', '5e270a0e2647322352129dae')
@@ -40,12 +49,17 @@ export class SocketStore{
         this.socket.on('reaction recieved', reactionObj => {
             console.log('Recieved an Emoji!');
         })
-
     }
 
-    @action recieveMessage = (message) => {
+    @action recieveMessage = () => { 
         return this.socket.on('reaction recieved', reactionObj => {
+            console.log("Recieved Message!");
+            this.checked = true;
+            setTimeout(() => {
+                this.checked = false; 
+                console.log('changed checked to false!');
 
-        })
+            }, 5000)
+        }) 
     }
 }

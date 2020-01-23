@@ -39,6 +39,7 @@ io.on('connection', function (socket) {
         console.log('userId',userId)
         const userInfo = queries.findUser(userId)
         userInfo.then( resolvedUserInfo => {
+            console.log(`userId is ${userId}, socketId is ${socket.id}`);
           resolvedUserInfo.socketId = socket.id
           users.push(resolvedUserInfo)
           // console.log(users)
@@ -84,8 +85,8 @@ io.on('connection', function (socket) {
     })
 
     socket.on('reaction', (reactionObj) => {
-        console.log(`User id is : ${reactionObj.userId} destinationSocket is ${reactionObj.destinationSocketId}`)
-        io.to(`${reactionObj.destinationSocketId}`).emit('reaction recieved', reactionObj.label);
+        console.log(`destinationSocket is`, reactionObj)
+        io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
 
         // socket.emit(`users`, usersNearUser)
         // socket.emit(`allUsers`, users);

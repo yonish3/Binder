@@ -7,25 +7,28 @@ import Fade from "@material-ui/core/Fade";
 @observer
 class Emoji extends Component {
   handleClick = label => {
+    const userId = this.props.match.params.userId;
+    const user = this.props.socketStore.getUserById(userId);
 
     const reactionObj = {
-      sourceUserId: this.props.match.params.userId,
       label,
-      destinationSocketId: ''
-    }
+      destinationUser: user
+    };
 
     console.log("socket is ", this.props.socketStore.socket);
-    this.props.socketStore.sendReaction(reactionObj)
+    console.log('reactionObj is ', reactionObj);
+    
+    this.props.socketStore.sendReaction(reactionObj);
   };
 
+ 
   render() {
+    const userId = this.props.match.params.userId;
+    const user = this.props.usersStore.getUserById(userId);
 
-    const userId = this.props.match.params.userId
-    const user = this.props.usersStore.getUserById(userId)
-
-    this.props.socketStore.socket.on('reaction recieved', reactionObj => {
-        console.log('Recieved an Emoji!');
-    })
+    this.props.socketStore.socket.on("reaction recieved", reactionObj => {
+      console.log("Recieved an Emoji!");
+    });
 
     return (
       //   <span
@@ -43,8 +46,10 @@ class Emoji extends Component {
       <>
         <Emojify
           style={{ height: 32, width: 32 }}
-          onClick={() => this.handleClick(':heart:')}
-        >:heart:</Emojify>
+          onClick={() => this.handleClick(":heart:")}
+        >
+          :heart:
+        </Emojify>
         <Emojify
           style={{ height: 32, width: 32 }}
           onClick={() => this.handleClick(":fire:")}
