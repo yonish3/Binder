@@ -108,7 +108,7 @@ console.log('newUser is ', newUser);
 });
 
 
-http.listen(8080, function () {
+http.listen(process.env.PORT, function () {
     console.log('listening on *:8080');
 });
 
