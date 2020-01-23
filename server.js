@@ -15,7 +15,7 @@ const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
-const port = 8080
+const PORT = 8080
 
   
 app.use(bodyParser.json());
@@ -113,7 +113,6 @@ console.log('newUser is ', newUser);
 // })
 
 // app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
-
-http.listen(port, function () {
+http.listen(process.env.PORT || PORT, function () {
     console.log('listening on *:8080');
 });
