@@ -107,8 +107,10 @@ console.log('newUser is ', newUser);
     });
 });
 
+app.get('*', function(req,res){
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
 
 http.listen(port, function () {
     console.log('listening on *:8080');
 });
-
