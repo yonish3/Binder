@@ -16,7 +16,9 @@ const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
 const port = process.env.PORT || 4000
+const INDEX = '/index.html';
 
+  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -107,9 +109,11 @@ console.log('newUser is ', newUser);
     });
 });
 
-app.get('*', function(req,res){
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
+// app.get('*', function(req,res){
+//   res.sendFile(path.join(__dirname, 'build', 'index.html'))
+// })
+
+// app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 
 http.listen(port, function () {
     console.log('listening on *:8080');
