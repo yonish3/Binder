@@ -10,6 +10,7 @@ import MapContainer from "./components/MapContainer"
 import Locations from './components/Locations'
 // import CurrentLocation from "./components/CurrentLocation"
 import Profile from './components/RenderedByMap/Profile'
+import Notification from './components/Notification'
 require('dotenv').config()
 
 
@@ -24,12 +25,16 @@ class App extends Component {
         this.props.usersStore.getUsers()
         this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
+        this.props.socketStore.recieveMessage();
     }
 
     render() {
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
         return ( 
             <Router>
+                {this.props.socketStore.checked ? 
+                <Notification />
+                :
                 <div id="main-container">
                     {/* <div id="main-links">
                         <Link to="/map" className="link">Map</Link>
@@ -37,8 +42,10 @@ class App extends Component {
                     {/* need to change path to /map when finished testing */}
                     <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />
                     <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                    <Route path="/user/:firstName" exact render={({ match }) => <Profile match={match} />} />
+                    <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
                 </div>
+                }
+                
             </Router>
         );
     }

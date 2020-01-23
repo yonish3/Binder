@@ -34,6 +34,8 @@ class Users extends Component {
   };
   render() {
     const nearbyUsers = this.props.socketStore.nearbyUsers;
+    console.log('nearby users are', nearbyUsers);
+    
     const currentLocation = this.props.match.params.location;
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
@@ -69,16 +71,16 @@ class Users extends Component {
         <div className={classes.root}>
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
-              <ListSubheader component="span">December</ListSubheader>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
-            {nearbyUsers.map((user, index) => (
+            {nearbyUsers.map((user, index) =>  (
               <GridListTile
                 key={user.firstName}
                 onClick={() =>
-                  this.props.history.push(`/user/${user.firstName}`)
+                  this.props.history.push(`/user/${user._id}`)
                 }
               >
+                {console.log('user url is ', user.picture)}
                 <img src={user.picture} alt={user.firstName} />
                 <GridListTileBar
                 style={{height: "auto"}}

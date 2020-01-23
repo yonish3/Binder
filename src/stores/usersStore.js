@@ -13,6 +13,11 @@ export class UsersStore{
         console.log(this.props)
         this.users = dummyData.default
     }
+
+    @action getUserById = (userId) => {
+        const user = this.users.find(user => user._id == userId)
+        return user;
+    }
 }
 
 

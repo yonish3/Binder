@@ -7,11 +7,31 @@ import Fade from "@material-ui/core/Fade";
 @observer
 
 class Emoji extends Component {
+  handleClick = label => {
+    const userId = this.props.match.params.id;
+    const user = this.props.socketStore.getUserById(userId);
+// console.log('userId is ', userId);
 
-    handleClick = (label) => {
+    const reactionObj = {
+      label,
+      destinationUser: user
+    };
 
-    }
+    console.log("socket is ", this.props.socketStore.socket);
+    console.log('reactionObj is ', reactionObj);
+    
+    this.props.socketStore.sendReaction(reactionObj);
+  };
+
+ 
   render() {
+    const userId = this.props.match.params.userId;
+    const user = this.props.usersStore.getUserById(userId);
+
+    this.props.socketStore.socket.on("reaction recieved", reactionObj => {
+      console.log("Recieved an Emoji!");
+    });
+
     return (
       //   <span
       //     className="emoji"
@@ -26,11 +46,36 @@ class Emoji extends Component {
       //   <Emojify style={{ height: 32, width: 32 }}>:heart:</Emojify>
       //     </Tooltip>
       <>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => this.handleClick()}></Emojify>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:fire:</Emojify>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:heart_eyes:</Emojify>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:blush:</Emojify>
-        <Emojify style={{ height: 32, width: 32 }} onClick={() => console.log("!!!")}>:(</Emojify>
+        <Emojify
+          style={{ height: 32, width: 32 }}
+          onClick={() => this.handleClick(":heart:")}
+        >
+          :heart:
+        </Emojify>
+        <Emojify
+          style={{ height: 32, width: 32 }}
+          onClick={() => this.handleClick(":fire:")}
+        >
+          :fire:
+        </Emojify>
+        <Emojify
+          style={{ height: 32, width: 32 }}
+          onClick={() => this.handleClick(":heart_eyes:")}
+        >
+          :heart_eyes:
+        </Emojify>
+        <Emojify
+          style={{ height: 32, width: 32 }}
+          onClick={() => this.handleClick(":blush:")}
+        >
+          :blush:
+        </Emojify>
+        <Emojify
+          style={{ height: 32, width: 32 }}
+          onClick={() => this.handleClick(":(")}
+        >
+          :(
+        </Emojify>
       </>
     );
   }
