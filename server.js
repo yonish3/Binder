@@ -20,6 +20,7 @@ const PORT = 8080
   
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use("/", api);
 app.use(errorHandler)
@@ -108,9 +109,9 @@ console.log('newUser is ', newUser);
     });
 });
 
-// app.get('*', function(req,res){
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'))
-// })
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 // app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 http.listen(process.env.PORT || PORT, function () {
