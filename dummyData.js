@@ -8,7 +8,6 @@ exports.users =  [
             interestedIn: ["Women"],
             gender: "Male",
             picture: "thisIsAtest",
-            location: "Zoo Zoo"
         },
         {
             firstName: "Clark",
@@ -19,7 +18,6 @@ exports.users =  [
             interestedIn: ["Women"],
             gender: "Male",
             picture: "thisIsAtest",
-            location: "Zoo Zoo"
         },
         {
             firstName: "Princess",
@@ -30,7 +28,6 @@ exports.users =  [
             interestedIn: ["Men"],
             gender: "Female",
             picture: "thisIsAtest",
-            location: "Sputnik bar"
         },
         {
             firstName: "Barry",
@@ -41,6 +38,12 @@ exports.users =  [
             interestedIn: ["Men"],
             gender: "Male",
             picture: "thisIsAtest",
-            location: "HaTayara"
         }
     ]
+
+exports.userIds = [
+    "5e270a0e2647322352129dae", 
+    "5e270a0e2647322352129daf", 
+    "5e270a0e2647322352129db0", 
+    "5e270a0e2647322352129db1"
+]
