@@ -33,7 +33,7 @@ io.on('connection', function (socket) {
             console.log(`userId is ${userId}, socketId is ${socket.id}`);
           resolvedUserInfo.socketId = socket.id
           users.push(resolvedUserInfo)
-          socket.emit('userInfo', userInfo)
+          socket.emit('userId', resolvedUserInfo)
         })
 
         // socket.emit(`allUsers`, users);
