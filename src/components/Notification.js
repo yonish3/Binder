@@ -32,22 +32,26 @@ class Notification extends Component {
   };
   render() {
     const classes = this.useStyles();
+    console.log(`in notification, reactingUser is `, this.props.socketStore.reactingUser);
+    
     return (
       <div>
-        <Zoom
+        {/* <Zoom
           in={this.props.socketStore.checked}
           style={{
             transitionDelay: this.props.socketStore.checked ? "500ms" : "0ms"
           }}
-        >
+        > */}
           
             <Emojify
               style={{ height: 80, width: 80, marginLeft: "40%", marginTop: "70%" }}
             >
-              :heart:
+              {this.props.socketStore.emoji}
             </Emojify>
-        
-        </Zoom>
+            <div style={{textAlign: "center"}}>
+                {this.props.socketStore.reactingUser.firstName} has reacted to you!
+            </div> 
+        {/* </Zoom> */}
       </div>
     );
   }

@@ -8,6 +8,8 @@ export class SocketStore{
     @observable coordinates = {}
     @observable nearbyLocations = []
     @observable nearbyUsers = []
+    @observable emoji = ''
+    @observable loggedInUser 
 @observable checked = false
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -20,8 +22,9 @@ export class SocketStore{
     @action openSocket = () => {
         // const ;
         this.socket.emit('userId', '5e270a0e2647322352129dae')
-        this.socket.on('userId', (userId) => {
-            console.log('received: '+ userId)
+        this.socket.on('userId', (user) => {
+            console.log('received: ', user)
+            this.loggedInUser = user
         })
     }
 
@@ -50,18 +53,31 @@ export class SocketStore{
     @action getReaction = (reactionObj) => {
         this.socket.on('reaction recieved', reactionObj => {
             console.log('Recieved an Emoji!');
+            // this.reactingUser = reactionObj.destinationUser
         })
     }
 
     @action recieveMessage = () => { 
-        return this.socket.on('reaction recieved', reactionObj => {
+        this.socket.on('reaction recieved', reactionObj => {
             console.log("Recieved Message!");
+            console.log('reactingObj is ', reactionObj);
+            this.reactingUser = reactionObj.sourceUser
+             console.log('reactingUser is ', this.reactingUser);
+            
             this.checked = true;
+            this.emoji = reactionObj.label;
+            
+           
             setTimeout(() => {
                 this.checked = false; 
+                this.reactingUser = null
                 console.log('changed checked to false!');
 
             }, 5000)
         }) 
     }
+
+    // @action setReactionUser = (user) => {
+    //     this.reactingUser = user
+    // }
 }

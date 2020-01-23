@@ -8,12 +8,14 @@ import Fade from "@material-ui/core/Fade";
 class Emoji extends Component {
   handleClick = label => {
     const userId = this.props.match.params.id;
+    console.log('userId', userId)
     const user = this.props.socketStore.getUserById(userId);
 // console.log('userId is ', userId);
 
     const reactionObj = {
       label,
-      destinationUser: user
+      destinationUser: user,
+      sourceUser: this.props.socketStore.loggedInUser
     };
 
     console.log("socket is ", this.props.socketStore.socket);
@@ -27,9 +29,9 @@ class Emoji extends Component {
     const userId = this.props.match.params.userId;
     const user = this.props.usersStore.getUserById(userId);
 
-    this.props.socketStore.socket.on("reaction recieved", reactionObj => {
-      console.log("Recieved an Emoji!");
-    });
+    // this.props.socketStore.socket.on("reaction recieved", reactionObj => {
+    //   console.log("Recieved an Emoji!");
+    // });
 
     return (
       //   <span
@@ -44,7 +46,7 @@ class Emoji extends Component {
       //       <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Add">
       //   <Emojify style={{ height: 32, width: 32 }}>:heart:</Emojify>
       //     </Tooltip>
-      <>
+      <div style={{marginLeft: "25vw", marginTop: "5vh"}}>
         <Emojify
           style={{ height: 32, width: 32 }}
           onClick={() => this.handleClick(":heart:")}
@@ -75,7 +77,7 @@ class Emoji extends Component {
         >
           :(
         </Emojify>
-      </>
+      </div>
     );
   }
 }
