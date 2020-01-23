@@ -6,6 +6,7 @@ exports.findUser = async function(userId){
         _id: userId
     })
     return await {
+        id: user[0]._id,
         firstName: user[0].firstName,
         lastName: user[0].lastName,
         age: user[0].age,

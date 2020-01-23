@@ -7,8 +7,9 @@ import Fade from "@material-ui/core/Fade";
 @observer
 class Emoji extends Component {
   handleClick = label => {
-    const userId = this.props.match.params.userId;
+    const userId = this.props.match.params.id;
     const user = this.props.socketStore.getUserById(userId);
+// console.log('userId is ', userId);
 
     const reactionObj = {
       label,

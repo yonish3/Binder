@@ -15,7 +15,7 @@ class Profile extends Component {
   
   render() {
     console.log(this.props.match)
-    console.log(this.props.usersStore.users)
+    console.log(this.props.socketStore.nearbyUsers)
     // const user = {
     //   firstName: "Dor",
     //   lastName: "Ben Lulu",
@@ -34,7 +34,7 @@ class Profile extends Component {
     const user = this.props.socketStore.getUserById(userId)
 
     console.log(`user to display is `, user);
-console.log(this.props.usersStore.users);
+// console.log(this.props.usersStore.users);
 
     const containerStyle = {
       position: "relative",

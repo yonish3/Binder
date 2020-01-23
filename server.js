@@ -73,6 +73,7 @@ io.on('connection', function (socket) {
         })
         socket.emit(`usersNearMe`, usersNearUser)
         usersNearUser.push(newUser)
+console.log('newUser is ', newUser);
 
         for (let i = 0; i < usersNearUser.length-1; i++) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
