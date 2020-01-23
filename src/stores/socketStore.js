@@ -8,7 +8,8 @@ export class SocketStore{
     @observable coordinates = {}
     @observable nearbyLocations = []
     @observable nearbyUsers = []
-@observable checked = false
+    @observable checked = false
+    
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
     }

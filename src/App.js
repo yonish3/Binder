@@ -11,6 +11,7 @@ import Locations from './components/Locations'
 // import CurrentLocation from "./components/CurrentLocation"
 import Profile from './components/RenderedByMap/Profile'
 import Notification from './components/Notification'
+import Login from './components/Login'
 require('dotenv').config()
 
 
@@ -32,6 +33,7 @@ class App extends Component {
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
         return ( 
             <Router>
+                <Login />
                 {this.props.socketStore.checked ? 
                 <Notification />
                 :

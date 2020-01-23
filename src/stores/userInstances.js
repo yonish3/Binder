@@ -1,29 +1,25 @@
-import {observable} from "mobx"
+import { observable, computed, action } from "mobx"
+import axios from "axios"
 
 export class User{
     @observable id
-    @observable firstName
+    @observable firstName = 'first name'
     @observable lastName
     @observable age
     @observable status
     @observable desiredRelationship
     @observable interestedIn
     @observable gender
-    @observable picture
+    @observable picture 
     
     
     @observable isCheckedIn
     @observable isDeleted 
     
-    constructor(id, firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture, coordinates){
-        this._id = id
-        this.firstName = firstName
-        this.lastName = lastName
-        this.age = age
-        this.status = status
-        this.desiredRelationship = desiredRelationship
-        this.interestedIn = interestedIn
-        this.gender = gender
-        this.picture = picture
+
+    @action logIn = async (username) =>{
+        const userInfo = await axios.get(`http://localhost:8080/login/${username}`)
+        console.log('user name from server: ' + userInfo.data )
+        this.firstName = userInfo.data
     }
 }

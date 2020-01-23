@@ -20,6 +20,13 @@ const userIds = require('./dummyData').userIds
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
+    next()
+})
+
 app.use("/", api);
 app.use(errorHandler)
 
@@ -35,26 +42,13 @@ io.on('connection', function (socket) {
           users.push(resolvedUserInfo)
           socket.emit('userInfo', userInfo)
         })
-
-        // socket.emit(`allUsers`, users);
-        // console.log('user id socket works')
     })
-    
-    
-    
-
-    // let len = users.length
-    
-    // socket.emit(`allUsers`, users);
 
     socket.on('GPSlocation', async (GPSlocation) => {
         console.log('GPS location received: ' + GPSlocation.lat, GPSlocation.lng)
 
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-        // let places = []
         let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
-        // console.log(places)
-
         socket.emit(`locationsArry`, places);
     })
     
@@ -85,8 +79,6 @@ console.log('newUser is ', newUser);
         console.log(`destinationSocket is`, reactionObj)
         io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
 
-        // socket.emit(`users`, usersNearUser)
-        // socket.emit(`allUsers`, users);
     })
 
     socket.on('disconnect', function () {

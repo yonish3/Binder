@@ -27,3 +27,17 @@ exports.deleteUser = async (req, res, next) => {
             next(err)
     })
 }
+
+exports.logIn = async (req, res, next) => {
+    console.log('user name in server: '+req.params.username)
+    const usernameToSend = req.params.username
+    console.log(usernameToSend)
+    res.send(usernameToSend)
+    // queries.findUser(req.params.id)
+    //        .then( user => {
+    //                 res.send(user)
+    //             }) 
+    //             .catch(err => {
+    //                 next(err)
+    //             })
+}
