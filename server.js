@@ -71,26 +71,29 @@ io.on('connection', function (socket) {
             }
         })
         socket.emit(`usersNearMe`, usersNearUser)
-        
         usersNearUser.push(newUser)
 
-        
         for (let i = 0; i < usersNearUser.length-1; i++) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
-
-            //const index = usersToSend.findIndex( user => user.socketId == socket.id )
-            //usersToSend.splice(index,1)
             io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
         }
     })
 
     socket.on('disconnect', function () {
         console.log('user disconnected');
+        let location
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
+                location = users[i].location
                 console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
+        }
+        
+
+        for (let i = 0; i < users.length; i++) {
+            const usersToSend = [...users.filter( user => user.socketId != users[i].socketId && user.location == location )]
+            io.to(`${users[i].socketId}`).emit('usersNearMe', usersToSend);
         }
     });
 });
