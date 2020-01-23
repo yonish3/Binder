@@ -30,7 +30,8 @@ class User extends Component {
 
 
     const classes = this.useStyles();
-    const user = this.props.user;
+    const user = this.props.user; 
+console.log('logged in user is ', user);
 
     const contentStyle = {
       opacity: "0.5"
