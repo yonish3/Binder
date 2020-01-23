@@ -30,6 +30,7 @@ io.on('connection', function (socket) {
     socket.on('userId', (userId) => {
         const userInfo = queries.findUser(userIds.pop())
         userInfo.then( resolvedUserInfo => {
+            console.log(`userId is ${userId}, socketId is ${socket.id}`);
           resolvedUserInfo.socketId = socket.id
           users.push(resolvedUserInfo)
           socket.emit('userInfo', userInfo)
@@ -77,6 +78,14 @@ io.on('connection', function (socket) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
             io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
         }
+    })
+
+    socket.on('reaction', (reactionObj) => {
+        console.log(`destinationSocket is`, reactionObj)
+        io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
+
+        // socket.emit(`users`, usersNearUser)
+        // socket.emit(`allUsers`, users);
     })
 
     socket.on('disconnect', function () {

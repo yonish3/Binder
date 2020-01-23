@@ -1,4 +1,4 @@
-import { observable, action } from "mobx"
+import { observable, action, computed } from "mobx"
 import dummyData from "./dummyData"
 import socketIOClient  from "socket.io-client"
 export class SocketStore{
@@ -8,6 +8,14 @@ export class SocketStore{
     @observable coordinates = {}
     @observable nearbyLocations = []
     @observable nearbyUsers = []
+@observable checked = false
+    @action getUserById = (id) => {
+        return this.nearbyUsers.find(user => user.id == id)
+    }
+    @action findSocketDestinationById = (id) => {
+        const socketId = this.nearbyUsers.find(user => user.socketId == id)
+        return socketId;
+    }
 
     @action openSocket = () => {
         // const ;
@@ -25,6 +33,7 @@ export class SocketStore{
             this.nearbyLocations = locationsArry
           })
     }
+
     @action getUsersNearMe = (location) => {
         console.log('before emit location: '+location)
         this.socket.emit('selectedLocation', location);
@@ -35,5 +44,24 @@ export class SocketStore{
     }
     @action sendReaction = (reactionObj) => {
         this.socket.emit('reaction', reactionObj)
+        
+    }
+
+    @action getReaction = (reactionObj) => {
+        this.socket.on('reaction recieved', reactionObj => {
+            console.log('Recieved an Emoji!');
+        })
+    }
+
+    @action recieveMessage = () => { 
+        return this.socket.on('reaction recieved', reactionObj => {
+            console.log("Recieved Message!");
+            this.checked = true;
+            setTimeout(() => {
+                this.checked = false; 
+                console.log('changed checked to false!');
+
+            }, 5000)
+        }) 
     }
 }
