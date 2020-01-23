@@ -90,7 +90,6 @@ io.on('connection', function (socket) {
             }
         }
         
-
         for (let i = 0; i < users.length; i++) {
             const usersToSend = [...users.filter( user => user.socketId != users[i].socketId && user.location == location )]
             io.to(`${users[i].socketId}`).emit('usersNearMe', usersToSend);
