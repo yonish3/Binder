@@ -46,7 +46,7 @@ class Emoji extends Component {
       //       <Tooltip TransitionComponent={Fade} TransitionProps={{ timeout: 600 }} title="Add">
       //   <Emojify style={{ height: 32, width: 32 }}>:heart:</Emojify>
       //     </Tooltip>
-      <>
+      <div style={{marginLeft: "25vw", marginTop: "5vh"}}>
         <Emojify
           style={{ height: 32, width: 32 }}
           onClick={() => this.handleClick(":heart:")}
@@ -77,7 +77,7 @@ class Emoji extends Component {
         >
           :(
         </Emojify>
-      </>
+      </div>
     );
   }
 }
