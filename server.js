@@ -7,16 +7,15 @@ const api = require("./server/routes/api.js");
 const errorHandler = require('./server/middlewares/errorHandler/errorHandler')
 const config = require('./config/config')
 // const dbSetup = require('./server/db/dbSetup')
-const server = require('http').createServer(app);
-const io = require('socket.io')(server);
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const axios = require("axios")
 const apiKey = process.env.GOOGLE_MAP_API_KEY //move through config
 const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
-const port = process.env.PORT || 4000
-const INDEX = '/index.html';
+const port = 8080
 
   
 app.use(bodyParser.json());
@@ -115,6 +114,6 @@ console.log('newUser is ', newUser);
 
 // app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
 
-server.listen(port, function () {
+http.listen(port, function () {
     console.log('listening on *:8080');
 });
