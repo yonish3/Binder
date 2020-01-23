@@ -6,7 +6,6 @@ const path = require("path");
 const api = require("./server/routes/api.js");
 const errorHandler = require('./server/middlewares/errorHandler/errorHandler')
 const config = require('./config/config')
-const port = 8080
 // const dbSetup = require('./server/db/dbSetup')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -16,6 +15,7 @@ const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
+const port = process.env.PORT || 4000
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -108,7 +108,7 @@ console.log('newUser is ', newUser);
 });
 
 
-http.listen(process.env.PORT, function () {
+http.listen(port, function () {
     console.log('listening on *:8080');
 });
 
