@@ -10,7 +10,7 @@ export class SocketStore{
     @observable nearbyUsers = []
 @observable checked = false
     @action getUserById = (id) => {
-        return this.nearbyUsers.find(user => user.id == id)
+        return this.nearbyUsers.find(user => user._id == id)
     }
     @action findSocketDestinationById = (id) => {
         const socketId = this.nearbyUsers.find(user => user.socketId == id)

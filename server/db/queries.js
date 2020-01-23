@@ -6,14 +6,14 @@ exports.findUser = async function(userId){
         _id: userId
     })
     return await {
-        id: user[0]._id,
+        _id: user[0]._id,
         firstName: user[0].firstName,
         lastName: user[0].lastName,
         age: user[0].age,
         status: user[0].status,
         desiredRelationship: user[0].desiredRelationship,
         gender: user[0].gender,
-        pic: user[0].picture
+        picture: user[0].picture
     }
 }
 

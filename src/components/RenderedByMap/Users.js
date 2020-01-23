@@ -73,13 +73,14 @@ class Users extends Component {
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
             </GridListTile>
-            {nearbyUsers.map((user, index) => (
+            {nearbyUsers.map((user, index) =>  (
               <GridListTile
                 key={user.firstName}
                 onClick={() =>
-                  this.props.history.push(`/user/${user.id}`)
+                  this.props.history.push(`/user/${user._id}`)
                 }
               >
+                {console.log('user url is ', user.picture)}
                 <img src={user.picture} alt={user.firstName} />
                 <GridListTileBar
                 style={{height: "auto"}}

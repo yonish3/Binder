@@ -12,7 +12,7 @@ export class UsersStore{
     }
 
     @action getUserById = (userId) => {
-        const user = this.users.find(user => user.id == userId)
+        const user = this.users.find(user => user._id == userId)
         return user;
     }
 }

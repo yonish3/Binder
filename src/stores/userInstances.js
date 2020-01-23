@@ -16,7 +16,7 @@ export class User{
     @observable isDeleted 
     
     constructor(id, firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture, coordinates){
-        this.id = id
+        this._id = id
         this.firstName = firstName
         this.lastName = lastName
         this.age = age
