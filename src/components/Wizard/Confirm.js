@@ -50,7 +50,6 @@ class Confirm extends Component{
                           <ListItem primaryText= 'Intersted In' secondaryText={interstedIn}/>
                           <ListItem primaryText= 'Gender' secondaryText={gender}/>
                           <ListItem primaryText= 'Picture' secondaryText={picture}/>
-
                           
                       </List>
                        <br/>

@@ -41,7 +41,7 @@ class UserForm extends Component {
 
     handleChange = (input) => (event) => {
         
-        // console.log(input, event.target.value)
+        console.log(input, event)
         if (input === "age" && event.target.value > 100){
             alert("Age must be between 18 to 100!")
             event.target.value = 18
