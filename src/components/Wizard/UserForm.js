@@ -40,8 +40,6 @@ class UserForm extends Component {
     }
 
     handleChange = (input) => (event) => {
-        
-        console.log(input, event)
         if (input === "age" && event.target.value > 100){
             alert("Age must be between 18 to 100!")
             event.target.value = 18
@@ -66,7 +64,7 @@ class UserForm extends Component {
         if (input === "picture"){
             this.setState({
                 picture: event
-            }, function(){console.log(this.state)})
+            })
             return
         }
         this.setState({
