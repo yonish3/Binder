@@ -54,9 +54,12 @@ class FormPersonalDetails extends Component {
                 
             }, ()=>{
                 storage.ref('images').child(image.name).getDownloadURL().then(url=> {
+                    
                     this.setState({
                         url
-                    })
+                    }, 
+                        this.props.handleChange('picture'(this.state.url))
+                    )
                 })
             })
         }
@@ -66,6 +69,7 @@ class FormPersonalDetails extends Component {
 
 
     render() {
+            
             const { values, handleChange, upload } = this.props
             return (
                 <MuiThemeProvider>
