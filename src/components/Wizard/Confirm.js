@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
+import axios from 'axios';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {List,ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import { StylesProvider } from '@material-ui/core';
+import Axios from 'axios';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -14,23 +16,31 @@ class Confirm extends Component{
     //     this.state = {
     //     }
     // }
-    continue = event => {
+    continue = async event => {
         event.preventDefault()
         this.props.nextStep()
+        console.log(this.props.values)
+       await axios.post(`http://localhost:8080/signIn`, this.props.values);
 
     }
+        
+
+    
     back = event => {
         event.preventDefault()
         this.props.previousStep()
+   
     }
+       
+    
 
     render(){
-        const { values:{firstName,lastName, age, status, desiredRelationship, interstedIn , gender,  picture }} = this.props
+        const { values: {firstName,lastName,age, status, desiredRelationship, interstedIn , gender,  picture }} = this.props
         return (
                <MuiThemeProvider>
                    <React.Fragment>
                        <AppBar title="Confirm user data" />
-                      <List>
+                        <List>
                           <ListItem primaryText= 'First Name' secondaryText={firstName}/>
                           <ListItem primaryText= 'Last Name' secondaryText={lastName}/>
                           <ListItem primaryText= 'Age' secondaryText={age}/>
@@ -50,6 +60,8 @@ class Confirm extends Component{
         )
     }
 }
+    
+
 
 const styles = {
     buttons: {

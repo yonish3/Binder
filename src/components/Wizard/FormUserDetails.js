@@ -47,7 +47,7 @@ class FormUserDetails extends Component{
                        floatingLabelText="Age"
                        onChange={handleChange('age')}
                        defaultValue={values.age}
-                       type="number" min="18" max="100"/>
+                       type="number" min="18" max="100"  />
                        <br/>
                        <TextField 
                        hintText="Enter Your Status"

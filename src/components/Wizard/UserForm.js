@@ -36,6 +36,7 @@ class UserForm extends Component {
     }
 
     handleChange = (input) => (event) => {
+      
         this.setState({
             [input]: event.target.value
         })

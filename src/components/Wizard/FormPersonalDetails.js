@@ -5,10 +5,14 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { StylesProvider } from '@material-ui/core';
+import axios from 'axios';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class FormPersonalDetails extends Component{
+    state={
+        selectedFile:null
+    }
     continue = event => {
         event.preventDefault()
         this.props.nextStep()
@@ -20,6 +24,19 @@ class FormPersonalDetails extends Component{
         this.props.previousStep()
 
     }
+
+    x= event=> {
+        this.setState({
+            selectedFile:event.target.files[0]
+        })
+    
+
+    }
+    uploadFile=async ()=> {
+        const abc = await axios.post("gs://binder-1579608819026.appspot.com/", this.state.selectedFile)
+        console.log(abc)
+    }
+
 
     render(){
         const { values, handleChange } = this.props
@@ -50,10 +67,12 @@ class FormPersonalDetails extends Component{
                        <br/>
                        <TextField 
                        hintText="Enter Your Picture"
+                       type="file"
                        floatingLabelText="Picture"
-                       onChange={handleChange('picture')}
+                       onChange={this.x}
                        defaultValue={values.picture}
                        />
+                       
                        <br/>
                        <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue}/>
                        <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back}/>
