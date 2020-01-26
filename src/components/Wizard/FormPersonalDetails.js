@@ -4,15 +4,23 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { StylesProvider } from '@material-ui/core';
-import axios from 'axios';
+import { StylesProvider, InputLabel, Input } from '@material-ui/core';
+import { MenuItem } from 'material-ui';
+import Select from '@material-ui/core/Select';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from "@material-ui/core/FormControl"
+import FormLabel from "@material-ui/core/FormLabel"
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
-class FormPersonalDetails extends Component{
-    state={
-        selectedFile:null
+class FormPersonalDetails extends Component {
+    state = {
+        Men: false,
+        Women: false
     }
+
     continue = event => {
         event.preventDefault()
         this.props.nextStep()
@@ -25,67 +33,91 @@ class FormPersonalDetails extends Component{
 
     }
 
-    x= event=> {
+    x = event => {
         this.setState({
-            selectedFile:event.target.files[0]
+            selectedFile: event.target.files[0]
         })
-    
+
 
     }
-    uploadFile=async ()=> {
+    uploadFile = async () => {
         const abc = await axios.post("gs://binder-1579608819026.appspot.com/", this.state.selectedFile)
         console.log(abc)
     }
 
 
-    render(){
-        const { values, handleChange } = this.props
-        return (
-               <MuiThemeProvider>
-                   <React.Fragment>
-                       <AppBar title="Enter User Details" />
-                       <TextField 
-                       hintText="Enter Your Desired Relationship"
-                       floatingLabelText="Desired Relationship"
-                       onChange={handleChange('desiredRelationship')}
-                       defaultValue={values.desiredRelationship}
-                       />
-                       <br/>
-                       <TextField 
-                       hintText="Enter Your Interested In"
-                       floatingLabelText="Interested In"
-                       onChange={handleChange('interedtedIn')}
-                       defaultValue={values.interedtedIn}
-                       />
-                       <br/>
-                       <TextField 
-                       hintText="Enter Your Gender"
-                       floatingLabelText="Gender"
-                       onChange={handleChange('gender')}
-                       defaultValue={values.gender}
-                       />
-                       <br/>
-                       <TextField 
-                       hintText="Enter Your Picture"
-                       type="file"
-                       floatingLabelText="Picture"
-                       onChange={this.x}
-                       defaultValue={values.picture}
-                       />
-                       
-                       <br/>
-                       <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue}/>
-                       <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back}/>
-                   </React.Fragment>
-               </MuiThemeProvider> 
-        )
-    }
-}
+    render() {
+            const { values, handleChange, upload } = this.props
+            return (
+                <MuiThemeProvider>
+                    <React.Fragment>
+                        <AppBar title="Enter User Details" />
 
-const styles = {
-    buttons: {
-        margin: 15
-    }
-}
+                        <InputLabel id="desired-relationship-label">What Are You Looking For?</InputLabel>
+                        <Select labelId="desired-relationship-label" label="What Are You Looking For?"
+                            hintText="Enter Your Desdired Relationship"
+                            floatingLabelText="desiredRelationship"
+                            onChange={handleChange('desiredRelationship')}
+                            value={values.desiredRelationship} autoWidth>
+                            <MenuItem value="True Love">True Love</MenuItem>
+                            <MenuItem value="Hookups">Hookups</MenuItem>
+                        </Select>
+                        <br />
 
-export default FormPersonalDetails
+                        <FormControl component="fieldset" >
+                            <FormLabel component="legend">Who Are You Looking For?</FormLabel>
+                            <FormGroup>
+                                <FormControlLabel
+                                    control={<Checkbox onChange={handleChange('interestedIn')} value="Men" />}
+                                    label="Men"
+                                />
+                                <FormControlLabel
+                                    control={<Checkbox onChange={handleChange('interestedIn')} value="Women" />}
+                                    label="Women"
+                                />
+                            </FormGroup>
+
+                        </FormControl>
+
+                        <br />
+                        <InputLabel id="gender-label">Gender</InputLabel>
+                        <Select labelId="gender-label" label="gender"
+                            hintText="How Do You Define Yourself?"
+                            floatingLabelText="Gender"
+                            onChange={handleChange('gender')}
+                            value={values.gender} autoWidth>
+                            <MenuItem value="Female">Female</MenuItem>
+                            <MenuItem value="Male">Male</MenuItem>
+                            <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
+                        </Select>
+
+                        <br />
+                        <InputLabel id="picture-label">Picture</InputLabel>
+                        <FormGroup >
+                            <Input type="file" floatingLabelText="Picture" onChange={handleChange('picture')}
+                                defaultValue={values.picture} />
+                            <RaisedButton label="Upload" primary={false} style={styles.button} onClick={upload} />
+                        </FormGroup>
+                        <TextField
+                            hintText="Enter Your Picture"
+                            type="file"
+                            floatingLabelText="Picture"
+                            onChange={this.x}
+                            defaultValue={values.picture}
+                        />
+                        <br />
+                        <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
+                        <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back} />
+                    </React.Fragment>
+                </MuiThemeProvider>
+            )
+        }
+    }
+
+    const styles = {
+        buttons: {
+            margin: 15
+        }
+    }
+
+    export default FormPersonalDetails
