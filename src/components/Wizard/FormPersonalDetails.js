@@ -94,17 +94,17 @@ class FormPersonalDetails extends Component {
                         <br />
                         <InputLabel id="picture-label">Picture</InputLabel>
                         <FormGroup >
-                            <Input type="file" floatingLabelText="Picture" onChange={handleChange('picture')}
+                            <Input type="file" floatingLabelText="Picture" onChange={this.x}}
                                 defaultValue={values.picture} />
                             <RaisedButton label="Upload" primary={false} style={styles.button} onClick={upload} />
                         </FormGroup>
-                        <TextField
+                        {/* <TextField
                             hintText="Enter Your Picture"
                             type="file"
                             floatingLabelText="Picture"
                             onChange={this.x}
                             defaultValue={values.picture}
-                        />
+                        /> */}
                         <br />
                         <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
                         <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back} />
