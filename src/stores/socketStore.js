@@ -10,7 +10,7 @@ export class SocketStore{
     @observable nearbyUsers = []
     @observable emoji = ''
     @observable loggedInUser 
-@observable checked = false
+    @observable checked = false
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
     }
