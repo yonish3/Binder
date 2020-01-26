@@ -12,13 +12,15 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
+import {storage} from '../../config/fireBaseConfig'
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class FormPersonalDetails extends Component {
     state = {
         Men: false,
-        Women: false
+        Women: false,
+        url:""
     }
 
     continue = event => {
@@ -40,9 +42,26 @@ class FormPersonalDetails extends Component {
 
 
     }
-    uploadFile = async () => {
-        const abc = await axios.post("gs://binder-1579608819026.appspot.com/", this.state.selectedFile)
-        console.log(abc)
+    uploadFile =  () => {
+        if(this.state.selectedFile){
+            let image = this.state.selectedFile
+            
+            const uploadTask= storage.ref(`images/${image.name}`).put(image)
+            uploadTask.on('state_changed', (snapshot)=>{
+                console.log(snapshot)
+            }, (error)=> {
+                console.log(error);
+                
+            }, ()=>{
+                storage.ref('images').child(image.name).getDownloadURL().then(url=> {
+                    this.setState({
+                        url
+                    })
+                })
+            })
+        }
+        // const abc = await axios.post("gs://binder-1579608819026.appspot.com/", this.state.selectedFile)
+        // console.log(abc)
     }
 
 
@@ -96,7 +115,7 @@ class FormPersonalDetails extends Component {
                         <FormGroup >
                             <Input type="file" floatingLabelText="Picture" onChange={handleChange('picture')}
                                 defaultValue={values.picture} />
-                            <RaisedButton label="Upload" primary={false} style={styles.button} onClick={upload} />
+                            <RaisedButton label="Upload" primary={false} style={styles.button} onClick={this.uploadFile} />
                         </FormGroup>
                         <TextField
                             hintText="Enter Your Picture"
