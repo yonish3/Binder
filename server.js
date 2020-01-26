@@ -30,9 +30,10 @@ io.on('connection', function (socket) {
     socket.on('userId', (userId) => {
         const userInfo = queries.findUser(userIds.pop())
         userInfo.then( resolvedUserInfo => {
+            console.log(`userId is ${userId}, socketId is ${socket.id}`);
           resolvedUserInfo.socketId = socket.id
           users.push(resolvedUserInfo)
-          socket.emit('userInfo', userInfo)
+          socket.emit('userId', resolvedUserInfo)
         })
 
         // socket.emit(`allUsers`, users);
@@ -71,29 +72,41 @@ io.on('connection', function (socket) {
             }
         })
         socket.emit(`usersNearMe`, usersNearUser)
-        
         usersNearUser.push(newUser)
+console.log('newUser is ', newUser);
 
-        
         for (let i = 0; i < usersNearUser.length-1; i++) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
-
-            //const index = usersToSend.findIndex( user => user.socketId == socket.id )
-            //usersToSend.splice(index,1)
             io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
         }
     })
 
+    socket.on('reaction', (reactionObj) => {
+        console.log(`destinationSocket is`, reactionObj)
+        io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
+
+        // socket.emit(`users`, usersNearUser)
+        // socket.emit(`allUsers`, users);
+    })
+
     socket.on('disconnect', function () {
         console.log('user disconnected');
+        let location
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
+                location = users[i].location
                 console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }
+        
+        for (let i = 0; i < users.length; i++) {
+            const usersToSend = [...users.filter( user => user.socketId != users[i].socketId && user.location == location )]
+            io.to(`${users[i].socketId}`).emit('usersNearMe', usersToSend);
+        }
     });
 });
+
 
 http.listen(8080, function () {
     console.log('listening on *:8080');
