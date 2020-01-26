@@ -1,9 +1,10 @@
 import { observable, action, computed } from "mobx"
 import dummyData from "./dummyData"
 import socketIOClient  from "socket.io-client"
+
 export class SocketStore{
     endpoint = "localhost:8080"
-    socket = socketIOClient(this.endpoint);
+    socket = socketIOClient()
     @observable socketId = "";
     @observable coordinates = {}
     @observable nearbyLocations = []
