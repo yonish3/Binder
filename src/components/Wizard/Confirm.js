@@ -26,6 +26,7 @@ class Confirm extends Component{
 
     render(){
         const { values:{firstName,lastName, age, status, desiredRelationship, interstedIn , gender,  picture }} = this.props
+        // console.log(this.props.values)
         return (
                <MuiThemeProvider>
                    <React.Fragment>

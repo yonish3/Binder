@@ -9,16 +9,19 @@ import Sucess from "./Success"
 @observer
 
 class UserForm extends Component {
-    state = {
-        step: 1,
-        firstName: '',
-        lastName: '',
-        age: Number,
-        status: '',
-        desiredRelationship: '',
-        interedtedIn: '',
-        gender: '',
-        picture: ''
+    constructor() {
+        super()
+        this.state = {
+            step: 1,
+            firstName: '',
+            lastName: '',
+            age: Number,
+            status: '',
+            desiredRelationship: '',
+            interestedIn: [],
+            gender: '',
+            picture: ''
+        }
     }
 
     nextStep = () => {
@@ -36,11 +39,32 @@ class UserForm extends Component {
     }
 
     handleChange = (input) => (event) => {
+        // console.log(input, event.target.value)
         if (input === "age" && event.target.value > 100){
             alert("Age must be between 18 to 100!")
             event.target.value = 18
+        } 
+        if (input === "interestedIn" && event.target.checked === true) {
+            
+            const genderImInterestedIn = event.target.value
+            let interestedInArray = [...this.state.interestedIn]
+            interestedInArray.push(genderImInterestedIn)
+            console.log(this.state.interestedIn)
+            console.log(interestedInArray)
+            this.setState({
+                interestedIn: interestedInArray
+            })
+            return
+        } else if (input === "interestedIn" && event.target.checked === false){
+            let interestedInArray = [...this.state.interestedIn]
+            let genderToSplice = interestedInArray.indexOf(event.target.value)
+            interestedInArray.splice(genderToSplice, 1)
+            this.setState({
+                interestedIn: interestedInArray
+            })
+            return
         }
-        console.log(input, event.target.value)
+        
         this.setState({
             [input]: event.target.value
         })
@@ -48,8 +72,8 @@ class UserForm extends Component {
 
     render() {
         const { step } = this.state
-        const { firstName, lastName, age, status, desiredRelationship, interedtedIn, gender, picture } = this.state
-        const values = { firstName, lastName, age, status, desiredRelationship, interedtedIn, gender, picture }
+        const { firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture } = this.state
+        const values = { firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture }
 
         switch (step) {
             case 1:
