@@ -7,7 +7,7 @@ const config = {
     // port: process.env.PORT,
     
     db: {
-        db_URI: process.env.MONGO_DB_URI
+        db_URI: process.env.MONGODB_URI
     },
     googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY
 
