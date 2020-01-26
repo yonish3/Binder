@@ -4,7 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { StylesProvider, InputLabel } from '@material-ui/core';
+import { StylesProvider, InputLabel, Input } from '@material-ui/core';
 import { MenuItem } from 'material-ui';
 import Select from '@material-ui/core/Select';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -34,7 +34,7 @@ class FormPersonalDetails extends Component {
     }
 
     render() {
-        const { values, handleChange } = this.props
+        const { values, handleChange, upload } = this.props
         return (
             <MuiThemeProvider>
                 <React.Fragment>
@@ -52,7 +52,7 @@ class FormPersonalDetails extends Component {
                     <br />
 
                     <FormControl component="fieldset" >
-                        <FormLabel component="legend">Assign responsibility</FormLabel>
+                        <FormLabel component="legend">Who Are You Looking For?</FormLabel>
                         <FormGroup>
                             <FormControlLabel
                                 control={<Checkbox onChange={handleChange('interestedIn')} value="Men" />}
@@ -65,26 +65,26 @@ class FormPersonalDetails extends Component {
                         </FormGroup>
 
                     </FormControl>
-                    {/* <TextField
-                        hintText="Enter Your Interested In"
-                        floatingLabelText="Interested In"
-                        onChange={handleChange('interedtedIn')}
-                        defaultValue={values.interedtedIn}
-                    /> */}
+
                     <br />
-                    <TextField
-                        hintText="Enter Your Gender"
+                    <InputLabel id="gender-label">Gender</InputLabel>
+                    <Select labelId="gender-label" label="gender"
+                        hintText="How Do You Define Yourself?"
                         floatingLabelText="Gender"
                         onChange={handleChange('gender')}
-                        defaultValue={values.gender}
-                    />
+                        value={values.gender} autoWidth>
+                        <MenuItem value="Female">Female</MenuItem>
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Gender Fluid">Gender Fluid</MenuItem>
+                    </Select>
+
                     <br />
-                    <TextField
-                        hintText="Enter Your Picture"
-                        floatingLabelText="Picture"
-                        onChange={handleChange('picture')}
-                        defaultValue={values.picture}
-                    />
+                    <InputLabel id="picture-label">Picture</InputLabel>
+                    <FormGroup >
+                    <Input type="file" floatingLabelText="Picture" onChange={handleChange('picture')}
+                        defaultValue={values.picture}/>
+                        <RaisedButton label="Upload" primary={false} style={styles.button} onClick={upload}/>
+                    </FormGroup>
                     <br />
                     <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
                     <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back} />
