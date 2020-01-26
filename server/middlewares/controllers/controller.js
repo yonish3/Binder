@@ -1,4 +1,5 @@
 const queries = require('../../db/queries')
+const socket = require('../../socket/socket')
 
 exports.main = async (req, res, next) => {
     try {
@@ -26,4 +27,13 @@ exports.deleteUser = async (req, res, next) => {
     .catch( err => {
             next(err)
     })
+}
+
+exports.socketConnect = async (req, res, next) => {
+    socket.connect()
+    try {
+        
+    } catch (err) {
+        next(err)
+    }
 }
