@@ -65,7 +65,7 @@ class UserForm extends Component {
         }
         if (input === "picture"){
             this.setState({
-                picture: event.target.files[0]
+                picture: event
             }, function(){console.log(this.state)})
             return
         }
@@ -74,21 +74,6 @@ class UserForm extends Component {
         })
     }
 
-    upload = () => {
-        const reader = new FileReader()
-        reader.readAsDataURL(this.state.picture)
-        reader.onload = async (event) => {
-            // console.warn("img data", event.target.result)
-            // const url = "http://localhost:3000/image"
-            const formData = {file:event.target.result}
-            const imagePost = await axios.post("http://localhost:8080/image", formData)
-            console.log(imagePost)
-            // return axios.post(url, formData).then(response => console.warn("response", response))
-        }
-        // formdata.append('image', this.state.picture, this.state.picture.name)
-        console.log(this.state)
-        console.log(reader)
-    }
 
     render() {
         
@@ -103,7 +88,7 @@ class UserForm extends Component {
                 )
             case 2:
                 return (
-                <FormPersonalDetails nextStep={this.nextStep} previousStep={this.previousStep} handleChange={this.handleChange} upload={this.upload} values={values}/>
+                <FormPersonalDetails nextStep={this.nextStep} previousStep={this.previousStep} handleChange={this.handleChange}  values={values}/>
                 )
             case 3:
                 return (

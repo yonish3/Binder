@@ -57,9 +57,10 @@ class FormPersonalDetails extends Component {
                     
                     this.setState({
                         url
-                    }, 
-                        this.props.handleChange('picture'(this.state.url))
-                    )
+                    }, function(){
+                    // console.log(this.state.url)
+                    this.props.handleChange('picture')(this.state.url)
+                    })
                 })
             })
         }
@@ -117,7 +118,7 @@ class FormPersonalDetails extends Component {
                         <br />
                         <InputLabel id="picture-label">Picture</InputLabel>
                         <FormGroup >
-                            <Input type="file" floatingLabelText="Picture" onChange={this.x}}
+                            <Input type="file" floatingLabelText="Picture" onChange={this.x}
                                 defaultValue={values.picture} />
                             <RaisedButton label="Upload" primary={false} style={styles.button} onClick={this.uploadFile} />
                         </FormGroup>
