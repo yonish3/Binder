@@ -32,12 +32,7 @@ class Locations extends Component {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
     const locationsArray = this.props.socketStore.nearbyLocations;
-    console.log(this.props.socketStore.nearbyLocations)
-    // sending location to yoni - post to yoni with axios
-    // getting from yoni users list //keeps updating
-    console.log(this.props.myProfile.profile)
-    console.log("in Locations!");
-
+   
     const divStyle = {
       position: "absolute",
       top: "40%",

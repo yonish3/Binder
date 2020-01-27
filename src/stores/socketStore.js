@@ -110,11 +110,9 @@ export class SocketStore{
 
         let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
         if(diff>0.1){
-            console.log(`location cordinates: ${lat},${lng}`)
-            console.log(`new cordinates: ${lat2},${lng2}`)
-            console.log(`user is out of range, diff is:  ${diff}`)
             this.nearbyUsers = []
             this.socket.emit('out of range')
+            navigator.geolocation.clearWatch(watchID)
         }
     });
 }
