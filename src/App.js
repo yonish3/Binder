@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 
 import { observer, inject } from 'mobx-react'
 import './App.css';
-
+import Login from "./components/Login/Login"
 import Users from "./components/RenderedByMap/Users"
 import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
@@ -27,6 +27,7 @@ class App extends Component {
         // this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
         this.props.socketStore.recieveMessage();
+        
     }
 
     render() {
@@ -41,7 +42,7 @@ class App extends Component {
                     {/* <div id="main-links">
                         <Link to="/map" className="link">Map</Link>
                     </div> */}
-                    <UserForm />
+                    <Login />
                     {/* need to change path to /map when finished testing */}
                     {/* <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} /> */}
                     <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />

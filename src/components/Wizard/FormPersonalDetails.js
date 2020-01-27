@@ -13,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import {storage} from '../../config/fireBaseConfig'
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
