@@ -41,6 +41,7 @@ router.post('/checkEmail', async function(req, res){
 router.post('/login', async function(req, res){
     let emailAddress=req.body.address
     let password=req.body.password
+    console.log(req.body)
     let checkIfExists= await  User.findOne({email: emailAddress , password: password}, function(err, result){
         if(result){
         res.send("Welcome")

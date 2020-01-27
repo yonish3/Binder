@@ -42,6 +42,7 @@ class App extends Component {
                     {/* <div id="main-links">
                         <Link to="/map" className="link">Map</Link>
                     </div> */}
+                    {/* <UserForm /> */}
                     <Login />
                     {/* need to change path to /map when finished testing */}
                     {/* <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} /> */}
