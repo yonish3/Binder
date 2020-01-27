@@ -74,7 +74,7 @@ class UserForm extends Component {
 
 
     render() {
-        
+        console.log(process.env)
         const { step } = this.state
         const { firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture } = this.state
         const values = { firstName, lastName, age, status, desiredRelationship, interestedIn, gender, picture }

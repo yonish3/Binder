@@ -123,13 +123,6 @@ class FormPersonalDetails extends Component {
                                 defaultValue={values.picture} />
                             <RaisedButton label="Upload" primary={false} style={styles.button} onClick={this.uploadFile} />
                         </FormGroup>
-                        {/* <TextField
-                            hintText="Enter Your Picture"
-                            type="file"
-                            floatingLabelText="Picture"
-                            onChange={this.x}
-                            defaultValue={values.picture}
-                        /> */}
                         <br />
                         <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
                         <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back} />

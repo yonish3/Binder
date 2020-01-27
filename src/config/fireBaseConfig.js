@@ -1,20 +1,21 @@
 import firebase from 'firebase/app'
 import 'firebase/storage'
+// import {config} from "../../config/"
 
-var firebaseConfig = {
-    apiKey: "AIzaSyD15Hl3UZ8yuiNs3KljCJ0ePQgs6Wf-0ps",
-    authDomain: "binder2-319a5.firebaseapp.com",
-    databaseURL: "https://binder2-319a5.firebaseio.com",
-    projectId: "binder2-319a5",
-    storageBucket: "binder2-319a5.appspot.com",
-    messagingSenderId: "890819851860",
-    appId: "1:890819851860:web:3d880fb18a5d4a8749dfc1",
-    measurementId: "G-F6E8HMJB7G"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+const firebaseConfig = {
+    apiKey: process.env.FIREBASE_API_KEY,
+    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
+    projectId: process.env.FIREBASE_PROJECT_ID,
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID,
+    appId: process.env.FIREBASE_APP_ID,
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-  const storage= firebase.storage()
-  export {
-      storage, firebase as default
-  }
+const storage = firebase.storage()
+export {
+    storage, firebase as default
+}

@@ -30,6 +30,7 @@ class App extends Component {
     }
 
     render() {
+        
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
         return ( 
             <Router>
