@@ -72,8 +72,10 @@ class CurrentLocation extends React.Component {
                 }
               }, function(){
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
-              });
-            });
+                console.log(`first and sent recorded cordinets are: ${this.state.currentLocation.lat}, ${this.state.currentLocation.lng}`)
+                this.props.socketStore.watchPosition(this.state.currentLocation.lat, this.state.currentLocation.lng)
+              })
+            })
           }
         }
         this.loadMap();
