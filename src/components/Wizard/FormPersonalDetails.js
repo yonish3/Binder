@@ -35,13 +35,14 @@ class FormPersonalDetails extends Component {
 
     }
 
-    x = event => {
+    uploadImage = event => {
         this.setState({
             selectedFile: event.target.files[0]
         })
 
 
     }
+
     uploadFile =  () => {
         if(this.state.selectedFile){
             let image = this.state.selectedFile
@@ -118,7 +119,7 @@ class FormPersonalDetails extends Component {
                         <br />
                         <InputLabel id="picture-label">Picture</InputLabel>
                         <FormGroup >
-                            <Input type="file" floatingLabelText="Picture" onChange={this.x}
+                            <Input type="file" floatingLabelText="Picture" onChange={this.uploadImage}
                                 defaultValue={values.picture} />
                             <RaisedButton label="Upload" primary={false} style={styles.button} onClick={this.uploadFile} />
                         </FormGroup>
