@@ -5,6 +5,7 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String,
   age: Number,
+  email:String,
   status: String,
   desiredRelationship: String,
   interestedIn: Array,
