@@ -6,7 +6,6 @@ const path = require("path");
 const api = require("./server/routes/api.js");
 const errorHandler = require('./server/middlewares/errorHandler/errorHandler')
 const config = require('./config/config')
-const port = 8080
 // const dbSetup = require('./server/db/dbSetup')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -16,9 +15,12 @@ const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
+const PORT = 8080
 
+  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'build')));
 
 app.use("/", api);
 app.use(errorHandler)
@@ -35,26 +37,17 @@ io.on('connection', function (socket) {
           users.push(resolvedUserInfo)
           socket.emit('userId', resolvedUserInfo)
         })
-
-        // socket.emit(`allUsers`, users);
-        // console.log('user id socket works')
     })
-    
-    
-    
 
-    // let len = users.length
-    
-    // socket.emit(`allUsers`, users);
 
     socket.on('GPSlocation', async (GPSlocation) => {
+<<<<<<< HEAD
         console.log('GPS location received: ' + GPSlocation.lat, GPSlocation.lng)
-
+        console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`)
+=======
+>>>>>>> ba57b6f8b27b990bd54eb959c3a1727909b26215
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-        // let places = []
-        let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
-        // console.log(places)
-
+        let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
         socket.emit(`locationsArry`, places);
     })
     
@@ -73,7 +66,7 @@ io.on('connection', function (socket) {
         })
         socket.emit(`usersNearMe`, usersNearUser)
         usersNearUser.push(newUser)
-console.log('newUser is ', newUser);
+        console.log('newUser is ', newUser);
 
         for (let i = 0; i < usersNearUser.length-1; i++) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
@@ -84,10 +77,23 @@ console.log('newUser is ', newUser);
     socket.on('reaction', (reactionObj) => {
         console.log(`destinationSocket is`, reactionObj)
         io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
-
-        // socket.emit(`users`, usersNearUser)
-        // socket.emit(`allUsers`, users);
     })
+
+    socket.on('out of range', function () {
+        let location
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].socketId === socket.id) {
+                location = users[i].location
+                console.log(`deleting user ${users[i].userId}`)
+                users.splice(i, 1);
+            }
+        }
+        for (let i = 0; i < users.length; i++) {
+            const usersToSend = [...users.filter( user => user.socketId != users[i].socketId && user.location == location )]
+            io.to(`${users[i].socketId}`).emit('usersNearMe', usersToSend);
+        }
+    })
+    
 
     socket.on('disconnect', function () {
         console.log('user disconnected');
@@ -107,8 +113,11 @@ console.log('newUser is ', newUser);
     });
 });
 
-
-http.listen(8080, function () {
-    console.log('listening on *:8080');
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
+// app.use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+http.listen(process.env.PORT || PORT, function () {
+    console.log('listening on *:8080');
+});

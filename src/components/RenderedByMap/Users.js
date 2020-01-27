@@ -35,8 +35,6 @@ class Users extends Component {
   };
   render() {
     const nearbyUsers = this.props.socketStore.nearbyUsers;
-    console.log('nearby users are', nearbyUsers);
-    
     const currentLocation = this.props.match.params.location;
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users

@@ -22,20 +22,17 @@ class Locations extends Component {
       }
     }));
   };
-  sendLocation = (locationName) => {
-    this.props.socketStore.getUsersNearMe(locationName)
+  sendLocation = (location) => {
+    this.props.socketStore.SelectedLocationCoordinates = location.locationCoordinates
+    this.props.socketStore.watchPosition()
+    this.props.socketStore.getUsersNearMe(location.name)
   }
 
   render() {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
     const locationsArray = this.props.socketStore.nearbyLocations;
-    console.log(this.props.socketStore.nearbyLocations)
-    // sending location to yoni - post to yoni with axios
-    // getting from yoni users list //keeps updating
-    console.log(this.props.myProfile.profile)
-    console.log("in Locations!");
-
+   
     const divStyle = {
       position: "absolute",
       top: "47%",
