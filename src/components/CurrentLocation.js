@@ -72,8 +72,8 @@ class CurrentLocation extends React.Component {
               }, function(){
                 
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
-              });
-            });
+              })
+            })
           }
         }
         this.loadMap();

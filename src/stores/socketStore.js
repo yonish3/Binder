@@ -12,8 +12,10 @@ export class SocketStore {
     @observable nearbyLocations = []
     @observable nearbyUsers = []
     @observable emoji = ''
-    @observable loggedInUser
+    @observable loggedInUser 
     @observable checked = false
+    @observable SelectedLocationCoordinates
+
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
     }
@@ -31,8 +33,7 @@ export class SocketStore {
         })
     }
 
-
-    @action getLocationsNearby = function (coordinates) {
+    @action getLocationsNearby = function(coordinates) {
         this.socket.emit('GPSlocation', coordinates);
         this.socket.on('locationsArry', (locationsArry) => {
             this.nearbyLocations = locationsArry
@@ -82,4 +83,39 @@ export class SocketStore {
     // @action setReactionUser = (user) => {
     //     this.reactingUser = user
     // }
+    degreesToRadians(degrees) {
+        return degrees * Math.PI / 180;
+    }
+  
+    distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
+        var earthRadiusKm = 6371;
+        
+        var dLat = this.degreesToRadians(lat2-lat1);
+        var dLon = this.degreesToRadians(lon2-lon1);
+        
+        lat1 = this.degreesToRadians(lat1);
+        lat2 = this.degreesToRadians(lat2);
+        
+        var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+        return earthRadiusKm * c;
+    }
+
+    @action watchPosition = () => {
+        let lat = this.SelectedLocationCoordinates.lat 
+        let lng = this.SelectedLocationCoordinates.lng 
+
+        var watchID = navigator.geolocation.watchPosition((position)=> {
+        let lat2 = position.coords.latitude
+        let lng2 = position.coords.longitude
+
+        let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
+        if(diff>0.1){
+            this.nearbyUsers = []
+            this.socket.emit('out of range')
+            navigator.geolocation.clearWatch(watchID)
+        }
+    });
+}
 }
