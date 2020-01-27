@@ -5,6 +5,7 @@ import socketIOClient from "socket.io-client"
 export class SocketStore {
     endpoint = "localhost:8080"
     socket = socketIOClient(this.endpoint)
+    //need to empty parantheses before deploying to heroku!!!
     @observable socketId = "";
     @observable coordinates = {}
     @observable nearbyLocations = []
@@ -33,7 +34,6 @@ export class SocketStore {
     @action getLocationsNearby = function (coordinates) {
         this.socket.emit('GPSlocation', coordinates);
         this.socket.on('locationsArry', (locationsArry) => {
-            console.log('locationsArry', locationsArry)
             this.nearbyLocations = locationsArry
         })
     }
