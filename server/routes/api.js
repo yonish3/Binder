@@ -16,14 +16,16 @@ router.delete('/user', controller.deleteUser)
 
 router.post('/signIn', function(req, res){
     // console.log(req.body)
-    let detailes={firstName:req.body.firstName 
-        , lastName: req.body.lastName , age:req.body.age ,
+    let detailes = {
+        firstName: req.body.firstName
+        , lastName: req.body.lastName, age: req.body.age,
         email: req.body.email,
-         status: req.body.status , desiredRelationship: req.body.desiredRelationship , intrestedIn: req.body.intrestedIn
-          , gender: req.body.gender , picture:req.body.picture }
-         let user= new User(detailes)
-         user.save() 
-         res.send("Done")
+        status: req.body.status, desiredRelationship: req.body.desiredRelationship, interestedIn: req.body.interestedIn
+        , gender: req.body.gender, picture: req.body.picture
+    }
+    let user = new User(detailes)
+    user.save()
+    res.send("Done")
 })
 
 router.post('/checkEmail', async function(req, res){
