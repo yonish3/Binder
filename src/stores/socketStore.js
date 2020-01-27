@@ -11,6 +11,7 @@ export class SocketStore{
     @observable emoji = ''
     @observable loggedInUser 
     @observable checked = false
+    @observable SelectedLocationCoordinates
 
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -99,13 +100,17 @@ export class SocketStore{
         return earthRadiusKm * c;
     }
 
-    @action watchPosition = (lat,lng) => {
+    @action watchPosition = () => {
+        let lat = this.SelectedLocationCoordinates.lat 
+        let lng = this.SelectedLocationCoordinates.lng 
+
         var watchID = navigator.geolocation.watchPosition((position)=> {
         let lat2 = position.coords.latitude
         let lng2 = position.coords.longitude
 
         let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
-        if(diff>0.05){
+        if(diff>0.1){
+            console.log(`location cordinates: ${lat},${lng}`)
             console.log(`new cordinates: ${lat2},${lng2}`)
             console.log(`user is out of range, diff is:  ${diff}`)
             this.nearbyUsers = []
