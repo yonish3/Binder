@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import { Route } from "react-router-dom"
 import Locations from "../Locations"
+import MapContainer from "../MapContainer"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Input, InputBase } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import { StylesProvider, InputLabel } from '@material-ui/core';
-import { MenuItem } from 'material-ui';
 import axios from "axios"
-import MapContainer from "../MapContainer"
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
