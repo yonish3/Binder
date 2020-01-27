@@ -20,37 +20,44 @@ require('dotenv').config()
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
-    
+
 
     componentDidMount() {
         // this.props.usersStore.getUsers()
         // this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
         this.props.socketStore.recieveMessage();
-        
+
     }
 
     render() {
-        
+
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
-        return ( 
+        return (
             <Router>
-                {this.props.socketStore.checked ? 
-                <Notification />
-                :
-                <div id="main-container">
-                    {/* <div id="main-links">
-                        <Link to="/map" className="link">Map</Link>
-                    </div> */}
-                    {/* <UserForm /> */}
-                    <Login />
-                    {/* need to change path to /map when finished testing */}
-                    {/* <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} /> */}
+                {this.props.socketStore.checked ?
+                    <Notification />
+                    :
+                    <div id="main-container">
+                        {!this.props.user.isLoggedIn ? 
+                        <Route path="/" exact render={({match})=> <Login />} /> : <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />}}
+
+                        {/* <Login /> */}
+                        {/* {console.log(this.props.user.isLoggedIn)}
+                        {!this.props.user.isLoggedIn ?
+                            <Route path="/map" exact component={Login} /> : <Route path="/map" exact render={({ match }) => <><MapContainer /> <Locations /> </>} />} */}
+                        <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
+                       {/* <Route path="/login" exact render={({ match }) => <Login match={match} />} />
+                        <Route path="/map" exact render={({ match }) => <><MapContainer /> <Locations /> </>} />
+                        <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
+                        <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} /> */}
+                        
+                         {/* <Login /> */}
+                    
                     <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
                     <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
-                </div>
+                    </div>
                 }
-                
             </Router>
         );
     }
