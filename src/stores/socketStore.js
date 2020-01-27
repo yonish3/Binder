@@ -1,8 +1,8 @@
 import { observable, action, computed } from "mobx"
 import dummyData from "./dummyData"
-import socketIOClient  from "socket.io-client"
+import socketIOClient from "socket.io-client"
 
-export class SocketStore{
+export class SocketStore {
     endpoint = "localhost:8080"
     socket = socketIOClient()
     @observable socketId = "";
@@ -10,8 +10,8 @@ export class SocketStore{
     @observable nearbyLocations = []
     @observable nearbyUsers = []
     @observable emoji = ''
-    @observable loggedInUser 
-@observable checked = false
+    @observable loggedInUser
+    @observable checked = false
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
     }
@@ -30,25 +30,25 @@ export class SocketStore{
     }
 
 
-    @action getLocationsNearby = function(coordinates) {
+    @action getLocationsNearby = function (coordinates) {
         this.socket.emit('GPSlocation', coordinates);
-        this.socket.on('locationsArry',  (locationsArry) => {
-            console.log('locationsArry',locationsArry)
+        this.socket.on('locationsArry', (locationsArry) => {
+            console.log('locationsArry', locationsArry)
             this.nearbyLocations = locationsArry
-          })
+        })
     }
 
     @action getUsersNearMe = (location) => {
-        console.log('before emit location: '+location)
+        console.log('before emit location: ' + location)
         this.socket.emit('selectedLocation', location);
-        this.socket.on('usersNearMe',  (usersNearMe) => {
+        this.socket.on('usersNearMe', (usersNearMe) => {
             console.log('usersNearMe: ' + usersNearMe)
             this.nearbyUsers = usersNearMe
-          })
+        })
     }
     @action sendReaction = (reactionObj) => {
         this.socket.emit('reaction', reactionObj)
-        
+
     }
 
     @action getReaction = (reactionObj) => {
@@ -58,24 +58,24 @@ export class SocketStore{
         })
     }
 
-    @action recieveMessage = () => { 
+    @action recieveMessage = () => {
         this.socket.on('reaction recieved', reactionObj => {
             console.log("Recieved Message!");
             console.log('reactingObj is ', reactionObj);
             this.reactingUser = reactionObj.sourceUser
-             console.log('reactingUser is ', this.reactingUser);
-            
+            console.log('reactingUser is ', this.reactingUser);
+
             this.checked = true;
             this.emoji = reactionObj.label;
-            
-           
+
+
             setTimeout(() => {
-                this.checked = false; 
+                this.checked = false;
                 this.reactingUser = null
                 console.log('changed checked to false!');
 
             }, 5000)
-        }) 
+        })
     }
 
     // @action setReactionUser = (user) => {

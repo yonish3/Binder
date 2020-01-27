@@ -23,8 +23,8 @@ class App extends Component {
     
 
     componentDidMount() {
-        this.props.usersStore.getUsers()
-        this.props.myProfile.getProfile()
+        // this.props.usersStore.getUsers()
+        // this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
         this.props.socketStore.recieveMessage();
     }

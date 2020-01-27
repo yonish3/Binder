@@ -19,7 +19,7 @@ router.post('/signIn', function(req, res){
     let detailes={firstName:req.body.firstName 
         , lastName: req.body.lastName , age:req.body.age ,
         email: req.body.email,password:req.body.password,
-         status: req.body.status , desiredRelationship: req.body.desiredRelationship , intrestedIn: req.body.intrestedIn
+         status: req.body.status , desiredRelationship: req.body.desiredRelationship , interestedIn: req.body.interestedIn
           , gender: req.body.gender , picture:req.body.picture }
          let user= new User(detailes)
          user.save() 
