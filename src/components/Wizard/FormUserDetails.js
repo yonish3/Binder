@@ -63,7 +63,14 @@ class FormUserDetails extends Component {
                         floatingLabelText="Email"
                         onChange={handleChange('email')}
                         defaultValue={values.email}
-                        type="email"/>
+                        type="email" required />
+                    <br />
+                    <TextField
+                        hintText="Enter Your Password"
+                        floatingLabelText="password"
+                        onChange={handleChange('password')}
+                        defaultValue={values.password}
+                        type="password" required/>
                     <br />
                     <InputLabel id="relationship-status">Relationship Status</InputLabel>
                     <Select
