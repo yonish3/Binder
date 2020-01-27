@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
 
     socket.on('GPSlocation', async (GPSlocation) => {
         console.log('GPS location received: ' + GPSlocation.lat, GPSlocation.lng)
-
+        console.log(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`)
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
         // let places = []
         let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id }))
