@@ -18,8 +18,6 @@ class Confirm extends Component{
         await axios.post(`http://localhost:8080/signIn`, this.props.values);
 
     }
-        
-
     
     back = event => {
         event.preventDefault()
