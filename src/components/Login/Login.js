@@ -69,8 +69,6 @@ class Login extends Component {
                     <RaisedButton label="Create Account" primary={true} style={styles.button}/>
                     </Link>
                 </React.Fragment>
-     {/* :
-     <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />} */}
             </MuiThemeProvider>
 
         )

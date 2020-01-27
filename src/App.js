@@ -39,24 +39,13 @@ class App extends Component {
                     <Notification />
                     :
                     <div id="main-container">
-                        {!this.props.user.isLoggedIn ? 
-                        <Route path="/" exact render={({match})=> <Login />} /> : <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />}}
-
-                        {/* <Login /> */}
-                        {/* {console.log(this.props.user.isLoggedIn)}
                         {!this.props.user.isLoggedIn ?
-                            <Route path="/map" exact component={Login} /> : <Route path="/map" exact render={({ match }) => <><MapContainer /> <Locations /> </>} />} */}
+                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations /> </>} />}
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
-                       {/* <Route path="/login" exact render={({ match }) => <Login match={match} />} />
-                        <Route path="/map" exact render={({ match }) => <><MapContainer /> <Locations /> </>} />
                         <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                        <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} /> */}
-                        
-                         {/* <Login /> */}
-                    
-                    <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                    <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
+                        <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
                     </div>
+    
                 }
             </Router>
         );
