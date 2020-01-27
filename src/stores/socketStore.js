@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client"
 
 export class SocketStore {
     endpoint = "localhost:8080"
-    socket = socketIOClient()
+    socket = socketIOClient(this.endpoint)
     @observable socketId = "";
     @observable coordinates = {}
     @observable nearbyLocations = []
