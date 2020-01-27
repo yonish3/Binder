@@ -25,30 +25,26 @@ class App extends Component {
         // this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
         this.props.socketStore.recieveMessage();
-        
+
     }
 
     render() {
-        
+
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
-        return ( 
+        return (
             <Router>
-                <Header />
-                {this.props.socketStore.checked ? 
-                <Notification />
-                :
-                <div id="main-container">
-                    {/* <div id="main-links">
-                        <Link to="/map" className="link">Map</Link>
-                    </div> */}
-                    {/* <UserForm /> */}
-                    <Login />
-                    {/* need to change path to /map when finished testing */}
-                    {/* <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} /> */}
-                    <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                    <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
-                    <Route path="/settings" exact render={({ match }) => <Settings match={match} />} />
-                </div>
+                {this.props.socketStore.checked ?
+                    <Notification />
+                    :
+                    <div id="main-container">
+                        {!this.props.user.isLoggedIn ?
+                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <><Header /><MapContainer /> <Locations /> </>} />}
+                            <Header />
+                        <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
+                        <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
+                        <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
+                    </div>
+    
                 }
             </Router>
         );

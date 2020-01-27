@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
+import { Link } from "react-router-dom"
+import RaisedButton from 'material-ui/RaisedButton';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 
@@ -29,13 +31,20 @@ class Succsess extends Component{
                    <React.Fragment>
                        <AppBar title="Success" />
                        <h1>Thank You For Your Submission</h1>
-                
+                       <Link to="/" className="link">
+                    <RaisedButton label="Login" primary={true} style={styles.button}/>
+                    </Link>
                    </React.Fragment>
                </MuiThemeProvider> 
         )
     }
 }
 
+const styles = {
+    buttons: {
+        margin: 15
+    }
+}
 
 
 export default Succsess;
