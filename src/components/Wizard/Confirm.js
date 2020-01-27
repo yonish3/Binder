@@ -11,16 +11,12 @@ import Axios from 'axios';
 @observer
 
 class Confirm extends Component{
-    // constructor(){
-    //     super();
-    //     this.state = {
-    //     }
-    // }
+
     continue = async event => {
         event.preventDefault()
         this.props.nextStep()
         console.log(this.props.values)
-       await axios.post(`http://localhost:8080/signIn`, this.props.values);
+        await axios.post(`http://localhost:8080/signIn`, this.props.values);
 
     }
         

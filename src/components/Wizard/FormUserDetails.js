@@ -20,7 +20,7 @@ class FormUserDetails extends Component {
     continue = event => {
         event.preventDefault()
         this.props.nextStep()
-
+        
     }
 
     render() {
