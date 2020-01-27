@@ -22,21 +22,17 @@ class Locations extends Component {
       }
     }));
   };
-  sendLocation = (locationName) => {
-    console.log(locationName)
-    this.props.socketStore.getUsersNearMe(locationName)
+  sendLocation = (location) => {
+    this.props.socketStore.SelectedLocationCoordinates = location.locationCoordinates
+    this.props.socketStore.watchPosition()
+    this.props.socketStore.getUsersNearMe(location.name)
   }
 
   render() {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
     const locationsArray = this.props.socketStore.nearbyLocations;
-    console.log(this.props.socketStore.nearbyLocations)
-    // sending location to yoni - post to yoni with axios
-    // getting from yoni users list //keeps updating
-    console.log(this.props.myProfile.profile)
-    console.log("in Locations!");
-
+   
     const divStyle = {
       position: "absolute",
       top: "40%",
@@ -52,7 +48,7 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button value={location.name} onClick={() => this.sendLocation(location.name)}>
+          <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)}>
             <Link  to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
             </Link>
