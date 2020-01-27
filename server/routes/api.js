@@ -35,9 +35,20 @@ router.post('/checkEmail', async function(req, res){
              else{
                  res.send("continue")
              }
-         })
+         })  
+})
 
-         
+router.post('/login', async function(req, res){
+    let emailAddress=req.body.address
+    let password=req.body.password
+    let checkIfExists= await  User.findOne({email: emailAddress , password: password}, function(err, result){
+        if(result){
+        res.send("Welcome")
+        }
+        else{
+            res.send("login error")
+        }
+    })  
 })
 
 module.exports = router
