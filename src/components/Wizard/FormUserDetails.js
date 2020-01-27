@@ -8,6 +8,7 @@ import { Input, InputBase } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import { StylesProvider, InputLabel } from '@material-ui/core';
 import { MenuItem } from 'material-ui';
+import axios from 'axios';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -17,10 +18,16 @@ class FormUserDetails extends Component {
     //     this.state = {
     //     }
     // }
-    continue = event => {
+    continue = async event => {
         event.preventDefault()
-        this.props.nextStep()
         
+        let emailAddress={address: this.props.values.email}
+        let checkEmail= await axios.post('http://localhost:8080/checkEmail', emailAddress )
+        if(checkEmail.data=="exists"){
+            alert("Email already exists. Did you forget your password?")
+        } else {
+            this.props.nextStep()
+        }
     }
 
     render() {
@@ -50,6 +57,13 @@ class FormUserDetails extends Component {
                         onChange={handleChange('age')}
                         defaultValue={values.age}
                         type="number" min="18" max="100"/>
+                    <br />
+                    <TextField
+                        hintText="Enter Your Email"
+                        floatingLabelText="Email"
+                        onChange={handleChange('email')}
+                        defaultValue={values.email}
+                        type="email"/>
                     <br />
                     <InputLabel id="relationship-status">Relationship Status</InputLabel>
                     <Select

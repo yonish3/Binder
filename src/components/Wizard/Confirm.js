@@ -6,7 +6,6 @@ import AppBar from 'material-ui/AppBar';
 import {List,ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import { StylesProvider } from '@material-ui/core';
-import Axios from 'axios';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
