@@ -16,7 +16,7 @@ import Header from './components/Header'
 import Settings from './components/Settings'
 require('dotenv').config()
 
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("user", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
 
