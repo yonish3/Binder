@@ -38,7 +38,6 @@ io.on('connection', function (socket) {
         })
     })
 
-
     socket.on('GPSlocation', async (GPSlocation) => {
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
         let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
@@ -78,7 +77,6 @@ io.on('connection', function (socket) {
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
                 location = users[i].location
-                console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }
@@ -95,7 +93,6 @@ io.on('connection', function (socket) {
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
                 location = users[i].location
-                console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }

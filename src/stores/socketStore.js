@@ -5,6 +5,7 @@ import socketIOClient from "socket.io-client"
 export class SocketStore {
     endpoint = "localhost:8080"
     socket = socketIOClient(this.endpoint)
+    watchID
     //need to empty parantheses before deploying to heroku!!!
 
     @observable socketId = "";
@@ -25,8 +26,7 @@ export class SocketStore {
     }
 
     @action openSocket = () => {
-        // const ;
-        this.socket.emit('userId', '5e270a0e2647322352129dae')
+        this.socket.emit('userId')
         this.socket.on('userId', (user) => {
             console.log('received: ', user)
             this.loggedInUser = user
@@ -106,16 +106,22 @@ export class SocketStore {
         let lat = this.SelectedLocationCoordinates.lat 
         let lng = this.SelectedLocationCoordinates.lng 
 
-        var watchID = navigator.geolocation.watchPosition((position)=> {
-        let lat2 = position.coords.latitude
-        let lng2 = position.coords.longitude
+        this.watchID = navigator.geolocation.watchPosition((position)=> {
+            let lat2 = position.coords.latitude
+            let lng2 = position.coords.longitude
 
-        let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
-        if(diff>0.1){
-            this.nearbyUsers = []
-            this.socket.emit('out of range')
-            navigator.geolocation.clearWatch(watchID)
-        }
-    });
-}
+            let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
+            if(diff>0.1){
+                this.nearbyUsers = []
+                this.socket.emit('out of range')
+                navigator.geolocation.clearWatch(this.watchID)
+            }
+        })
+    }
+
+    @action checkoutFromLocation = () => {
+        this.nearbyUsers = []
+        this.socket.emit('out of range')
+        navigator.geolocation.clearWatch(this.watchID)        
+    }
 }
