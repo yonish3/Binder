@@ -35,8 +35,9 @@ class Locations extends Component {
    
     const divStyle = {
       position: "absolute",
-      top: "40%",
-      width: "100%"
+      top: "47%",
+      width: "100%",
+      backgroundColor: "#ece9e95e"
     };
 
     const classes = this.useStyles();
