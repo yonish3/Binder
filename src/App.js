@@ -5,16 +5,16 @@ import { observer, inject } from 'mobx-react'
 import './App.css';
 import Login from "./components/Login/Login"
 import Users from "./components/RenderedByMap/Users"
-import User from "./components/RenderedByMap/User"
 import MapContainer from "./components/MapContainer"
 import Locations from './components/Locations'
-// import CurrentLocation from "./components/CurrentLocation"
 import Profile from './components/RenderedByMap/Profile'
 import UserForm from "./components/Wizard/UserForm"
 import Notification from './components/Notification'
 import Header from './components/Header'
 import Footer from "./components/Footer"
 import Settings from './components/Settings'
+import EditProfile from "./components/EditProfile"
+import AwaitingNotification from "./components/AwaitingNotification"
 require('dotenv').config()
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
@@ -45,6 +45,9 @@ class App extends Component {
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
                         {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <> <Users match={match} /><Footer /></>} /> : null }
                         <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /><Footer /></>} />
+                        <Route path="/editProfile" exact render={({match}) => <EditProfile />}/>
+                        <Route path="/settings" exact render={({match}) => <Settings />}/>
+                        <Route path="/notifications" exact render={({match}) => <AwaitingNotification />}/>
                     </div>
 
                 }
