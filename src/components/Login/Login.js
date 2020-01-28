@@ -2,16 +2,13 @@ import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
 import { Route } from "react-router-dom"
 import Locations from "../Locations"
+import MapContainer from "../MapContainer"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Input, InputBase } from '@material-ui/core';
-import Select from '@material-ui/core/Select';
-import { StylesProvider, InputLabel } from '@material-ui/core';
-import { MenuItem } from 'material-ui';
 import axios from "axios"
-import MapContainer from "../MapContainer"
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -35,7 +32,10 @@ class Login extends Component {
         event.preventDefault()
         const loginInformation = { address: this.state.email, password: this.state.password }
         const checkIfUserExists = await axios.post('http://localhost:8080/login', loginInformation)
-        if (checkIfUserExists.data === "Welcome") {
+    
+        if (checkIfUserExists.data) {
+            console.log("--------------------------")
+            this.props.socketStore.openSocket(checkIfUserExists.data)
             this.setState({ loggedIn: true })
         } else {
             alert("Incorrect Email Address/Password")

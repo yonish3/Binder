@@ -72,11 +72,12 @@ class CurrentLocation extends React.Component {
               }, function(){
                 
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
-              });
-            });
+              })
+            })
           }
         }
         this.loadMap();
+        //this.props.socketStore.openSocket()
       }
 
       getCheckIn= (coordinates) => {
