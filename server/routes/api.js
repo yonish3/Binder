@@ -43,12 +43,11 @@ router.post('/login', async function(req, res){
     let password=req.body.password
     console.log(req.body)
     let checkIfExists = await User.findOne({email: emailAddress , password: password}, function(err, result){
-        console.log("---------------------------")
         console.log(result)
-        if(result){
-        res.send(result)
+        if (result) {
+            res.send(result)
         }
-        else{
+        else {
             res.send("login error")
         }
     })  
