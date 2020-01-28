@@ -13,6 +13,7 @@ import Profile from './components/RenderedByMap/Profile'
 import UserForm from "./components/Wizard/UserForm"
 import Notification from './components/Notification'
 import Header from './components/Header'
+import Footer from "./components/Footer"
 import Settings from './components/Settings'
 require('dotenv').config()
 
@@ -39,12 +40,13 @@ class App extends Component {
                     <div id="main-container">
                         {!this.props.user.isLoggedIn ?
                             <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
-                            <Header />
+                        <Header />
+                        
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
-                        <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
-                        <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
+                        {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <> <Users match={match} /><Footer /></>} /> : null }
+                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /><Footer /></>} />
                     </div>
-    
+
                 }
             </Router>
         );
