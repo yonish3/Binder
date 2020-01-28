@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use("/", api);
 app.use(errorHandler)
 
-
 io.on('connection', function (socket) {
     console.log('user has connected')
     
@@ -38,7 +37,6 @@ io.on('connection', function (socket) {
           socket.emit('userId', resolvedUserInfo)
         })
     })
-
 
     socket.on('GPSlocation', async (GPSlocation) => {
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
@@ -79,7 +77,6 @@ io.on('connection', function (socket) {
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
                 location = users[i].location
-                console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }
@@ -96,7 +93,6 @@ io.on('connection', function (socket) {
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
                 location = users[i].location
-                console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }

@@ -35,8 +35,9 @@ class Locations extends Component {
    
     const divStyle = {
       position: "absolute",
-      top: "40%",
-      width: "100%"
+      top: "47%",
+      width: "100%",
+      backgroundColor: "#ece9e95e"
     };
 
     const classes = this.useStyles();
@@ -48,7 +49,7 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)}>
+          <ListItem key={i} button value={location.name} onClick={() => this.sendLocation(location.name)} style={{borderBottom:"1px solid #0000002e"}} >
             <Link  to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
             </Link>
