@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { observer, inject } from "mobx-react"
-import { Route } from "react-router-dom"
+import { Route, Link } from "react-router-dom"
 import Locations from "../Locations"
 import MapContainer from "../MapContainer"
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -18,7 +18,6 @@ class Login extends Component {
         this.state = {
             email: '',
             password: '',
-            loggedIn: false
         }
     }
 
@@ -36,7 +35,7 @@ class Login extends Component {
         if (checkIfUserExists.data) {
             console.log("--------------------------")
             this.props.socketStore.openSocket(checkIfUserExists.data)
-            this.setState({ loggedIn: true })
+            this.props.user.logIn()
         } else {
             alert("Incorrect Email Address/Password")
         }
@@ -45,9 +44,9 @@ class Login extends Component {
     render() {
 
         return (
-
+            
             <MuiThemeProvider>
-                {!this.state.loggedIn ? 
+                {/* {!this.props.user.isLoggedIn ?  */}
                 <React.Fragment>
 
                     <AppBar title="Login" />
@@ -68,9 +67,11 @@ class Login extends Component {
                     />
                     <br />
                     <RaisedButton label="Submit" primary={true} style={styles.button} onClick={this.submit} />
-
+                    <hr />
+                    <Link to="/register" className="link">
+                    <RaisedButton label="Create Account" primary={true} style={styles.button}/>
+                    </Link>
                 </React.Fragment>
-    : <Route path="/" exact render={({ match }) => <><MapContainer /> <Locations/> </>} />}
             </MuiThemeProvider>
 
         )

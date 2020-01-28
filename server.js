@@ -25,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.use("/", api);
 app.use(errorHandler)
 
-
 io.on('connection', function (socket) {
     console.log('user has connected')
     // console.log(socket.id)
