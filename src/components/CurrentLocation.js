@@ -70,13 +70,13 @@ class CurrentLocation extends React.Component {
                   lng: coords.longitude
                 }
               }, function(){
+                
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
               })
             })
           }
         }
         this.loadMap();
-        //this.props.socketStore.openSocket()
       }
 
       getCheckIn= (coordinates) => {
