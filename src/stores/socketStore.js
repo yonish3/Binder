@@ -15,6 +15,7 @@ export class SocketStore {
     @observable emoji = ''
     @observable loggedInUser 
     @observable checked = false
+    @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
 
     @action getUserById = (id) => {
@@ -26,7 +27,7 @@ export class SocketStore {
     }
 
     @action openSocket = () => {
-        this.socket.emit('userId')
+        this.socket.emit('userId', '5e270a0e2647322352129dae')
         this.socket.on('userId', (user) => {
             console.log('received: ', user)
             this.loggedInUser = user
