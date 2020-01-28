@@ -9,6 +9,7 @@ import { User } from "./stores/userInstances"
 import { LocationsStore } from "./stores/locationsStore"
 import { MyProfile } from './stores/myProfileStore';
 import { SocketStore } from "./stores/socketStore"
+// import { initializeFirebase } from '../src/components/pushNotification'
 
 const user = new User()
 // const usersStore = new UsersStore()
@@ -25,3 +26,4 @@ ReactDOM.render(<Provider {...stores}><App /></Provider>, document.getElementByI
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+// initializeFirebase()
