@@ -38,7 +38,7 @@ class App extends Component {
                     :
                     <div id="main-container">
                         {!this.props.user.isLoggedIn ?
-                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <><Header /><MapContainer /> <Locations /> </>} />}
+                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                             <Header />
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
                         <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
