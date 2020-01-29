@@ -5,6 +5,8 @@ exports.findUser = async function(userId){
     const user = await User.find({
         _id: userId
     })
+    // console.log('user', user)
+    // console.log('userId', userId)
     return await {
         _id: user[0]._id,
         firstName: user[0].firstName,
@@ -24,6 +26,15 @@ exports.deleteUser = async function(userId){
     console.log(deletedUser.deletedCount)
     if (deletedUser.deletedCount != 0) {
         return deletedUser.deletedCount 
+    } else {
+        throw new Error('Couldn\'t find user')
+    }
+}
+
+exports.findUserByEmailAddress = async (email) => {
+    const user = await User.find({email})
+    if (user.length > 0) {
+        return user 
     } else {
         throw new Error('Couldn\'t find user')
     }

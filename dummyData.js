@@ -11,7 +11,7 @@ exports.users =  [
             picture: "https://storage.googleapis.com/binder_users_images/DorBenLulu.jpg",
         },
         {
-            _id: "5e270a0e2647322352129daf",
+            _id: "5e304a1456713f1f0424e08c",
             firstName: "Efrat",
             lastName: "Harel",
             age: 26,
@@ -33,7 +33,7 @@ exports.users =  [
             picture: "https://storage.googleapis.com/binder_users_images/Vicki.jpeg",
         },
         {
-            _id: "5e270a0e2647322352129db1",
+            _id: "5e304aa562f39316dc36b645",
             firstName: "Haim",
             lastName: "Ruso",
             age: 29,
@@ -68,10 +68,6 @@ exports.users =  [
     ]
 
 exports.userIds = [
-    "5e270a0e2647322352129dae",
-    "5e270a0e2647322352129daf",
-    "5e270a0e2647322352129db0",
-    "5e270a0e2647322352129db1",
-    "5e28fe74d80c499f21afeffd",
-    "5e28fed2d80c499f21aff678"
+    "5e304aa562f39316dc36b645",
+    "5e304a1456713f1f0424e08c"
 ]

@@ -14,18 +14,34 @@ import UserForm from "./components/Wizard/UserForm"
 import Notification from './components/Notification'
 import Header from './components/Header'
 import Settings from './components/Settings'
+import axios from 'axios';
 require('dotenv').config()
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
 
-    componentDidMount() {
+    async componentDidMount() {
         // this.props.usersStore.getUsers()
         // this.props.myProfile.getProfile()
         this.props.socketStore.openSocket()
         this.props.socketStore.recieveMessage();
+        axios.defaults.withCredentials = true;
 
+
+        // const response = axios.get(`http://localhost:8080/home`)
+        // response.then(response => console.log(response))
+        // .catch(err => console.log(err))
+        try {
+            
+            const response = await axios.get(`http://localhost:8080/home`)
+            console.log("in componentDidMount: response is: ", response);
+            this.props.user.logIn()
+            
+        } catch(err) {
+            console.log('Error is ', err);
+            
+        }
     }
 
     render() {

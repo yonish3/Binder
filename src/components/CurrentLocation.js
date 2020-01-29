@@ -62,7 +62,7 @@ class CurrentLocation extends React.Component {
             navigator.geolocation.getCurrentPosition( pos => {
               const coords = pos.coords;
               const coordinates={lat:coords.latitude,lng :coords.longitude }
-              this.getCheckIn(coordinates)
+              // this.getCheckIn(coordinates)
               // this.getLocations(coordinates)
               this.setState({
                 currentLocation: {
@@ -82,7 +82,7 @@ class CurrentLocation extends React.Component {
       getCheckIn= (coordinates) => {
         axios.post('/', coordinates)
         .then(function (response) {
-          console.log(response);
+          console.log('response justin timberlake',response);
         })
         .catch(function (error) {
           console.log(error);

@@ -29,6 +29,7 @@ class Login extends Component {
 
     submit = async (event) => {
         event.preventDefault()
+        axios.defaults.withCredentials = true;
         const loginInformation = { address: this.state.email, password: this.state.password }
         const checkIfUserExists = await axios.post('http://localhost:8080/login', loginInformation)
         if (checkIfUserExists.data === "Welcome") {

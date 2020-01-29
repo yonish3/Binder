@@ -6,6 +6,7 @@ const path = require("path");
 const api = require("./server/routes/api.js");
 const errorHandler = require('./server/middlewares/errorHandler/errorHandler')
 const config = require('./config/config')
+const cookieParser = require('cookie-parser');
 // const dbSetup = require('./server/db/dbSetup')
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
@@ -16,11 +17,45 @@ const queries = require('./server/db/queries')
 const users = require('./dummyData').users
 const userIds = require('./dummyData').userIds
 const PORT = 8080
+var cors = require('cors');
 
+
+const corsConfig = {
+    origin: true,
+    credentials: true,
+  };
   
+  app.use(cors(corsConfig));
+  app.options('*', cors(corsConfig));
+
+app.use(cookieParser())
+
+
+
+
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    // res.header("Access-Control-Allow-Origin", "http://localhost:8080");
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Content-Type, Authorization, Content-Length, X-Requested-With"
+    );
+    
+    res.header('Access-Control-Allow-Headers: *');
+    res.header('Access-Control-Max-Age: 1728000');
+    res.header("Content-Length: 0");
+    res.header("Content-Type: text/plain"); 
+  
+    next();
+  });
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(cookieParser()); 
+// app.use(express.static(path.join(__dirname, 'build')));
 
 app.use("/", api);
 app.use(errorHandler)
@@ -47,7 +82,7 @@ io.on('connection', function (socket) {
     })
     
     socket.on('selectedLocation', (selectedLocation) => {
-        console.log('Selected location received: ' + selectedLocation)
+        // console.log('Selected location received: ' + selectedLocation)
         let usersNearUser = []
         let newUser = {}
         users.forEach(u => {
@@ -61,7 +96,7 @@ io.on('connection', function (socket) {
         })
         socket.emit(`usersNearMe`, usersNearUser)
         usersNearUser.push(newUser)
-        console.log('newUser is ', newUser);
+        // console.log('newUser is ', newUser);
 
         for (let i = 0; i < usersNearUser.length-1; i++) {
             const usersToSend = [...usersNearUser.filter( user => user.socketId != usersNearUser[i].socketId)]
@@ -79,7 +114,7 @@ io.on('connection', function (socket) {
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
                 location = users[i].location
-                console.log(`deleting user ${users[i].userId}`)
+                // console.log(`deleting user ${users[i].userId}`)
                 users.splice(i, 1);
             }
         }
@@ -91,7 +126,7 @@ io.on('connection', function (socket) {
     
 
     socket.on('disconnect', function () {
-        console.log('user disconnected');
+        // console.log('user disconnected');
         let location
         for (let i = 0; i < users.length; i++) {
             if (users[i].socketId === socket.id) {
