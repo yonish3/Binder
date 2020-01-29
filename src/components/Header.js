@@ -40,7 +40,6 @@ class Header extends Component {
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      // setLeft(open);
       return;
     }
 
@@ -104,6 +103,12 @@ class Header extends Component {
             }
           </ListItemIcon>
           <Link to="/notifications"> <ListItemText primary={'Notifications'} /> </Link>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <Link to="/"><ListItemText primary={"Back"} /></Link>
         </ListItem>
       </List>
       <Divider />

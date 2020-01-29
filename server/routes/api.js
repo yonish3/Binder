@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const controller = require('../middlewares/controllers/controller')
 const User = require('../db/models/User')
+
 // const mongoose = require('../db/mongoose')
 router.use(function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*')
@@ -16,7 +17,6 @@ router.delete('/user', controller.deleteUser)
 router.post('/notification', controller.addNotification)
 
 router.post('/signIn', function(req, res){
-    // console.log(req.body)
     let detailes={firstName:req.body.firstName 
         , lastName: req.body.lastName , age:req.body.age ,
         email: req.body.email,password:req.body.password,
@@ -42,14 +42,11 @@ router.post('/checkEmail', async function(req, res){
 router.post('/login', async function(req, res){
     let emailAddress=req.body.address
     let password=req.body.password
-    console.log(req.body)
     let checkIfExists = await User.findOne({email: emailAddress , password: password}, function(err, result){
-        console.log("---------------------------")
-        console.log(result)
-        if(result){
-        res.send(result)
+        if (result) {
+            res.send(result)
         }
-        else{
+        else {
             res.send("login error")
         }
     })  
