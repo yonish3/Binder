@@ -16,6 +16,7 @@ class Footer extends Component {
 
     checkout = () => {
        this.props.user.checkout()
+       this.props.socketStore.checkoutFromLocation()
     }
 
     render() {
