@@ -13,10 +13,6 @@ const axios = require("axios")
 const apiKey = process.env.GOOGLE_MAP_API_KEY //move through config
 const controller = require('./server/middlewares/controllers/controller')
 const queries = require('./server/db/queries')
-<<<<<<< HEAD
-const users = require('./dummyData').users
-=======
->>>>>>> development
 const userIds = require('./dummyData').userIds
 const PORT = 8080
 
