@@ -1,5 +1,4 @@
 import { observable, action, computed } from "mobx"
-import dummyData from "./dummyData"
 import socketIOClient from "socket.io-client"
 
 export class SocketStore {

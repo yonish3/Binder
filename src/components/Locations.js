@@ -36,7 +36,6 @@ class Locations extends Component {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni
     const locationsArray = this.props.socketStore.nearbyLocations;
-
     const divStyle = {
       position: "absolute",
       top: "50%",
@@ -59,6 +58,7 @@ class Locations extends Component {
           <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)} style={{borderBottom: "2px solid #f3bed08c"}}>
             <Link to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
+              <img src={location.picture} height="200" />
             </Link>
           </ListItem>
         ))}

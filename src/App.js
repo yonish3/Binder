@@ -18,7 +18,7 @@ import EditProfile from "./components/EditProfile"
 import AwaitingNotification from "./components/AwaitingNotification"
 require('dotenv').config()
 
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("user", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
 
