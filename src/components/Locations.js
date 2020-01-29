@@ -52,6 +52,7 @@ class Locations extends Component {
         aria-label="mailbox folders"
         style={divStyle}
       >
+        <h3>Where Are You?</h3>
         {locationsArray.map((location, i) => (
           <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)}>
             <Link to={`/map/${location.name}`} >

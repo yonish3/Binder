@@ -17,20 +17,7 @@ class Profile extends Component {
   
   render() {
     console.log(this.props.match)
-    console.log(this.props.socketStore.nearbyUsers)
-    // const user = {
-    //   firstName: "Dor",
-    //   lastName: "Ben Lulu",
-    //   age: 25,
-    //   status: "Single",
-    //   desiredRelationship: "Serious Relationship",
-    //   interestedIn: ["Women"],
-    //   gender: "Male",
-    //   picture: DorImage,
-    //   isCheckedIn: true,
-    //   isDeleted: false
-    // };
-    
+    console.log(this.props.socketStore.nearbyUsers)  
     const userId = this.props.match.params.id;
     console.log(`user id `, userId);
     const user = this.props.socketStore.getUserById(userId)

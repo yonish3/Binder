@@ -11,8 +11,9 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import RaisedButton from 'material-ui/RaisedButton';
-
+import EmptyProfilePicture from "../../dummyImage/Empty.jpg"
 // import tileData from "./tileData";
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Users extends Component {
@@ -37,13 +38,11 @@ class Users extends Component {
   render() {
     const nearbyUsers = this.props.socketStore.nearbyUsers;
     const currentLocation = this.props.match.params.location;
-    const currentUser = this.props.socketStore.loggedInUser
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
     return (
       <>
         <div className={classes.root}>
-          <h3>Hello, {currentUser.firstName}</h3>
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
@@ -56,7 +55,8 @@ class Users extends Component {
                 }
               >
                 {console.log('user url is ', user.picture)}
-                <img src={user.picture} alt={user.firstName} />
+                {user.picture !== null ?
+                <img src={user.picture} alt={user.firstName} /> : <img src={EmptyProfilePicture} alt={user.firstName}/>}
                 <GridListTileBar
                 style={{height: "auto"}}
                   title={`${user.firstName}, ${user.age}`}
