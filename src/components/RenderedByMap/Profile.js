@@ -53,7 +53,7 @@ class Profile extends Component {
       maxWidth: "100%",
       maxHeight: "100%",
       position: "absolute",
-      top: "0",
+      top: "10vh",
       bottom: "0",
       margin: "auto",
       width: "100%"
@@ -65,7 +65,8 @@ class Profile extends Component {
     }
 
     const userInfoStyle = {
-      textIndent: "5vw"
+      textIndent: "5vw",
+      marginTop: "2vh"
     }
 
     const headlineStyle = {

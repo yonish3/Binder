@@ -59,8 +59,8 @@ class App extends Component {
                         <Header />
                         
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
-                        {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <> <Users match={match} /><Footer /></>} /> : null }
-                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /><Footer /></>} />
+                        {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <><Users match={match} /></>} /> : null }
+                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /></>} />
                         <Route path="/editProfile" exact render={({match}) => <EditProfile />}/>
                         <Route path="/settings" exact render={({match}) => <Settings />}/>
                         <Route path="/notifications" exact render={({match}) => <AwaitingNotification />}/>

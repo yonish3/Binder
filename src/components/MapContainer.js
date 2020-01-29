@@ -40,7 +40,8 @@ class MapContainer extends Component {
       //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
       const divStyle = {
         width: "100%",
-        height: "40%"
+        height: "40%",
+        // top: "10vh"
       }
 
       return (

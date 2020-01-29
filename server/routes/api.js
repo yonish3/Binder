@@ -18,6 +18,7 @@ router.delete('/user', controller.deleteUser)
 
 router.post('/signIn', function(req, res){
     // console.log(req.body)
+    res.cookie('emailAddress', emailAddress, {expires: new Date(2021, 1, 1)});
     let detailes={firstName:req.body.firstName 
         , lastName: req.body.lastName , age:req.body.age ,
         email: req.body.email,password:req.body.password,
@@ -74,7 +75,7 @@ router.get("/home", async (req, res) => {
     } catch (err) {
         console.log('in home route! Error is ', err);
         
-        res.status(200).send("No user was found")
+        res.status(400).send("No user was found")
     }
     
 

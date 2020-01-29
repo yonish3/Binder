@@ -11,7 +11,7 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import RaisedButton from 'material-ui/RaisedButton';
-
+import BottomNavigationBar from '../BottomNavigationBar'
 // import tileData from "./tileData";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
@@ -42,7 +42,7 @@ class Users extends Component {
     return (
       <>
 
-        <div className={classes.root}>
+        <div className={classes.root} style={{position: "relative", width: "92vw", height: "90vh", marginLeft: "4vw"}}>
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
@@ -72,7 +72,7 @@ class Users extends Component {
             ))}
           </GridList>
         
-    
+          <BottomNavigationBar />
         </div>
       </>
     );

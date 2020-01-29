@@ -11,7 +11,8 @@ const mapStyles = {
   map: {
     position: 'absolute',
     width: '100%',
-    height: '40%'
+    height: '40%',
+    top: "10vh"
   }
 };
 

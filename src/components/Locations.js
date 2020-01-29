@@ -11,6 +11,7 @@ import Divider from "@material-ui/core/Divider";
 
 
 
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -38,14 +39,15 @@ class Locations extends Component {
 
     const divStyle = {
       position: "absolute",
-      top: "47%",
+      top: "50%",
       width: "100%",
+      // height:"100%",
       backgroundColor: "#ece9e95e"
     };
 
     const classes = this.useStyles();
     return (
-
+      <>
       <List
         component="nav"
         className={classes.root}
@@ -53,15 +55,15 @@ class Locations extends Component {
         style={divStyle}
       >
         {locationsArray.map((location, i) => (
-          <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)}>
+          <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)} style={{borderBottom: "2px solid #f3bed08c"}}>
             <Link to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
             </Link>
           </ListItem>
         ))}
       </List>
-
-
+      {/* <BottomNavigationBar /> */}
+        </>
     );
   }
 }
