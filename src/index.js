@@ -12,7 +12,7 @@ import { SocketStore } from "./stores/socketStore"
 // import { initializeFirebase } from '../src/components/pushNotification'
 
 const user = new User()
-// const usersStore = new UsersStore()
+const usersStore = new UsersStore()
 const locationsStore = new LocationsStore()
 const myProfile = new MyProfile()
 const socketStore = new SocketStore()

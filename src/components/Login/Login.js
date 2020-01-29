@@ -8,6 +8,7 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios"
+import Cookies from 'js-cookie'
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
@@ -31,14 +32,19 @@ class Login extends Component {
         event.preventDefault()
         const loginInformation = { address: this.state.email, password: this.state.password }
         const checkIfUserExists = await axios.post('http://localhost:8080/login', loginInformation)
-    
+        
         if (checkIfUserExists.data!=="login error") {
             this.props.socketStore.openSocket(checkIfUserExists.data)
             this.props.user.logIn()
+            Cookies.set('user','loginTrue')
+            
         } else {
             alert("Incorrect Email Address/Password")
         }
     }
+     readCookie=()=>{
+         const user=Cookies.get('user')
+     }
 
     render() {
 
