@@ -32,11 +32,8 @@ io.on('connection', function (socket) {
     socket.on('userId', (user) => {
         user.socketId = socket.id
         users.push(user)
-
-        console.log(user.firstName)
-        users.forEach(u=>console.log('user name: '+u.firstName))
+        //users.forEach(u=>console.log('user name: '+u.firstName))
     })
-
 
     socket.on('GPSlocation', async (GPSlocation) => {
         const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
