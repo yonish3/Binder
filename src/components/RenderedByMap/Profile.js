@@ -29,7 +29,6 @@ class Profile extends Component {
     const user = this.props.socketStore.getUserById(userId)
     const chosenLocation = this.props.socketStore.chosenLocation
     console.log(`user to display is `, user);
-// console.log(this.props.usersStore.users);
 
     const containerStyle = {
       position: "relative",

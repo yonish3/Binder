@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const controller = require('../middlewares/controllers/controller')
 const User = require('../db/models/User')
+
 // const mongoose = require('../db/mongoose')
 
 
@@ -47,9 +48,7 @@ router.post('/checkEmail', async function(req, res){
 router.post('/login', async function(req, res){
     let emailAddress=req.body.address
     let password=req.body.password
-    console.log(req.body)
     let checkIfExists = await User.findOne({email: emailAddress , password: password}, function(err, result){
-        console.log(result)
         if (result) {
             res.send(result)
         }
