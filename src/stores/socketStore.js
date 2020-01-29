@@ -12,13 +12,17 @@ export class SocketStore {
     @observable nearbyUsers = []
     @observable emoji = ''
     @observable loggedInUser 
+    @observable chosenLocation
     @observable checked = false
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
 
     @action getUserById = (id) => {
-        return this.nearbyUsers.find(user => user._id == id)
+        const user = this.nearbyUsers.find(user => user._id == id)
+        console.log(user)
+        return user
     }
+
     @action findSocketDestinationById = (id) => {
         const socketId = this.nearbyUsers.find(user => user.socketId == id)
         return socketId;
@@ -46,17 +50,22 @@ export class SocketStore {
         this.socket.on('usersNearMe', (usersNearMe) => {
             console.log('usersNearMe: ' + usersNearMe)
             this.nearbyUsers = usersNearMe
+            this.chosenLocation = location
         })
     }
     @action sendReaction = (reactionObj) => {
         this.socket.emit('reaction', reactionObj)
-
+        console.log('reaction obj: '+ reactionObj.destinationUser._id)
+        
+        let user = this.nearbyUsers.filter(u=>u._id === reactionObj.destinationUser._id)
+        console.log('filter res: '+user[0]._id)
+        user[0].blockTimer = true
+        setTimeout(function(){ user[0].blockTimer = false }, 5000);
     }
 
     @action getReaction = (reactionObj) => {
         this.socket.on('reaction recieved', reactionObj => {
             console.log('Recieved an Emoji!');
-            // this.reactingUser = reactionObj.destinationUser
         })
     }
 
@@ -69,7 +78,6 @@ export class SocketStore {
 
             this.checked = true;
             this.emoji = reactionObj.label;
-
 
             setTimeout(() => {
                 this.checked = false;

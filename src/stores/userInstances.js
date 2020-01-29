@@ -35,4 +35,12 @@ export class User{
     @action logIn = () => {
         return this.isLoggedIn = true
     }
+
+    @action checkout = () => {
+        this.isCheckedIn = false
+    }
+
+    @action checkin = () => {
+        this.isCheckedIn = true
+    }
 }

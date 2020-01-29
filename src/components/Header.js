@@ -43,14 +43,11 @@ export default function ButtonAppBar() {
   const [left, setLeft] = React.useState(false);
 
   const toggleDrawer = (side, open) => event => {
-    console.log("event type is ", event.type);
-    console.log("open is ", open);
 
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      // setLeft(open);
       return;
     }
 
@@ -68,7 +65,6 @@ export default function ButtonAppBar() {
         <ListItem
           button
           onClick={() => {
-            console.log("Want to close!");
             toggleDrawer(side, false);
           }}
         >
@@ -102,6 +98,12 @@ export default function ButtonAppBar() {
             </Badge>
           </ListItemIcon>
           <Link to="/notifications"><ListItemText primary={"Notifications"} /></Link>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <Link to="/"><ListItemText primary={"Back"} /></Link>
         </ListItem>
       </List>
       <Divider />

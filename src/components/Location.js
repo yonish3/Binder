@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 
+
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
@@ -17,6 +18,7 @@ export default function ListDividers() {
   const classes = useStyles();
 
   return (
+    
     <List component="nav" className={classes.root} aria-label="mailbox folders">
       <ListItem button>
         <ListItemText primary="Inbox" />
@@ -33,5 +35,6 @@ export default function ListDividers() {
         <ListItemText primary="Spam" />
       </ListItem>
     </List>
+    
   );
 }

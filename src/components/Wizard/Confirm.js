@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 import {List,ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
 import { StylesProvider } from '@material-ui/core';
+import EmptyProfilePicture from "../../dummyImage/Empty.jpg";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -14,7 +15,6 @@ class Confirm extends Component{
     continue = async event => {
         event.preventDefault()
         this.props.nextStep()
-        console.log(this.props.values)
         await axios.post(`http://localhost:8080/signIn`, this.props.values);
 
     }

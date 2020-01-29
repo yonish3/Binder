@@ -9,6 +9,8 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
 
+
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -23,6 +25,7 @@ class Locations extends Component {
     }));
   };
   sendLocation = (location) => {
+    this.props.user.checkin()
     this.props.socketStore.SelectedLocationCoordinates = location.locationCoordinates
     this.props.socketStore.watchPosition()
     this.props.socketStore.getUsersNearMe(location.name)
@@ -41,21 +44,25 @@ class Locations extends Component {
 
     const classes = this.useStyles();
     return (
+
       <List
         component="nav"
         className={classes.root}
         aria-label="mailbox folders"
         style={divStyle}
       >
+        <h3>Where Are You?</h3>
         {locationsArray.map((location, i) => (
           <ListItem key={i} button value={location} onClick={() => this.sendLocation(location)}>
-            <Link  to={`/map/${location.name}`} >
+            <Link to={`/map/${location.name}`} >
               <ListItemText primary={location.name} />
               <img src={location.picture} height="200" />
             </Link>
           </ListItem>
         ))}
       </List>
+
+
     );
   }
 }
