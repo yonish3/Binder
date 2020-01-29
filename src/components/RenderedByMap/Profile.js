@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
+import {Redirect} from 'react-router-dom'
 import Typography from "@material-ui/core/Typography";
 import Emoji from "./Emoji";
 import Paper from '@material-ui/core/Paper';
@@ -13,7 +14,12 @@ import { makeStyles } from '@material-ui/core/styles';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Profile extends Component {
-
+  constructor(){
+    super()
+    this.state = {
+      redirect: false
+    }
+  }
   
   render() {
     console.log(this.props.match)
@@ -21,7 +27,7 @@ class Profile extends Component {
     const userId = this.props.match.params.id;
     console.log(`user id `, userId);
     const user = this.props.socketStore.getUserById(userId)
-
+    const chosenLocation = this.props.socketStore.chosenLocation
     console.log(`user to display is `, user);
 // console.log(this.props.usersStore.users);
 
@@ -30,7 +36,7 @@ class Profile extends Component {
       overflow: "hidden",
       height: "40vh",
       width: "100vw",
-      backgroundImage: `url(${user.picture})`,
+      backgroundImage: `url(${user ? user.picture : null })`, 
       backgroundPosition: "center",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat"
@@ -61,6 +67,7 @@ class Profile extends Component {
     return (
       <div>
         <div style={containerStyle}></div>
+        {user ? 
         <div style={userInfoStyle}>
         <Typography variant="h6" gutterBottom>
          {user.firstName}, {user.age}
@@ -73,7 +80,7 @@ class Profile extends Component {
         </Typography>
         <Emoji match={this.props.match}/>
         </div>
-
+        : <Redirect to={`/map/${chosenLocation}`} /> } 
       </div>
     );
   }

@@ -13,6 +13,7 @@ export class SocketStore {
     @observable nearbyUsers = []
     @observable emoji = ''
     @observable loggedInUser 
+    @observable chosenLocation
     @observable checked = false
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
@@ -48,6 +49,7 @@ export class SocketStore {
         this.socket.on('usersNearMe', (usersNearMe) => {
             console.log('usersNearMe: ' + usersNearMe)
             this.nearbyUsers = usersNearMe
+            this.chosenLocation = location
         })
     }
     @action sendReaction = (reactionObj) => {
