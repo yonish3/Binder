@@ -34,6 +34,7 @@ class Login extends Component {
     
         if (checkIfUserExists.data!=="login error") {
             this.props.socketStore.openSocket(checkIfUserExists.data)
+            // this.props.socketStore.openSocket(politician.data)
             this.props.user.logIn()
         } else {
             alert("Incorrect Email Address/Password")
