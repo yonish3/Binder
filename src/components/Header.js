@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -18,31 +18,21 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import Tap from "./Tap";
+import { inject } from "mobx-react";
 
+@inject("socketStore")
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1
-  },
-  menuButton: {
-    marginRight: theme.spacing(2)
-  },
-  title: {
-    flexGrow: 1
-  },
-  list: {
-    width: 250
-  },
-  fullList: {
-    width: "auto"
+class Header extends Component {
+  
+  constructor(){
+    super()
+    this.state = {
+      left: false
+    }
   }
-}));
 
-export default function ButtonAppBar() {
-  const classes = useStyles();
-  const [left, setLeft] = React.useState(false);
-
-  const toggleDrawer = (side, open) => event => {
+  toggleDrawer = (side, open) => event => {
     console.log("event type is ", event.type);
     console.log("open is ", open);
 
@@ -54,22 +44,30 @@ export default function ButtonAppBar() {
       return;
     }
 
-    setLeft(open);
+    this.setState({
+      left: open
+    })
   };
 
-  const sideList = side => (
+  initializeCounter = () => {
+    this.props.socketStore.readNotifications()
+  }
+
+  sideList = side => {
+  const classes = this.useStyles();
+  return(
     <div
       className={classes.list}
       role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
+      onClick={this.toggleDrawer(side, false)}
+      onKeyDown={this.toggleDrawer(side, false)}
     >
       <List>
         <ListItem
           button
           onClick={() => {
             console.log("Want to close!");
-            toggleDrawer(side, false);
+            this.toggleDrawer(side, false);
           }}
         >
           <ListItemIcon>
@@ -95,22 +93,51 @@ export default function ButtonAppBar() {
           </ListItemIcon>
           <Link to="/settings"><ListItemText primary={"Settings"} /></Link>
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={this.initializeCounter}>
           <ListItemIcon>
-            <Badge badgeContent={4} color="primary">
-                <NotificationsIcon />
-            </Badge>
+            {
+              this.props.socketStore.notificationsAmt > 0
+                ? <Badge badgeContent={this.props.socketStore.notifications.length} color="primary"> <NotificationsIcon />
+                  </Badge>
+                : <Badge badgeContent={0} color="primary"> <NotificationsIcon />
+                </Badge>
+            }
           </ListItemIcon>
-          <Link to="/notifications"><ListItemText primary={"Notifications"} /></Link>
+          <Link to="/notifications"> <ListItemText primary={'Notifications'} /> </Link>
         </ListItem>
       </List>
       <Divider />
     </div>
-  );
+  )}
 
-  const appBarStyle = {
-    backgroundColor: "#e91e63"
-  };
+  useStyles = () => {
+    return makeStyles(theme => ({
+    root: {
+      flexGrow: 1
+    },
+    menuButton: {
+      marginRight: theme.spacing(2)
+    },
+    title: {
+      flexGrow: 1
+    },
+    list: {
+      width: 250
+    },
+    fullList: {
+      width: "auto"
+    }
+  }))}
+  
+
+  render() {
+    const classes = this.useStyles();
+    // const [left, setLeft] = React.useState(false);
+    const appBarStyle = {
+      backgroundColor: "#e91e63"
+    };
+
+
   return (
     <div className={classes.root}>
       <AppBar position="static" style={appBarStyle}>
@@ -121,10 +148,10 @@ export default function ButtonAppBar() {
             color="inherit"
             aria-label="menu"
           >
-            <MenuIcon onClick={toggleDrawer("left", true)} />
-            <Drawer open={left} onClose={toggleDrawer("left", false)}>
-              {console.log("state.left is ", left)}
-              {sideList("left")}
+            <MenuIcon onClick={this.toggleDrawer("left", true)} />
+            <Drawer open={this.state.left} onClose={this.toggleDrawer("left", false)}>
+              {console.log("state.left is ", this.state.left)}
+              {this.sideList("left")}
             </Drawer>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
@@ -133,8 +160,11 @@ export default function ButtonAppBar() {
         </Toolbar>
       </AppBar>
     </div>
-  );
+  )
 }
+}
+
+export default Header
 
 // const sideList = side => (
 //     <div

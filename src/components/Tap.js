@@ -7,7 +7,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import Emojify from "react-emojione";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
-class Notification extends Component {
+
+class Tap extends Component {
+  
   useStyles = () => {
     return makeStyles(theme => ({
       root: {
@@ -30,9 +32,16 @@ class Notification extends Component {
       }
     }));
   };
+
   render() {
     const classes = this.useStyles();
-    console.log(`in notification, reactingUser is `, this.props.socketStore.reactingUser);
+    const date = new Date()
+    const notification = {
+      time: date,
+      sender: this.props.socketStore.reactingUser.firstName,
+      emoji: this.props.socketStore.emoji
+    }
+    this.props.socketStore.addNotification(notification)
     
     return (
       <div>
@@ -57,4 +66,4 @@ class Notification extends Component {
   }
 }
 
-export default Notification;
+export default Tap;

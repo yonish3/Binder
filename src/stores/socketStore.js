@@ -16,6 +16,8 @@ export class SocketStore {
     @observable checked = false
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
+    @observable notifications = []
+    @observable notificationsAmt = this.notifications.length || 0
 
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -125,4 +127,14 @@ export class SocketStore {
         this.socket.emit('out of range')
         navigator.geolocation.clearWatch(this.watchID)        
     }
+
+    @action addNotification = (newNotification) => {
+        this.notifications.push(newNotification)
+        this.notificationsAmt++
+    }
+
+    @action readNotifications = () => {
+        this.notificationsAmt = 0
+    }
+
 }

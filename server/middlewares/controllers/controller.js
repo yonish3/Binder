@@ -28,3 +28,6 @@ exports.deleteUser = async (req, res, next) => {
     })
 }
 
+exports.addNotification = async (req, res, next) => {
+    queries.addNotification(req.body)
+}

@@ -11,9 +11,10 @@ import Locations from './components/Locations'
 // import CurrentLocation from "./components/CurrentLocation"
 import Profile from './components/RenderedByMap/Profile'
 import UserForm from "./components/Wizard/UserForm"
-import Notification from './components/Notification'
+import Tap from './components/Tap'
 import Header from './components/Header'
 import Settings from './components/Settings'
+import Notifications from './components/Notifications';
 require('dotenv').config()
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
@@ -33,16 +34,16 @@ class App extends Component {
         //isloggiedIn? map component (axios post to yoni with id in the store) : wizard
         return (
             <Router>
-                {this.props.socketStore.checked ?
-                    <Notification />
-                    :
-                    <div id="main-container">
+                {this.props.socketStore.checked
+                    ? <Tap />
+                    : <div id="main-container">
                         {!this.props.user.isLoggedIn ?
                             <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                             <Header />
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
                         <Route path="/map/:location" exact render={({ match }) => <Users match={match} />} />
                         <Route path="/user/:id" exact render={({ match }) => <Profile match={match} />} />
+                        <Route path='/notifications' exact render={({ match }) => <Notifications match={match} />} /> 
                     </div>
     
                 }

@@ -13,6 +13,7 @@ router.use(function (req, res, next) {
 router.get('/', controller.main)
 router.get('/user/:id', controller.getUser)
 router.delete('/user', controller.deleteUser)
+router.post('/notification', controller.addNotification)
 
 router.post('/signIn', function(req, res){
     // console.log(req.body)

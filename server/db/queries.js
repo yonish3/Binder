@@ -28,3 +28,13 @@ exports.deleteUser = async function(userId){
         throw new Error('Couldn\'t find user')
     }
 }
+
+exports.addNotification = async function(request){
+    const notification = {
+        userId: request.userId,
+        senderName: String,
+        emoji: String,
+        time: Date,
+        isRead: Boolean
+    }
+}
