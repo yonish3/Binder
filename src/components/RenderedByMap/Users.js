@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import RaisedButton from 'material-ui/RaisedButton';
 import BottomNavigationBar from '../BottomNavigationBar'
+import EmptyProfilePicture from "../../dummyImage/Empty.jpg"
 // import tileData from "./tileData";
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
