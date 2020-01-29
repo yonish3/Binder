@@ -44,14 +44,6 @@ io.on('connection', function (socket) {
         socket.emit(`locationsArry`, places);
     })
 
-<<<<<<< HEAD
-socket.on('GPSlocation', async (GPSlocation) => {
-    console.log('GPSlocation',GPSlocation)
-    const nearLocations = await axios.get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${GPSlocation.lat},${GPSlocation.lng}&radius=100&type=bar&key=${apiKey}`);
-    let places = nearLocations.data.results.map(itemName => ({ name: itemName.name, id: itemName.place_id, locationCoordinates: itemName.geometry.location }))
-    socket.emit(`locationsArry`, places);
-})
-=======
     socket.on('selectedLocation', (selectedLocation) => {
         console.log('Selected location received: ' + selectedLocation)
         let usersNearUser = []
@@ -75,7 +67,6 @@ socket.on('GPSlocation', async (GPSlocation) => {
             io.to(`${usersNearUser[i].socketId}`).emit('usersNearMe', usersToSend);
         }
     })
->>>>>>> development
 
     socket.on('reaction', (reactionObj) => {
         io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
