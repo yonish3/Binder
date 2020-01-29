@@ -11,7 +11,6 @@ import Typography from "@material-ui/core/Typography";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
-
 class Footer extends Component {
 
     checkout = () => {
