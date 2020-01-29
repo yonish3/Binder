@@ -54,6 +54,7 @@ class App extends Component {
                     <Notification />
                     :
                     <div id="main-container">
+                        {console.log(this.props.socketStore.nearbyUsers)}
                         {!this.props.user.isLoggedIn ?
                             <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                         <Header />

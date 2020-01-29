@@ -32,9 +32,13 @@ class Login extends Component {
         axios.defaults.withCredentials = true;
         const loginInformation = { address: this.state.email, password: this.state.password }
         const checkIfUserExists = await axios.post('http://localhost:8080/login', loginInformation)
+        
         console.log(checkIfUserExists)
+        // const politician = await axios.post('http://localhost:8080/login', {address: "mickeyzohar@gmail.com", password: "123456"})
+        // console.log(politician)
         if (checkIfUserExists.data !== "login error") {
             this.props.socketStore.openSocket(checkIfUserExists.data)
+            // this.props.socketStore.openSocket(politician.data)
             this.props.user.logIn()
         } else {
             alert("Incorrect Email Address/Password")

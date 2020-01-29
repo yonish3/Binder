@@ -13,6 +13,7 @@ import InfoIcon from "@material-ui/icons/Info";
 import RaisedButton from 'material-ui/RaisedButton';
 import BottomNavigationBar from '../BottomNavigationBar'
 // import tileData from "./tileData";
+
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Users extends Component {
@@ -55,7 +56,8 @@ class Users extends Component {
                 }
               >
                 {console.log('user url is ', user.picture)}
-                <img src={user.picture} alt={user.firstName} />
+                {user.picture !== null ?
+                <img src={user.picture} alt={user.firstName} /> : <img src={EmptyProfilePicture} alt={user.firstName}/>}
                 <GridListTileBar
                 style={{height: "auto"}}
                   title={`${user.firstName}, ${user.age}`}
