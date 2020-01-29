@@ -59,6 +59,8 @@ app.use(cookieParser());
 app.use("/", api);
 app.use(errorHandler)
 
+const users = []
+
 io.on('connection', function (socket) {
     console.log('user has connected')
 
