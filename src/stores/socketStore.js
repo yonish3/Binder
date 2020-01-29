@@ -18,6 +18,7 @@ export class SocketStore {
     @observable SelectedLocationCoordinates
 
     @action getUserById = (id) => {
+        console.log(this.nearbyUsers)
         return this.nearbyUsers.find(user => user._id == id)
     }
     @action findSocketDestinationById = (id) => {

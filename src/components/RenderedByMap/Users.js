@@ -37,12 +37,13 @@ class Users extends Component {
   render() {
     const nearbyUsers = this.props.socketStore.nearbyUsers;
     const currentLocation = this.props.match.params.location;
+    const currentUser = this.props.socketStore.loggedInUser
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
     return (
       <>
-
         <div className={classes.root}>
+          <h3>Hello, {currentUser.firstName}</h3>
           <GridList cellHeight={180} className={classes.gridList}>
             <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
