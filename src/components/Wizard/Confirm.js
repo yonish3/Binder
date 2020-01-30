@@ -16,7 +16,7 @@ class Confirm extends Component{
     continue = async event => {
         event.preventDefault()
         this.props.nextStep()
-        await axios.post(`http://localhost:8080/signIn`, this.props.values);
+        await axios.post(`/signIn`, this.props.values);
 
     }
     

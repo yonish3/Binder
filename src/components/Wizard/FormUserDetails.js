@@ -23,7 +23,7 @@ class FormUserDetails extends Component {
         event.preventDefault()
         
         let emailAddress={address: this.props.values.email}
-        let checkEmail= await axios.post('http://localhost:8080/checkEmail', emailAddress )
+        let checkEmail= await axios.post('/checkEmail', emailAddress )
         if(checkEmail.data=="exists"){
             alert("Email already exists. Did you forget your password?")
         } else {
