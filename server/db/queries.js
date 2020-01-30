@@ -1,5 +1,6 @@
 const mongoose = require('./mongoose')
 const User = require('./models/User')
+const Notification = require('./models/Notification')
 
 exports.findUser = async function(userId){
     const user = await User.find({
@@ -29,12 +30,18 @@ exports.deleteUser = async function(userId){
     }
 }
 
-exports.addNotification = async function(request){
-    const notification = {
-        userId: request.userId,
-        senderName: String,
-        emoji: String,
-        time: Date,
-        isRead: Boolean
-    }
+exports.addNotification = async function(notification){
+    const newNotification = new Notification({
+        // userId: ObjectId,
+        // senderName: String,
+        // emoji: String,
+        time: new Date(),
+        text: notification
+        // isRead: Boolean
+    })
+    await newNotification.save()
+    // try {
+    // } catch(err) {
+        // throw
+    // }
 }

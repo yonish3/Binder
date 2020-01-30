@@ -1,4 +1,7 @@
 const queries = require('../../db/queries')
+const config = require('../../../config/config.js')
+const express = require('express')
+const router = express.Router()
 
 exports.main = async (req, res, next) => {
     try {
@@ -29,5 +32,12 @@ exports.deleteUser = async (req, res, next) => {
 }
 
 exports.addNotification = async (req, res, next) => {
-    queries.addNotification(req.body)
+    router.post('https://fcm.googleapis.com/fcm/send', req.body.body.content, req.body.body.headers)
+    // queries.addNotification(req.body.notification)
+    .then( result => {
+        res.end()
+    })
+    .catch( err => {
+        next(err)
+    })
 }

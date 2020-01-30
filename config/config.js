@@ -8,7 +8,9 @@ const config = {
     db: {
         db_URI: process.env.MONGODB_URI
     },
+    
     googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY,
+    
     firebaseConfig: {
         apiKey: process.env.FIREBASE_API_KEY,
         authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -17,10 +19,11 @@ const config = {
         storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
         messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID,
         appId: process.env.FIREBASE_APP_ID,
-        measurementId: process.env.FIREBASE_MEASUREMENT_ID
+        measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+        cloudServerKey: process.env.FIREBASE_CLOUD_SERVER_KEY
     }
 }
 
-console.log(config)
+// console.log(config)
 
 module.exports = config

@@ -33,7 +33,6 @@ io.on('connection', function (socket) {
     socket.on('userId', (user) => {
         user.socketId = socket.id
         users.push(user)
-
         console.log(user.firstName)
         users.forEach(u=>console.log('user name: '+u.firstName))
     })
@@ -71,6 +70,31 @@ io.on('connection', function (socket) {
 
     socket.on('reaction', (reactionObj) => {
         io.to(`${reactionObj.destinationUser.socketId}`).emit('reaction recieved', reactionObj);
+        
+        // for (let i = 0; i < users.length; i++) {
+        //     if (users[i].socketId === reactionObj.destinationUser.socketId) {
+        //         // console.log('users[i].notificationToken',users[i].notificationToken)
+        //         const body = {
+        //             content: {
+        //                 data: {
+        //                     message: "notification",
+        //                 },
+        //                 to: users[i].notificationToken
+        //             },
+        //             headers: {
+        //                 'Content-Type': 'application/json',
+        //                 'Authorization': 'key=AAAAz2kANlQ:APA91bFtwfVaUwO-d7CYV-BkeyqiXM93jaZtT4LeWZqrd6kXJbEefW-8yNZ8zHbKQA6X8aPZZoJlYKAcQ0IIfEkWOqN7qpvTyoWqBjBt2ZpyFJ7LgbTPQiExwkCjP-nFeqEYMhL7a8dI'
+        //             }
+        //         }
+        //         axios.post('https://fcm.googleapis.com/fcm/send', body)
+        //         .then( result => {
+        //             res.end()
+        //         })
+        //         .catch( err => {
+        //             // console.log('error')
+        //         })
+        //     }
+        // }
     })
 
     socket.on('out of range', function () {
@@ -88,6 +112,17 @@ io.on('connection', function (socket) {
         }
     })
 
+    socket.on('push notification token', (token) => {
+        console.log('token',token)
+        console.log('users',users)
+        for (let i = 0; i < users.length; i++) {
+            console.log('socketId',socket.id)
+            if (users[i].socketId === socket.id) {
+                users[i].notificationToken = token
+                console.log('userWithToken',users[i].notificationToken)
+            }
+        }
+    })  
 
     socket.on('disconnect', function () {
         console.log('user disconnected');

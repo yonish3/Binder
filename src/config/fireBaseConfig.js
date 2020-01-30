@@ -10,13 +10,14 @@ const firebaseConfig = {
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID,
     appId: process.env.FIREBASE_APP_ID,
-    measurementId: process.env.FIREBASE_MEASUREMENT_ID
-};
+    measurementId: process.env.FIREBASE_MEASUREMENT_ID,
+    cloudServerKey: process.env.FIREBASE_CLOUD_SERVER_KEY
+}
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const initializedFirebase = firebase.initializeApp(firebaseConfig);
 // firebase.firestore().settings({ timestampsInSnapshots: true })
 
 const storage = firebase.storage()
 export {
-    storage, firebase as default
+    storage, initializedFirebase, firebase as default
 }

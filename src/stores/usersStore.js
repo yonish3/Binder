@@ -8,7 +8,7 @@ const dummyData = require("./dummyData")
 
 export class UsersStore{
     @observable users = []
-    
+
     @action getUsers = () => {
         console.log(this.props)
         this.users = dummyData.default
@@ -18,6 +18,7 @@ export class UsersStore{
         const user = this.users.find(user => user._id == userId)
         return user;
     }
+
 }
 
 

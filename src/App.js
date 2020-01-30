@@ -15,20 +15,36 @@ import Footer from "./components/Footer"
 import Settings from './components/Settings'
 import Notifications from './components/Notifications';
 import EditProfile from "./components/EditProfile"
+import { messaging } from "./init-fcm";
 import AwaitingNotification from "./components/AwaitingNotification"
+import axios from 'axios'
+
 require('dotenv').config()
 
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
 
-    componentDidMount() {
+    async componentDidMount() {
         // this.props.usersStore.getUsers()
         // this.props.myProfile.getProfile()
        
-        this.props.socketStore.recieveMessage();
-
+        messaging.requestPermission()
+        .then(async () => {
+            const token = await messaging.getToken()
+            // console.log('tokenFromFireBase', token)
+            // console.log('check',this.props.socketStore.updateUserNotificationToken)
+            // this.props.socketStore.updateUserNotificationToken(token)
+            this.props.socketStore.userNotificationToken = token
+            this.props.socketStore.pushNotification()
+        })
+        .catch(function(err) {
+            console.log("Unable to get permission to notify.", err)
+        })
+        navigator.serviceWorker.addEventListener("message", (message) => console.log(message))
+        this.props.socketStore.recieveMessage()
     }
+
 
     render() {
 

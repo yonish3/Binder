@@ -1,6 +1,8 @@
 import { observable, action, computed } from "mobx"
 import dummyData from "./dummyData"
 import socketIOClient from "socket.io-client"
+import axios from 'axios'
+import fireBaseConfig from '../config/fireBaseConfig.js'
 
 export class SocketStore {
     endpoint = "localhost:8080"
@@ -19,6 +21,7 @@ export class SocketStore {
     @observable notifications = []
     @observable readNotificationsCount = 0
     @observable notificationsAmt = 0
+    @observable userNotificationToken = '' 
 
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -81,6 +84,7 @@ export class SocketStore {
                 emoji: this.emoji
             }
             this.addNotification(notification)
+            this.pushNotification()
 
             setTimeout(() => {
                 this.checked = false;
@@ -143,5 +147,42 @@ export class SocketStore {
     @action readNotifications = () => {
         this.readNotificationsCount = this.notifications.length
         this.notificationsAmt = this.notifications.length - this.readNotificationsCount
+    }
+
+    @action updateUserNotificationToken = (token) => {
+        console.log('user token from the action function in store', token)
+        this.userNotificationToken = token
+    }
+
+    // @computed get userNotificationToken() {
+    //     return this.userNotificationToken
+    // }
+
+    @action pushNotification = () => {
+        console.log('this.userNotificationToken', this.userNotificationToken)
+        console.log('user', this.loggedInUser)
+        const content = {
+            data: {
+                // message: //notification,
+                // sender: //user
+                date: new Date()
+            },
+            to: `${this.userNotificationToken}`
+        }
+
+        const requestHeaders = {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `key=${fireBaseConfig.cloudServerKey}`
+            }
+        }
+
+        axios.post('https://fcm.googleapis.com/fcm/send', content, requestHeaders)
+        .then(function (response) {
+            console.log(response)
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
     }
 }
