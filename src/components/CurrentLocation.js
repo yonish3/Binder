@@ -61,7 +61,7 @@ class CurrentLocation extends React.Component {
           if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( pos => {
               // const coords = pos.coords;
-              const coords = {
+              const coords = { //don't accept this change! this is for vicki's computer, and uncomment the line above
                 latitude: 32.0628992,
                 longitude: 34.7736213
               }

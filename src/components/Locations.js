@@ -25,6 +25,7 @@ class Locations extends Component {
     }));
   };
   sendLocation = (location) => {
+    console.log('location', location)
     this.props.user.checkin()
     this.props.socketStore.SelectedLocationCoordinates = location.locationCoordinates
     this.props.socketStore.watchPosition()

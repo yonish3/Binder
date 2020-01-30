@@ -33,15 +33,17 @@ class Tap extends Component {
     }));
   };
 
+  // const date = new Date()
+  // const notification = {
+  //   time: date,
+  //   sender: this.props.socketStore.reactingUser.firstName,
+  //   emoji: this.props.socketStore.emoji
+  // }
+  // this.props.socketStore.addNotification(notification)
+  
   render() {
     const classes = this.useStyles();
-    const date = new Date()
-    const notification = {
-      time: date,
-      sender: this.props.socketStore.reactingUser.firstName,
-      emoji: this.props.socketStore.emoji
-    }
-    this.props.socketStore.addNotification(notification)
+    
     
     return (
       <div>

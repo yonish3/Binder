@@ -15,7 +15,7 @@ class Notifications extends Component {
                             <span>
                                 {notification.time.getHours()}:{notification.time.getMinutes()}:{notification.time.getSeconds()} - {notification.sender} has reacted to you! <Emojify>{notification.emoji}</Emojify><br></br>
                             </span>)
-                        : <span style={{textAlign: "center"}}>There are no new notifications,<br></br> go react yourself!</span>
+                        : <span style={{textAlign: "center"}}>There are no new notifications<br></br> go react yourself!</span>
                 }
             </div>
         )

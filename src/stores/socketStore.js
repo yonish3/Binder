@@ -17,7 +17,8 @@ export class SocketStore {
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
     @observable notifications = []
-    @observable notificationsAmt = this.notifications.length || 0
+    @observable notificationsAmt = this.notifications.length - this.readNotificationsCount || 0
+    @observable readNotificationsCount = 0
 
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -73,6 +74,13 @@ export class SocketStore {
             this.checked = true;
             this.emoji = reactionObj.label;
 
+            const date = new Date()
+            const notification = {
+                time: date,
+                sender: this.reactingUser.firstName,
+                emoji: this.emoji
+            }
+            this.addNotification(notification)
 
             setTimeout(() => {
                 this.checked = false;
@@ -108,12 +116,11 @@ export class SocketStore {
     @action watchPosition = () => {
         let lat = this.SelectedLocationCoordinates.lat 
         let lng = this.SelectedLocationCoordinates.lng 
-
         this.watchID = navigator.geolocation.watchPosition((position)=> {
             let lat2 = position.coords.latitude
             let lng2 = position.coords.longitude
-
-            let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
+            
+            let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat,lng) //don't accept change!!!!!!!!!!!!!!!!!!! this is hardcoded for vicki's computer
             if(diff>0.1){
                 this.nearbyUsers = []
                 this.socket.emit('out of range')
@@ -129,11 +136,12 @@ export class SocketStore {
     }
 
     @action addNotification = (newNotification) => {
-        this.notifications.push(newNotification)
+        this.notifications.unshift(newNotification)
         this.notificationsAmt++
     }
 
     @action readNotifications = () => {
+        this.readNotificationsCount = this.notifications.length
         this.notificationsAmt = 0
     }
 
