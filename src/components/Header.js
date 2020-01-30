@@ -61,6 +61,10 @@ class Header extends Component {
     // setLeft(open);
   };
 
+  uploadImage = (event) => {
+    // make a POST request!
+  }
+  
   sideList = side => {
     const classes = this.useStyles() 
     const loggedInUser = this.props.socketStore.loggedInUser
@@ -84,10 +88,13 @@ class Header extends Component {
           <ListItemText primary="Back" />
         </ListItem>
         <ListItem>
+          <label for="image">
+            <input type="file" name="image" id="image" style={{display:"none"}} onChange={this.uploadImage} />
           <img
             src={loggedInUser ? loggedInUser.picture : EmptyProfilePicture}
             style={{ width: "30vw", height: "30vw", paddingLeft: "5vw" }}
           />
+          </label>
         </ListItem>
         <ListItem button>
           <ListItemIcon>
