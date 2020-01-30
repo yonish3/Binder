@@ -17,8 +17,8 @@ export class SocketStore {
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
     @observable notifications = []
-    @observable notificationsAmt = this.notifications.length - this.readNotificationsCount || 0
     @observable readNotificationsCount = 0
+    @observable notificationsAmt = 0
 
     @action getUserById = (id) => {
         return this.nearbyUsers.find(user => user._id == id)
@@ -142,7 +142,6 @@ export class SocketStore {
 
     @action readNotifications = () => {
         this.readNotificationsCount = this.notifications.length
-        this.notificationsAmt = 0
+        this.notificationsAmt = this.notifications.length - this.readNotificationsCount
     }
-
 }

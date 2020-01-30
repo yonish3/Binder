@@ -96,7 +96,7 @@ class Header extends Component {
           <ListItemIcon>
             {
               this.props.socketStore.notificationsAmt > 0
-                ? <Badge badgeContent={this.props.socketStore.notifications.length} color="primary"> <NotificationsIcon />
+                ? <Badge badgeContent={this.props.socketStore.notificationsAmt} color="primary"> <NotificationsIcon />
                   </Badge>
                 : <Badge badgeContent={0} color="primary"> <NotificationsIcon />
                 </Badge>
