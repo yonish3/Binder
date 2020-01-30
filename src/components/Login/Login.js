@@ -60,7 +60,7 @@ class Login extends Component {
                 {/* {!this.props.user.isLoggedIn ?  */}
                 <React.Fragment>
 
-                    <div style ={{borderBottom:"1px solid black", width: "72vw"}}>
+                    <div style ={{ width: "72vw"}}>
                     <Typography variant="h4" gutterBottom>
                      Login
                      </Typography>
@@ -81,13 +81,13 @@ class Login extends Component {
                         color={"red"}
                     />
                     <br />
-                    <Button label="Submit" variant="contained" color="secondary" onClick={this.submit} >Submit</Button>
-                    {/* <hr /> */}
+                    <Button label="Submit" variant="contained" color="secondary" onClick={this.submit} style={{marginLeft: "23vw", marginTop:"3vh"}}>Submit</Button>
+
                     </div>
                     <div style={{marginTop: "5vh", marginLeft: "12vw"}}>
                     <Link to="/register" className="link">
-                    <Button variant="contained" color="secondary">Create Account</Button>
-                    </Link>
+                    <Button variant="contained" color="secondary">Create Account</Button> 
+                    </Link> 
                     </div>
                 </React.Fragment>
             </MuiThemeProvider>

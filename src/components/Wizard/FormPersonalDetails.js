@@ -40,8 +40,6 @@ class FormPersonalDetails extends Component {
         this.setState({
             selectedFile: event.target.files[0]
         })
-
-
     }
 
     uploadFile =  () => {
