@@ -8,7 +8,7 @@ import AppBar from 'material-ui/AppBar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios"
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 @inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
@@ -39,15 +39,15 @@ class Login extends Component {
             // this.props.socketStore.openSocket(politician.data)
             this.props.user.logIn()
             this.props.generalStore.displayMenu = true
-            Cookies.set('user','loginTrue')
+            // Cookies.set('user','loginTrue')
             
         } else {
             alert("Incorrect Email Address/Password")
         }
     }
-     readCookie=()=>{
-         const user=Cookies.get('user')
-     }
+    //  readCookie=()=>{
+    //      const user=Cookies.get('user')
+    //  }
 
     render() {
         const divStyle = {

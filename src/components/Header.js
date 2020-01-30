@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { observer, inject } from "mobx-react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,10 +19,23 @@ import PermIdentityIcon from "@material-ui/icons/PermIdentity";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Badge from '@material-ui/core/Badge';
 import NotificationsIcon from "@material-ui/icons/Notifications";
-import Tap from "./Tap";
-import { inject } from "mobx-react";
-
-
+// const useStyles = makeStyles(theme => ({
+//   root: {
+//     flexGrow: 1
+//   },
+//   menuButton: {
+//     marginRight: theme.spacing(2)
+//   },
+//   title: {
+//     flexGrow: 1
+//   },
+//   list: {
+//     width: 250
+//   },
+//   fullList: {
+//     width: "auto"
+//   }
+// }));
 @inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Header extends Component {
@@ -33,35 +46,18 @@ class Header extends Component {
     }
   }
   toggleDrawer = (side, open) => event => {
-  
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
       return;
     }
-
-    this.setState({
-      left: open
-    })
-  };
-
-  initializeCounter = () => {
-    this.props.socketStore.readNotifications()
-  }
-
-  sideList = side => {
-  const classes = this.useStyles();
-  return(
     this.setState({left: open})
     // setLeft(open);
-    )
   };
-
   uploadImage = (event) => {
     // make a POST request!
   }
-  
   sideList = side => {
     const classes = this.useStyles() 
     const loggedInUser = this.props.socketStore.loggedInUser
@@ -76,7 +72,6 @@ class Header extends Component {
         <ListItem
           button
           onClick={() => {
-            console.log("Want to close!");
             this.toggleDrawer(side, false);
           }}
         >
@@ -106,7 +101,7 @@ class Header extends Component {
           </ListItemIcon>
           <Link to="/settings"><ListItemText primary={"Settings"} /></Link>
         </ListItem>
-        <ListItem button onClick={this.initializeCounter}>
+       <ListItem button onClick={this.initializeCounter}>
           <ListItemIcon>
             {
               this.props.socketStore.notificationsAmt > 0
@@ -129,7 +124,6 @@ class Header extends Component {
     </div>
   )
 }
-
   useStyles = () => {
     return makeStyles(theme => ({
     root: {
@@ -151,19 +145,15 @@ class Header extends Component {
   render() {
     const classes = this.useStyles();
     // const [left, setLeft] = React.useState(false);
-  
     // const toggleDrawer = (side, open) => event => {
-  
     //   if (
     //     event.type === "keydown" &&
     //     (event.key === "Tab" || event.key === "Shift")
     //   ) {
     //     return;
     //   }
-  
     //   setLeft(open);
     // };
-  
     // const sideList = side => (
     //   <div
     //     className={classes.list}
@@ -219,7 +209,6 @@ class Header extends Component {
     //     <Divider />
     //   </div>
     // );
-  
     const appBarStyle = {
       backgroundColor: "#e91e63"
     };
@@ -248,11 +237,7 @@ class Header extends Component {
       </div>
     );
   }
-  
 }
-
-export default Header
-
 // const sideList = side => (
 //     <div
 //       className={classes.list}
@@ -295,3 +280,4 @@ export default Header
 //       </List>
 //     </div>
 //   );
+export default Header

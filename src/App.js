@@ -54,8 +54,6 @@ class App extends Component {
                 {this.props.socketStore.checked
                     ? <Tap />
                     : <div id="main-container">
-                        {!this.props.user.isLoggedIn ?
-                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                         <Header />
                         {console.log(this.props.socketStore.nearbyUsers)}
                         {!this.props.user.isLoggedIn ?
