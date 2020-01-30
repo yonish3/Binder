@@ -13,7 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from "@material-ui/core/FormControl"
 import FormLabel from "@material-ui/core/FormLabel"
 import {storage} from '../../config/fireBaseConfig'
-
+import Button from '@material-ui/core/Button';
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
@@ -70,14 +70,22 @@ class FormPersonalDetails extends Component {
         // console.log(abc)
     }
 
-
+    // componentDidMount() {
+    //     this.props.generalStore.setHeaderLabel("Enter User Details")
+    // }
     render() {
             
             const { values, handleChange, upload } = this.props
+            const divStyle = {
+                marginLeft: "18vw",
+                marginTop: "10vh",
+                width: "60vw"
+            }
             return (
+                <div style={divStyle}>
                 <MuiThemeProvider>
                     <React.Fragment>
-                        <AppBar title="Enter User Details" />
+                        {/* <AppBar title="Enter User Details" /> */}
 
                         <InputLabel id="desired-relationship-label">What Are You Looking For?</InputLabel>
                         <Select labelId="desired-relationship-label" label="What Are You Looking For?"
@@ -125,10 +133,11 @@ class FormPersonalDetails extends Component {
                             <RaisedButton label="Upload" primary={false} style={styles.button} onClick={this.uploadFile} />
                         </FormGroup>
                         <br />
-                        <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
-                        <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back} />
+                        <Button variant="contained" color="primary" style={styles.button} onClick={this.continue} >Continue</Button>
+                        <Button variant="contained" color="secondary" style={styles.button} onClick={this.back} >Back</Button>
                     </React.Fragment>
                 </MuiThemeProvider>
+                </div>
             )
         }
     }

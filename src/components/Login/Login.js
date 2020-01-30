@@ -9,8 +9,9 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import axios from "axios"
 import Cookies from 'js-cookie'
-
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+@inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class Login extends Component {
@@ -37,6 +38,7 @@ class Login extends Component {
             this.props.socketStore.openSocket(checkIfUserExists.data)
             // this.props.socketStore.openSocket(politician.data)
             this.props.user.logIn()
+            this.props.generalStore.displayMenu = true
             Cookies.set('user','loginTrue')
             
         } else {
@@ -48,45 +50,57 @@ class Login extends Component {
      }
 
     render() {
-
+        const divStyle = {
+            marginLeft: "13vw",
+            marginTop: "10vh"
+        }
         return (
-            
+            <div style={divStyle}>
             <MuiThemeProvider>
                 {/* {!this.props.user.isLoggedIn ?  */}
                 <React.Fragment>
 
-                    <AppBar title="Login" />
+                    <div style ={{borderBottom:"1px solid black", width: "72vw"}}>
+                    <Typography variant="h4" gutterBottom>
+                     Login
+                     </Typography>
                     <TextField
-                        hintText="Enter Your Email"
-                        floatingLabelText="Email"
+                        placeholder="Enter Your Email"
+                        // floatingLabelText="Email"
                         onChange={this.handleChange('email')}
-                        defaultValue={this.state.email}
+                        value={this.state.email}
                         type="email"
                     />
                     <br />
                     <TextField
-                        hintText="Enter Your Password"
-                        floatingLabelText="Password"
+                        placeholder="Enter Your Password"
+                        // floatingLabelText="Password"
                         onChange={this.handleChange('password')}
-                        defaultValue={this.state.password}
+                        value={this.state.password}
                         type="password"
+                        color={"red"}
                     />
                     <br />
-                    <RaisedButton label="Submit" primary={true} style={styles.button} onClick={this.submit} />
-                    <hr />
+                    <Button label="Submit" variant="contained" color="secondary" onClick={this.submit} >Submit</Button>
+                    {/* <hr /> */}
+                    </div>
+                    <div style={{marginTop: "5vh", marginLeft: "12vw"}}>
                     <Link to="/register" className="link">
-                    <RaisedButton label="Create Account" primary={true} style={styles.button}/>
+                    <Button variant="contained" color="secondary">Create Account</Button>
                     </Link>
+                    </div>
                 </React.Fragment>
             </MuiThemeProvider>
-
+            </div>
         )
     }
 }
 
 const styles = {
     buttons: {
-        margin: 15
+        margin: 15,
+        backgroundColor: "#e91e63"
+
     }
 }
 

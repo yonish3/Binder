@@ -11,7 +11,7 @@ import Divider from "@material-ui/core/Divider";
 
 
 
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class Locations extends Component {
@@ -29,8 +29,13 @@ class Locations extends Component {
     this.props.socketStore.SelectedLocationCoordinates = location.locationCoordinates
     this.props.socketStore.watchPosition()
     this.props.socketStore.getUsersNearMe(location.name)
+    this.props.generalStore.setHeaderLabel(location.name)
   }
 
+  componentDidMount() {
+    this.props.generalStore.setHeaderLabel('Binder')
+  }
+  
   render() {
     // const realLocationArray = this.props.locationsStore.locations
     // function that gets locations from yoni

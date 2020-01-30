@@ -5,9 +5,10 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {List,ListItem} from 'material-ui/List';
 import RaisedButton from 'material-ui/RaisedButton';
+import Button from '@material-ui/core/Button';
 import { StylesProvider } from '@material-ui/core';
 import EmptyProfilePicture from "../../dummyImage/Empty.jpg";
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class Confirm extends Component{
@@ -26,14 +27,16 @@ class Confirm extends Component{
     }
        
     
-
+        componentDidMount() {
+                this.props.generalStore.setHeaderLabel("Confirm Information")
+            }
     render(){
         const { values:{firstName,lastName, age, email,  status, desiredRelationship, interstedIn , gender,  picture }} = this.props
         // console.log(this.props.values)
         return (
                <MuiThemeProvider>
                    <React.Fragment>
-                       <AppBar title="Confirm user data" />
+                       {/* <AppBar title="Confirm user data" /> */}
                         <List>
                           <ListItem primaryText= 'First Name' secondaryText={firstName}/>
                           <ListItem primaryText= 'Last Name' secondaryText={lastName}/>
@@ -47,8 +50,10 @@ class Confirm extends Component{
                           
                       </List>
                        <br/>
-                       <RaisedButton label="Confirm&Continue" primary={true} style={styles.button} onClick={this.continue}/>
-                       <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back}/>
+                       {/* <RaisedButton label="Confirm&Continue" primary={true} style={styles.button} onClick={this.continue}/>
+                       <RaisedButton label="Back" primary={false} style={styles.button} onClick={this.back}/> */}
+                       <Button variant="contained" color="primary" style={styles.button} onClick={this.continue} >Confirm&Continue</Button>
+                        <Button variant="contained" color="secondary" style={styles.button} onClick={this.back} >Back</Button>
                    </React.Fragment>
                </MuiThemeProvider> 
         )

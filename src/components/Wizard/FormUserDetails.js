@@ -8,8 +8,9 @@ import { Input, InputBase } from '@material-ui/core';
 import Select from '@material-ui/core/Select';
 import { StylesProvider, InputLabel } from '@material-ui/core';
 import { MenuItem } from 'material-ui';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("generalStore","user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 
 class FormUserDetails extends Component {
@@ -29,47 +30,51 @@ class FormUserDetails extends Component {
             this.props.nextStep()
         }
     }
+    componentDidMount() {
+        this.props.generalStore.setHeaderLabel("Enter User Details")
+    }
 
     render() {
         const { values, handleChange } = this.props
         return (
+            <div style={{marginLeft: "14vw"}}>
             <MuiThemeProvider>
                 <React.Fragment>
-                    <AppBar title="Enter User Details" />
+                    {/* <AppBar title="Enter User Details" /> */}
                     <TextField
-                        hintText="Enter Your First Name"
+                        // placeholder="Enter Your First Name"
                         floatingLabelText="First Name"
                         onChange={handleChange('firstName')}
-                        defaultValue={values.firstName}
+                        value={values.firstName}
                         type="text" 
                     />
                     <br />
                     <TextField
-                        hintText="Enter Your Last Name"
+                        // placeholder="Enter Your Last Name"
                         floatingLabelText="Last Name"
                         onChange={handleChange('lastName')}
-                        defaultValue={values.lastName}
+                        value={values.lastName}
                         type="text" />
                     <br />
                     <TextField
-                        hintText="Enter Your Age"
+                        // placeholder="Enter Your Age"
                         floatingLabelText="Age"
                         onChange={handleChange('age')}
-                        defaultValue={values.age}
+                        value={values.age}
                         type="number" min="18" max="100"/>
                     <br />
                     <TextField
-                        hintText="Enter Your Email"
+                        // placeholder="Enter Your Email"
                         floatingLabelText="Email"
                         onChange={handleChange('email')}
-                        defaultValue={values.email}
+                        value={values.email}
                         type="email" required />
                     <br />
                     <TextField
-                        hintText="Enter Your Password"
+                        // placeholder="Enter Your Password"
                         floatingLabelText="password"
                         onChange={handleChange('password')}
-                        defaultValue={values.password}
+                        value={values.password}
                         type="password" required/>
                     <br />
                     <InputLabel id="relationship-status">Relationship Status</InputLabel>
@@ -84,9 +89,10 @@ class FormUserDetails extends Component {
                     <MenuItem value="It's Complicated">It's Complicated</MenuItem>
                     </Select>
                     <br />
-                    <RaisedButton label="Continue" primary={true} style={styles.button} onClick={this.continue} />
+                    <Button variant="contained" color="secondary" onClick={this.continue}>Continue</Button>
                 </React.Fragment>
             </MuiThemeProvider>
+            </div>
         )
     }
 }

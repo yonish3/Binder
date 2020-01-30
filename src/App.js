@@ -38,14 +38,14 @@ class App extends Component {
                     <Notification />
                     :
                     <div id="main-container">
+                        <Header />
                         {console.log(this.props.socketStore.nearbyUsers)}
                         {!this.props.user.isLoggedIn ?
-                            <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
-                        <Header />
+                            <Route path="/" exact render={({ match }) => <Login match={match} />} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                         
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
                         {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <> <Users match={match} /><Footer /></>} /> : null }
-                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /><Footer /></>} />
+                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /></>} />
                         <Route path="/editProfile" exact render={({match}) => <EditProfile />}/>
                         <Route path="/settings" exact render={({match}) => <Settings />}/>
                         <Route path="/notifications" exact render={({match}) => <AwaitingNotification />}/>
