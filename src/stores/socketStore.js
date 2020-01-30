@@ -3,7 +3,7 @@ import socketIOClient from "socket.io-client"
 
 export class SocketStore {
     endpoint = "localhost:8080"
-    socket = socketIOClient(this.endpoint)
+    socket = socketIOClient()
     watchID
     //need to empty parantheses before deploying to heroku!!!
     @observable socketId = "";
