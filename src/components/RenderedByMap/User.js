@@ -17,6 +17,7 @@ import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 @inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
+
 class User extends Component {
   useStyles = () => {
     return makeStyles({
@@ -31,7 +32,7 @@ class User extends Component {
 
     const classes = this.useStyles();
     const user = this.props.user; 
-console.log('logged in user is ', user);
+console.log('logged in user is ', user, user.picture);
 
     const contentStyle = {
       opacity: "0.5"
@@ -42,6 +43,7 @@ console.log('logged in user is ', user);
     };
 
     return (
+        
       <GridListTile>
         <img src={user.picture} alt={user.firstName} />
         <GridListTileBar

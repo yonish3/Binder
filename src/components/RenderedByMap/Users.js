@@ -11,9 +11,10 @@ import ListSubheader from "@material-ui/core/ListSubheader";
 import IconButton from "@material-ui/core/IconButton";
 import InfoIcon from "@material-ui/icons/Info";
 import RaisedButton from 'material-ui/RaisedButton';
-
+import EmptyProfilePicture from "../../dummyImage/Empty.jpg"
 // import tileData from "./tileData";
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+
+@inject("generalStore", "user", "usersStore", "locationsStore", "myProfile", "socketStore")
 @observer
 class Users extends Component {
   useStyles = () => {
@@ -34,19 +35,27 @@ class Users extends Component {
       }
     }));
   };
+  // componentDidMount() {
+    
+  // }
   render() {
     const nearbyUsers = this.props.socketStore.nearbyUsers;
     const currentLocation = this.props.match.params.location;
+    const divStyle = {
+      height: "80vh",
+      width: "90vw",
+      marginTop: "1vh",
+      marginLeft: "5vw"
+    }
     const classes = this.useStyles();
     // send yoni the location and then load a loading bar and when the loading finishes - rendering the users
     return (
       <>
-
-        <div className={classes.root}>
+        <div className={classes.root} style={divStyle}>
           <GridList cellHeight={180} className={classes.gridList}>
-            <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+            {/* <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
               <ListSubheader component="span"><Link to="/">Back</Link></ListSubheader>
-            </GridListTile>
+            </GridListTile> */}
             {nearbyUsers.map((user, index) =>  (
               <GridListTile
                 key={user.firstName}
@@ -55,7 +64,8 @@ class Users extends Component {
                 }
               >
                 {console.log('user url is ', user.picture)}
-                <img src={user.picture} alt={user.firstName} />
+                {user.picture !== null ?
+                <img src={user.picture} alt={user.firstName} /> : <img src={EmptyProfilePicture} alt={user.firstName}/>}
                 <GridListTileBar
                 style={{height: "auto"}}
                   title={`${user.firstName}, ${user.age}`}

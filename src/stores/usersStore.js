@@ -2,7 +2,7 @@ import { observable, computed, action } from "mobx"
 import { inject } from "mobx-react"
 // import { User } from "./userInstances"
 // import axios from "axios"
-const dummyData = require("./dummyData")
+const dummyData= require('./dummyData')
 
 
 

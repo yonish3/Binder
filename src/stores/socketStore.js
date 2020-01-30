@@ -1,5 +1,4 @@
 import { observable, action, computed } from "mobx"
-import dummyData from "./dummyData"
 import socketIOClient from "socket.io-client"
 import axios from 'axios'
 import fireBaseConfig from '../config/fireBaseConfig.js'
@@ -15,6 +14,7 @@ export class SocketStore {
     @observable nearbyUsers = []
     @observable emoji = ''
     @observable loggedInUser 
+    @observable chosenLocation
     @observable checked = false
     @observable isLoggedIn = false
     @observable SelectedLocationCoordinates
@@ -24,8 +24,11 @@ export class SocketStore {
     @observable userNotificationToken = '' 
 
     @action getUserById = (id) => {
-        return this.nearbyUsers.find(user => user._id == id)
+        const user = this.nearbyUsers.find(user => user._id == id)
+        console.log(user)
+        return user
     }
+
     @action findSocketDestinationById = (id) => {
         const socketId = this.nearbyUsers.find(user => user.socketId == id)
         return socketId;
@@ -53,17 +56,22 @@ export class SocketStore {
         this.socket.on('usersNearMe', (usersNearMe) => {
             console.log('usersNearMe: ' + usersNearMe)
             this.nearbyUsers = usersNearMe
+            this.chosenLocation = location
         })
     }
     @action sendReaction = (reactionObj) => {
         this.socket.emit('reaction', reactionObj)
-
+        console.log('reaction obj: '+ reactionObj.destinationUser._id)
+        
+        let user = this.nearbyUsers.filter(u=>u._id === reactionObj.destinationUser._id)
+        console.log('filter res: '+user[0]._id)
+        user[0].blockTimer = true
+        setTimeout(function(){ user[0].blockTimer = false }, 5000);
     }
 
     @action getReaction = (reactionObj) => {
         this.socket.on('reaction recieved', reactionObj => {
             console.log('Recieved an Emoji!');
-            // this.reactingUser = reactionObj.destinationUser
         })
     }
 
@@ -123,8 +131,7 @@ export class SocketStore {
         this.watchID = navigator.geolocation.watchPosition((position)=> {
             let lat2 = position.coords.latitude
             let lng2 = position.coords.longitude
-            
-            let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat,lng) //don't accept change!!!!!!!!!!!!!!!!!!! this is hardcoded for vicki's computer
+            let diff = this.distanceInKmBetweenEarthCoordinates(lat,lng,lat2,lng2)
             if(diff>0.1){
                 this.nearbyUsers = []
                 this.socket.emit('out of range')

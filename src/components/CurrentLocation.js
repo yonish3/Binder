@@ -11,7 +11,8 @@ const mapStyles = {
   map: {
     position: 'absolute',
     width: '100%',
-    height: '40%'
+    height: '40%',
+    top: "10vh"
   }
 };
 
@@ -60,11 +61,11 @@ class CurrentLocation extends React.Component {
         if (this.props.centerAroundCurrentLocation) {
           if (navigator && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition( pos => {
-              // const coords = pos.coords;
-              const coords = { //don't accept this change! this is for vicki's computer, and uncomment the line above
-                latitude: 32.0628992,
-                longitude: 34.7736213
-              }
+              const coords = pos.coords;
+              // const coords = { //don't accept this change! this is for vicki's computer, and uncomment the line above
+                // latitude: 32.0628992,
+                // longitude: 34.7736213
+              // }
               const coordinates={lat:coords.latitude,lng :coords.longitude }
               this.getCheckIn(coordinates)
               // this.getLocations(coordinates)
@@ -74,13 +75,13 @@ class CurrentLocation extends React.Component {
                   lng: coords.longitude
                 }
               }, function(){
+                
                 this.props.socketStore.getLocationsNearby(this.state.currentLocation)
               })
             })
           }
         }
         this.loadMap();
-        //this.props.socketStore.openSocket()
       }
 
       getCheckIn= (coordinates) => {
@@ -162,8 +163,8 @@ export default CurrentLocation;
 CurrentLocation.defaultProps = {
   zoom: 14,
   initialCenter: {
-    lat: -1.2884,
-    lng: 36.8233
+    lat: 32.0628435,
+    lng: 34.7735121
   },
   centerAroundCurrentLocation: false,
   visible: true

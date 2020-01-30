@@ -21,7 +21,7 @@ import axios from 'axios'
 
 require('dotenv').config()
 
-@inject("user", "usersStore", "locationsStore", "myProfile", "socketStore")
+@inject("user", "locationsStore", "myProfile", "socketStore")
 @observer
 class App extends Component {
 
@@ -57,10 +57,13 @@ class App extends Component {
                         {!this.props.user.isLoggedIn ?
                             <Route path="/" exact component={Login} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                         <Header />
+                        {console.log(this.props.socketStore.nearbyUsers)}
+                        {!this.props.user.isLoggedIn ?
+                            <Route path="/" exact render={({ match }) => <Login match={match} />} /> : <Route path="/" exact render={({ match }) => <> <MapContainer /> <Locations /> </>} />}
                         
                         <Route path="/register" exact render={({ match }) => <UserForm match={match} />} />
                         {this.props.user.isCheckedIn ? <Route path="/map/:location" exact render={({ match }) => <> <Users match={match} /><Footer /></>} /> : null }
-                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /><Footer /></>} />
+                        <Route path="/user/:id" exact render={({ match }) => <><Profile match={match} /></>} />
                         <Route path="/editProfile" exact render={({match}) => <EditProfile />}/>
                         <Route path="/settings" exact render={({match}) => <Settings />}/>
                         <Route path='/notifications' exact render={({ match }) => <Notifications match={match} />} /> 
