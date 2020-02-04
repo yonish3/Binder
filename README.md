@@ -1,5 +1,6 @@
 ## Binder
 A location-based dating application, the App allow users to see online profiles of other users nearby, then open an online one-on-one chat
+PPT link: https://docs.google.com/presentation/d/1Wj1YqB1lrA1kPelq_SjV-7rAcNFp8IrF4noDbVMS71o/edit?usp=sharing
 
 ## The stack used <br />
 JavaScript <br />
