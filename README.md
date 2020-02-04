@@ -1,15 +1,17 @@
 ## Binder
 A location-based dating application, the App allow users to see online profiles of other users nearby, then open an online one-on-one chat
 
-## The stack used
-### JavaScript
-#### HTML5
+The stack used <br />
+JavaScript <br />
+HTML5 <br />
 Materials css <br />
 Node.js & Express <br />
-React & Mobx
-MongoDB & Mongoose
-Socket.io
-Google places API.
+React & Mobx <br />
+MongoDB & Mongoose <br />
+Socket.io <br />
+Google places API <br />
+Google map API <br />
+Google photos API <br />
 
 ## to run the App on a local machine
 run `npm start`
