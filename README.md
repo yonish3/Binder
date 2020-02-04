@@ -2,8 +2,8 @@
 A location-based dating application, the App allow users to see online profiles of other users nearby, then open an online one-on-one chat
 
 ## The stack used
-JavaScript
-HTML5
+###JavaScript
+###HTML5
 Materials css 
 Node.js & Express
 React & Mobx
