@@ -3,7 +3,7 @@ A location-based dating application, the App allow users to see online profiles 
 
 ## The stack used
 ### JavaScript
-### HTML5
+#### HTML5
 Materials css 
 Node.js & Express
 React & Mobx
